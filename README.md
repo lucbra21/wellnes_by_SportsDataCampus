@@ -1,1 +1,1 @@
-git stat
+git stats
