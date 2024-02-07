@@ -23,123 +23,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campograma de Fútbol</title>
+    <title>Wellness</title>
     <style>
-        #campo {
-            position: relative;  /* Asegúrate de que el contenedor del campo tenga posición relativa */
-            /*width: 500px;         Un ancho fijo para el campo */
-            height: 200px;
-            margin: 0 auto;      /* Centra el campo horizontalmente */
-            background-image: url('./img/campo.png');
-            background-size: 260px 170px;  /* Tamaño fijo para la imagen de fondo */
-            background-repeat: no-repeat;
-            
-        }
-
-        .area-accion {
-            /*width: 420px;   Ajusta al contenido */
-            /*height: 300px; /* Ajusta al contenido */
-            /* background-color: #e0e0e0; /* Color de fondo del área de acción */
-            /* padding-right: 10mm; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-            position: relative;  /* Asegúrate de que el contenedor del campo tenga posición relativa */
-        }
-
-        #porteria {
-            width: 320px;  /* Ancho total, incluyendo la portería y el espacio alrededor */
-            height: 200px; /* Alto total, incluyendo la portería y el espacio por encima y por debajo */
-            padding: 5mm; /* Esto efectivamente añade un "borde" al contenido interno */
-            background-image: url('./img/porteria.png');
-            background-size: 260px 170px;
-            /* background-position: center; */
-            background-repeat: no-repeat;
-            background-clip: border-box; /* Esta propiedad asegura que el fondo (la imagen) también cubre el área del padding */
-            /* position: relative;  Asegúrate de que el contenedor del campo tenga posición relativa */
-        }
-
-        .linea-vertical {
-            position: absolute;
-            width: 1px;
-            height: 100%;
-            background-color: white;
-            left: 50%;
-            top: 0;
-        }
-
-        .area-left, .area-right {
-            position: absolute;
-            height: 100px;
-            width: 50px;
-            background-color: transparent;
-            top: 50%;
-            transform: translateY(-50%);
-            border-style: solid;
-            border-width: 1px 1px 1px 0;
-            border-color: white;
-        }
-
-        .area-left {
-            left: 0;
-        }
-
-        .area-right {
-            right: 0;
-            border-width: 1px 0 1px 1px;
-        }
-
-        .circulo-central {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 1px solid white;
-            border-radius: 50%;
-        }
-        #acciones {
-            display: flex;
-            /* flex-direction: column; */
-            gap: 10px;
-        }
         
-        .btn-accion {
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .btn-accion:hover {
-            background-color: #45a049;
-        }
-
-        .youtube-player-container iframe {
-            width: 100%;
-            height: 600px;
-        }
-
-
-        #acciones button {
-            margin-bottom: 5px;
-            width: 100%;
-        }
-
-        .list-group-item {
-            margin-bottom: 5px;
-        }
-
-        .nombre-equipo {
-            font-weight: bold;
-            /* text-decoration: underline; */
-            width: 96%;
-        }
 
         #editableTable {
             border-collapse: separate;
@@ -179,7 +65,7 @@
         }
 
         /* Definimos los anchos específicos para cada columna */
-        .fixed-header th:nth-child(1), .fixed-header td:nth-child(1) { width: 5px; }
+        /*.fixed-header th:nth-child(1), .fixed-header td:nth-child(1) { width: 5px; }
         .fixed-header th:nth-child(2), .fixed-header td:nth-child(2) { width: 5px; }
         .fixed-header th:nth-child(3), .fixed-header td:nth-child(3) { width: 20px; }
         .fixed-header th:nth-child(4), .fixed-header td:nth-child(4) { width: 140px; }
@@ -190,7 +76,7 @@
         .fixed-header th:nth-child(9), .fixed-header td:nth-child(9) { width: 40px; }
         .fixed-header th:nth-child(10), .fixed-header td:nth-child(10) { width: 40px; }
         .fixed-header th:nth-child(11), .fixed-header td:nth-child(11) { width: 40px; }
-        .fixed-header th:nth-child(12), .fixed-header td:nth-child(12) { width: 40px; }
+        .fixed-header th:nth-child(12), .fixed-header td:nth-child(12) { width: 40px; }*/
       
         .fixed-header th, .fixed-header td {
             overflow: hidden;
@@ -260,11 +146,6 @@
         #acciones {
             background-color: transparent;
             border: none; /* Elimina el borde del contenedor */
-        }
-
-        .jugador.active {
-            background-color: #FFD700; /* Color dorado */
-            color: black;
         }
 
         .btn-group {
@@ -434,203 +315,7 @@
         <div class="row mt-4">
 
             <!-- Sección Izquierda (Reproductor, Campograma y Grilla) -->
-            <div class="col-md-12">
-                <div class="row">
-                    <!-- Reproductor de YouTube -->
-                    <div class="col-md-8 mb-2">
-                        <div class="container">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" id="videoTabs" role="tablist">
-                              <li class="nav-item">
-                                <a class="nav-link active" id="video-link-tab" data-toggle="tab" href="#videoLink" role="tab" aria-controls="videoLink" aria-selected="true">Video Link</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" id="video-file-tab" data-toggle="tab" href="#videoFile" role="tab" aria-controls="videoFile" aria-selected="false">Video File</a>
-                              </li>
-                            </ul>
-                          
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                              <div class="tab-pane active" id="videoLink" role="tabpanel" aria-labelledby="video-link-tab">
-                                <div class="youtube-player-container bg-light p-2 rounded shadow-sm">
-                                    <iframe id="youtubePlayer" src="https://www.youtube.com/embed/DEFAULT_VIDEO_ID?enablejsapi=1" frameborder="0" allowfullscreen></iframe> 
-                                       <div id="player" style="display:none"></div>
-                                   </div>
-                              </div>
-                              <div class="tab-pane" id="videoFile" role="tabpanel" aria-labelledby="video-file-tab">
-                                <div>
-                                    <video id="videoPlayer" width="100%" height="100%" controls>
-                                        
-                                        <source src="./video/video.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                <!-- Botonera action -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="bg-light p-2 rounded shadow-sm">
-                            <div id="acciones" class="mb-3 bg-light p-2 rounded shadow-sm">
-                                <div class="container">
-                                    <div id="eventoSeleccionado" class="col-md-3 mb-3"></div>
-                                    <div class="row" id="botonera"></div>
-                                    <div class="col-md-12">
-                                        <div id="inputs"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <input type="hidden" id="inputEvento" value="">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button id="btnReset" class="btn btn-secondary mb-2">Reset Event</button>
-                            </div>
-                            
-                            <div id="inputsAcciones">
-                                <!-- Aquí se agregarán los inputs de acciones dinámicamente -->
-                                
-                            </div>
-                                <input type="hidden" id="colorAccion" value="">
-                                <input type="hidden" id="eventName" value="">
-                        </div>
-                    </div>
-                </div>
-                    </div>
-                
-                     <!-- Campograma -->
-                     <div class="col-md-4  " style="padding-left:0px">
-                        <div class="row">
-                            <div class="col-6  " style="padding-left:0px;padding-right:0px">
-                                <div id="campo" onclick="registrarAccion(event)" class="w-100 p-2 rounded justify-content-center align-items-center">
-                                    <!-- Ejemplo de un punto en el 50% del ancho y 50% de la altura del campo -->
-                                    <!-- <div class="punto" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div> -->
-                                    <!-- Puedes agregar más puntos con diferentes coordenadas `left` y `top` -->
-                                    <!-- Contenedor SVG -->
-                                    <svg id="svgCampo" style="width:100%; height:100%; position:absolute; top:0; left:0;"></svg>
-
-                                </div>
-                                <div class="row"><div id="porteriaX"></div></div>
-                                <input type="hidden" id="porteria_X" value="">
-                                <input type="hidden" id="porteria_Y" value="">
-                            </div>
-
-                            <div class="col-6 mb-2   ">
-                                <!-- Acciones http://35.171.105.109/SDC/SDCKL/botonera/campo.png -->
-                                
-                                   <!-- <div class="container">-->
-                                        <div id="porterias">
-                                            <div class="area-accion">
-                                                <div id="porteria" class="porteria" onclick="registrarAccionPorteria(event)" style="w-100 p-2 rounded justify-content-center align-items-center">
-                                                
-                                                </div>
-                                            </div>
-                                       </div>
-                                   <!--  </div>-->
-                                    
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 mb-2 ">
-                                <div class="row justify-content-center align-items-center">
-                                    <div class="col-6">
-                                        <div class="input-group">
-                                            <button onclick="limpiarInputs()" class="btn btn-outline-secondary" type="button"><i class="fas fa-broom"></i></button>
-                                            <input type="text" id="jugadorPrincipal" placeholder="Jugador Principal" class="form-control" style="text-align: right; border: none;">
-                                        </div>
-
-                                        <!-- <input type="text" id="jugadorPrincipal" placeholder="Jugador Principal" class="btn btn-block" style="text-align: right;"> -->
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="input-group">
-                                        <input type="text" id="jugadorSecundario" placeholder="Jugador Secundario" class="form-control" style="text-align: left; border: none;">
-                                    </div>
-                                    </div>
-                                </div>
-                                 <div class="row">
-                                    
-                                    <input type="hidden" id="equipoJugadorPrincipal" readonly>
-                
-                                    <div class="col-md-12">
-                                        <div class="row mt-3 mb-3">
-                                            <!-- Contenedor general -->
-                                           
-                                                <div class="col-6">
-                                                   
-                                                        <!-- Jugadores del Equipo 1 (Home) -->
-                                                        <!-- <h5 id="nombreEquipo1" class="nombre-equipo" ondblclick="editarNombreEquipo(this)" >Equipo 1</h5> -->
-
-                                                        <!-- Jugadores del Equipo 1 (Home) -->
-                                                        <button id="nombreEquipo1" class="btn btn btn-primary nombre-equipo mr-2 mb-2 flex-fill" ondblclick="editarNombreEquipo(this)" onclick="seleccionarEquipo(this, 'home')">
-                                                            Equipo 1
-                                                        </button>
-
-                                                        <div id="equipo1" class="col-md-12 d-flex flex-wrap">
-                                                            <!-- Los botones del equipo 1 se generarán aquí, uno debajo del otro -->
-                                                        </div>
-                                                   
-                                                </div>
-                                                <div class="col-6">
-                                                  
-                                                        <!-- Jugadores del Equipo 2 (Away) -->
-                                                        <!-- <h5 id="nombreEquipo2" class="nombre-equipo" ondblclick="editarNombreEquipo(this)">Equipo 2</h5> -->
-                                                        <button id="nombreEquipo2" class="btn btn btn-secondary nombre-equipo mr-2 mb-2 flex-fill" ondblclick="editarNombreEquipo(this)" onclick="seleccionarEquipo(this, 'away')">
-                                                            Equipo 2
-                                                        </button>
-
-                                                        <div id="equipo2" class="col-md-12 d-flex flex-wrap">
-                                                            <!-- Los botones del equipo 2 se generarán aquí, uno debajo del otro -->
-                                                        </div>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Sección Derecha (Acciones y Jugadores) -->
-                </div>
-
-                 <!-- Botonera players-->
-                 <!-- Inputs para los jugadores seleccionados -->
-
-                <!-- Grilla -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="bg-light p-2 rounded shadow-sm">
-                            <table id="editableTable" class="display" style="width:100%">
-
-                                <thead class="bg-secondary text-white">
-                                    <tr >
-                                        <th style="text-align: center; "><i class="fas fa-play"></i></th> <!-- Si no tienes FontAwesome, puedes reemplazar con "Edit" -->
-                                        <th style="text-align: center; "><i class="fas fa-trash"></i></th> <!-- Si no tienes FontAwesome, puedes reemplazar con "Delete" -->
-                                        <th style="text-align: center; ">eventID</th>
-                                        <th style="text-align: center; ">Team</th>
-                                        <th style="text-align: center; ">Player</th>
-                                        <th style="text-align: center; ">Secundary</th>
-                                        <th style="text-align: center; ">code</th>
-                                        <th style="text-align: center; ">group</th>
-                                        <th style="text-align: center; ">text</th>
-                                        <th style="text-align: center; ">Periodo</th>
-                                        <th style="text-align: center; ">Mins</th>
-                                        <th style="text-align: center; ">Secs</th>
-                                        <th style="text-align: center; ">startX</th>
-                                        <th style="text-align: center; ">startY</th>
-                                        <th style="text-align: center; ">endX</th>
-                                        <th style="text-align: center; ">endY</th>
-                                        <th style="text-align: center; ">porX</th>
-                                        <th style="text-align: center; ">porY</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tablaRegistros" class="text-center">
-                                    <!-- Aquí se insertarán las filas automáticamente -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            cuerpo
         </div>
 
         <div class="container-fluid mt-3 mb-3">

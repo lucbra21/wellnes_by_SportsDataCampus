@@ -1,0 +1,38 @@
+
+/* Estilos para el footer */
+.footer {
+    width: 100%;
+    background-color: #2E3035; /* Color de fondo */
+    color: white; /* Color del texto */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px; /* Espaciado interno */
+    /* position: absolute; */
+    bottom: 0;
+    fixed-bottom
+}
+
+/* Estilos para el botón dentro del footer */
+.footer button {
+    color: white; /* Color del texto del botón */
+    background-color: #007bff; /* Color de fondo del botón */
+    border: none;
+    padding: 10px 20px; /* Espaciado interno del botón */
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.footer img {
+    height: 50px; /* Altura del logo */
+}
+
+/* Estilos para el enlace para remover subrayado y ajustar colores */
+.footer a, .footer a:visited {
+    color: white; /* Color del enlace */
+    text-decoration: none; /* Remueve subrayado */
+}
+
+.footer .version {
+    font-size: 1em; /* Tamaño del texto de la versión */
+}

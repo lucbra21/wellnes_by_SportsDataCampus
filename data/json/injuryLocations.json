@@ -1,0 +1,257 @@
+[
+    {
+        "Id": 1,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Ingle \/ Cadera",
+        "Specification": "Anterior"
+    },
+    {
+        "Id": 2,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Ingle \/ Cadera",
+        "Specification": "Posterior"
+    },
+    {
+        "Id": 3,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Ingle \/ Cadera",
+        "Specification": "Medial"
+    },
+    {
+        "Id": 4,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Ingle \/ Cadera",
+        "Specification": "Lateral"
+    },
+    {
+        "Id": 5,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Ingle \/ Cadera",
+        "Specification": "No aplica"
+    },
+    {
+        "Id": 6,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Muslo",
+        "Specification": "Anterior"
+    },
+    {
+        "Id": 7,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Muslo",
+        "Specification": "Posterior"
+    },
+    {
+        "Id": 8,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Muslo",
+        "Specification": "Medial"
+    },
+    {
+        "Id": 9,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Muslo",
+        "Specification": "Lateral"
+    },
+    {
+        "Id": 10,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Muslo",
+        "Specification": "No aplica"
+    },
+    {
+        "Id": 11,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Rodilla",
+        "Specification": "Anterior"
+    },
+    {
+        "Id": 12,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Rodilla",
+        "Specification": "Posterior"
+    },
+    {
+        "Id": 13,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Rodilla",
+        "Specification": "Medial"
+    },
+    {
+        "Id": 14,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Rodilla",
+        "Specification": "Lateral"
+    },
+    {
+        "Id": 15,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Rodilla",
+        "Specification": "No aplica"
+    },
+    {
+        "Id": 16,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Pierna",
+        "Specification": "Anterior"
+    },
+    {
+        "Id": 17,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Pierna",
+        "Specification": "Posterior"
+    },
+    {
+        "Id": 18,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Pierna",
+        "Specification": "Medial"
+    },
+    {
+        "Id": 19,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Pierna",
+        "Specification": "Lateral"
+    },
+    {
+        "Id": 20,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Pierna",
+        "Specification": "No aplica"
+    },
+    {
+        "Id": 21,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Tibillo",
+        "Specification": "Anterior"
+    },
+    {
+        "Id": 22,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Tibillo",
+        "Specification": "Posterior"
+    },
+    {
+        "Id": 23,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Tibillo",
+        "Specification": "Medial"
+    },
+    {
+        "Id": 24,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Tibillo",
+        "Specification": "Lateral"
+    },
+    {
+        "Id": 25,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Tibillo",
+        "Specification": "No aplica"
+    },
+    {
+        "Id": 26,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Pie",
+        "Specification": "Anterior"
+    },
+    {
+        "Id": 27,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Pie",
+        "Specification": "Posterior"
+    },
+    {
+        "Id": 28,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Pie",
+        "Specification": "Medial"
+    },
+    {
+        "Id": 29,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Pie",
+        "Specification": "Lateral"
+    },
+    {
+        "Id": 30,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Pie",
+        "Specification": "No aplica"
+    },
+    {
+        "Id": 31,
+        "BodyZone": "Tren Inferior",
+        "BodyPart": "Dedos del Pie"
+    },
+    {
+        "Id": 32,
+        "BodyZone": "Tren Superior",
+        "BodyPart": "Hombro"
+    },
+    {
+        "Id": 33,
+        "BodyZone": "Tren Superior",
+        "BodyPart": "Brazo"
+    },
+    {
+        "Id": 34,
+        "BodyZone": "Tren Superior",
+        "BodyPart": "Codo"
+    },
+    {
+        "Id": 35,
+        "BodyZone": "Tren Superior",
+        "BodyPart": "Antebrazo"
+    },
+    {
+        "Id": 36,
+        "BodyZone": "Tren Superior",
+        "BodyPart": "Mu\u00f1eca"
+    },
+    {
+        "Id": 37,
+        "BodyZone": "Tren Superior",
+        "BodyPart": "Mano"
+    },
+    {
+        "Id": 38,
+        "BodyZone": "Tren Superior",
+        "BodyPart": "Dedos de la mano"
+    },
+    {
+        "Id": 39,
+        "BodyZone": "Tronco",
+        "BodyPart": "Cabeza"
+    },
+    {
+        "Id": 40,
+        "BodyZone": "Tronco",
+        "BodyPart": "Cuello"
+    },
+    {
+        "Id": 41,
+        "BodyZone": "Tronco",
+        "BodyPart": "Pecho"
+    },
+    {
+        "Id": 42,
+        "BodyZone": "Tronco",
+        "BodyPart": "Columna Dorsal"
+    },
+    {
+        "Id": 43,
+        "BodyZone": "Tronco",
+        "BodyPart": "Abdomen"
+    },
+    {
+        "Id": 44,
+        "BodyZone": "Tronco",
+        "BodyPart": "Inespec\u00edfica"
+    },
+    {
+        "Id": 45,
+        "BodyZone": "Tronco",
+        "BodyPart": "Columna Lumbar"
+    }
+]

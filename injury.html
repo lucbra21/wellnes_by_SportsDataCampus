@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Estilos -->
+<link rel="stylesheet" href="./plugins/bootstrap-4.5.3/css/bootstrap.css">
+<link rel="stylesheet" href="./plugins/fontawesome-free-6.4.2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="./plugins/DataTables/datatables.css">
+<link rel="stylesheet" type="text/css" href="./plugins/sweetalert2/sweetalert2.css">
+<link rel="stylesheet" type="text/css" href="./css/default.css">
+
+<!-- JS -->
+<script src="./js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="./plugins/DataTables/datatables.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_popper.js_1.16.0_umd_popper.min.js"></script>
+<script src="./plugins/bootstrap-4.5.3/js/bootstrap.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_xlsx_0.16.9_xlsx.full.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js"></script>
+<!-- <script src="./plugins/sweetalert/sweetalert.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+<script src="./plugins/sweetalert2/sweetalert2.js"></script>
+<script src="./plugins/moment/moment.min.js"></script>
+<script src="./scripts/header.js"></script>
+<!-- <script src="./plugins/fontawesome-free-6.4.2-web/js/all.min.js" crossorigin="anonymous"></script> -->
+
+<!-- Incluir CSS de Select2 -->
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" /> -->
+<link rel="stylesheet" type="text/css" href="./plugins/select2/select2.min.css">
+
+<!-- Incluir JS de Select2 -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> -->
+<script src="./plugins/select2/select2.min.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> -->
+<!-- Bootstrap and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness</title>
+
+    <style>
+        #output {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+      
+        }
+        #range-slider {
+            width: 100%;
+        }
+        #range-slider::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output1 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider1 {
+            width: 100%;
+        }
+        #range-slider1::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider1:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output2 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider2 {
+            width: 100%;
+        }
+        #range-slider2::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider2:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output3 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider3 {
+            width: 100%;
+        }
+        #range-slider3::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider3:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output4 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #output7 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider4 {
+            width: 100%;
+        }
+        #range-slider4::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider4:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output5 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider5 {
+            width: 100%;
+        }
+        #range-slider5::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider5:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output6 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider6 {
+            width: 100%;
+        }
+        #range-slider6::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider6:active::-moz-range-thumb {
+            background: orange;               
+        }
+        #range-slider7 {
+            width: 100%;
+        }
+        #range-slider7::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider7:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            margin: 0px 0px;
+            }
+            input[type=range]:focus {
+            outline: none;
+            }
+            input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 15px;
+            cursor: pointer;
+            background: #fff3;
+            border-radius: 10px;
+            }
+            input[type=range]::-webkit-slider-thumb {
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            background: #8d8e8d;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -12px;
+            }
+            input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #fff3;
+            
+            }
+            p#points {
+            width: 100%;
+            float: left;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 40px;
+            color:  #8d8e8d;
+            }
+      </style>
+      <style>
+                      
+        .inputcheckbox:before {
+            position: absolute;
+            /* top: 0; */
+            left: 0;
+            transform: translate(0%, -13%);
+            width: 22px;
+            height: 22px;
+            /* color:#fff5; */
+           
+        }
+        .checkbox {
+      /* display: flex; */
+      align-items: center;
+      margin-top: 3px;
+      transform: translate(-41%, 0%);
+      }        
+      
+      input[type=checkbox] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      background-color: #fff3;
+      margin-right: 8px;
+      position: relative;
+      
+      }
+      
+      input[type=checkbox]::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      /* background-color: #4b1cb8; */
+      background-color: #ffffff;
+      transform: translate(8px, 13px) rotate(-45deg);
+      transform-origin: left;
+      transition: 150ms all linear;
+      transition-delay: 0ms;
+      }
+      
+      input[type=checkbox]::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      /* background-color: #4b1cb8; */
+      background-color: #ffffff;
+      transform: translate(1px, 8px) rotate(45deg);
+      transform-origin: left;
+      transition: 150ms all linear;
+      transition-delay: 150ms;
+      }
+      
+      input[type=checkbox]:checked::before {
+      width: 14px;
+      transition-delay: 150ms;
+      }
+      
+      input[type=checkbox]:checked::after {
+      width: 10px;
+      transition-delay: 0ms;
+      }
+      
+      </style>
+      <style>
+        .iradio_square-grey {
+            margin: 0px !important;
+        }
+        
+        .btn {
+            padding: 5px !important;
+        }
+      </style>
+      <style>
+       /* Centrar las pestañas */
+.nav-tabs {
+    display: flex;
+    justify-content: right;
+    padding: 10px 0;
+    background-color: #f8f9fa; /* Color de fondo de las pestañas */
+    border-bottom: 2px solid #dee2e6; /* Borde inferior para destacar las pestañas */
+}
+
+/* Estilos para cada pestaña */
+.nav-tabs .nav-item {
+    margin: 0 5px; /* Espaciado entre pestañas */
+}
+
+/* Estilos para los enlaces de las pestañas */
+.nav-tabs .nav-link {
+    border: none; /* Elimina el borde predeterminado */
+    color: #007bff; /* Color del texto de las pestañas */
+    background-color: #ffffff; /* Color de fondo de cada pestaña */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 15px; /* Espaciado interno para el texto */
+}
+
+/* Estilos para la pestaña activa */
+.nav-tabs .nav-link.active {
+    color: #fff; /* Color del texto para la pestaña activa */
+    background-color: #007bff; /* Color de fondo para la pestaña activa */
+}
+
+/* Estilos para el nombre del jugador y las pestañas */
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#playerName {
+    font-size: 1.2rem; /* Ajusta el tamaño del texto según tus necesidades */
+    padding-left: 15px; /* Añade un poco de espacio a la izquierda */
+}
+
+.nav-tabs {
+    margin-right: 15px; /* Añade un poco de espacio a la derecha */
+}
+
+
+      </style>
+
+    <style>
+        
+
+        #editableTable {
+            border-collapse: separate;
+            border-spacing: 0 5px;
+            font-size: 9px;
+        }
+
+        #editableTable thead tr {
+            border: none;
+        }
+
+        #editableTable th, #editableTable td {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+        }
+
+        #editableTable tbody tr:hover {
+            background-color: #f5f5f5; /* Color de fondo cuando pasas el mouse sobre una fila */
+        }
+
+        /* Estilo general para la tabla */
+        .fixed-header {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        /* Fijamos el encabezado */
+        .fixed-header thead {
+            display: block;
+        }
+
+        /* Hacemos que el cuerpo de la tabla sea desplazable */
+        .fixed-header tbody {
+            display: block;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        .fixed-header th, .fixed-header td {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        /* Ajusta el ancho y diseño del botón de eliminar */
+        #editableTable button {
+            background: none;
+            border: none;
+            color: red;
+            font-size: 9px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+        #botonera {
+            position: relative;
+        }
+
+        #botonera button {
+            margin-right: 10px;
+        }
+
+        #botonera select {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+        /* Estilo para reducir el espacio entre los elementos de la lista */
+        .list-group-item {
+            padding: 0.1rem 0; /* Ajusta el relleno para que sea más pequeño */
+            background-color: transparent; /* Hace que el fondo de los elementos de la lista sea transparente */
+            border: none; /* Elimina el borde de los elementos de la lista */
+        }
+        
+        /* Estilo para los botones dentro de la lista para que ocupen todo el ancho */
+        .list-group-item .btn {
+            display: block; /* Hace que el botón ocupe todo el ancho */
+            width: 100%; /* Asegura que el botón ocupe todo el ancho */
+            margin: -0.55rem 0; /* Agrega un margen muy pequeño entre los botones */
+        }
+    
+        /* Hace que el fondo del contenedor sea transparente */
+        #acciones {
+            background-color: transparent;
+            border: none; /* Elimina el borde del contenedor */
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .input-right {
+            text-align: right;
+            padding: 10px; /* Espaciado opcional para dar un poco de margen */
+        }
+
+        /* .btn{
+            font-size: 0.5rem
+        } */
+
+        .card {
+    background: none !important; /* Esto hará que el fondo sea transparente */
+}
+
+.card-header {
+    background-color: #007bff; /* Color de fondo del encabezado de la tarjeta */
+    color: white; /* Color del texto del encabezado de la tarjeta */
+}
+
+.card-title {
+    margin-bottom: 0; /* Elimina el margen inferior del título */
+}
+
+.custom-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+}
+
+.custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #007bff;
+    cursor: pointer;
+}
+
+.custom-range::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #007bff;
+    cursor: pointer;
+}
+
+.custom-range::-ms-thumb {
+    width: 25px;
+    height: 25px;
+    background: #007bff;
+    cursor: pointer;
+}
+
+
+.btn-guardar {
+    background-color: #28a745; /* Color verde para el botón guardar */
+    color: white; /* Texto blanco */
+}
+
+.btn-cancelar {
+    background-color: #dc3545; /* Color rojo para el botón cancelar */
+    color: white; /* Texto blanco */
+}
+
+/* Estilos para los botones al pasar el mouse */
+.btn-guardar:hover {
+    background-color: #218838;
+}
+
+.btn-cancelar:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 767px) {
+    .card {
+        margin-bottom: 10px; /* Añade un margen en la parte inferior de cada tarjeta */
+    }
+    /* .card:last-child {
+        margin-bottom: 60px;  
+    } */
+}
+
+.select2 {
+    width: 100%  !important;
+}
+    </style>
+
+</head>
+<header class="header">
+    <div class="container-fluid mt-2">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+
+            <div class="col" style="text-align: left;">
+                <span id="teamName">Nombre del Equipo</span><br>
+                <span id="staffName">Nombre del Staff</span> 
+            </div>
+            <div class="col" style="text-align: center;">
+                <a id="menuButton" href="./menu.html"  > 
+                    <img id="teamImage" src="./img/team.png" alt="Imagen del Equipo" style="width: 50px; height: 50px;">
+                </a>
+            </div>
+            <div class="col" style="text-align: right;">
+                <span id="soccerTeam">Soccer Team</span> <br>
+                <span id="category">Categoría</span>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+</div>
+</header>
+<body>
+    
+    <div class="container-fluid ">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="col-md-12 mt-2 mb-2 text-center">
+                            <h2>Data of injury</h2>
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <!-- Sección de Período -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="hidden" id="injutyId" name="injutyId" value=""/>
+                                    <label>Jugadores:</label>
+                                    <select class="form-control" id="players" name="players">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Sección de Período -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Categoría:</label>
+                                    <input type="text" id="category" name="category" value="" class="form-control mr-2"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Edad:</label>
+                                    <input type="text" id="age" name="age" value="" class="form-control mr-2"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Posición:</label>
+                                    <input type="text" id="position" name="position" value="" class="form-control mr-2"/>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Fecha de la Lesión:</label>
+                                    <div class="youtube-input-container d-flex align-items-center">
+                                        <input type="date" id="dateOfInjury" placeholder="Fecha de la lesión" class="form-control mr-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Fecha alta médica:</label>
+                                    <div class="youtube-input-container d-flex align-items-center">
+                                        <input type="date" id="medicalDischargeDate" placeholder="Fecha alta médica" class="form-control mr-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Días:</label>
+                                    <input type="text" id="days" name="days" value="" class="form-control mr-2"/>
+                                </div>
+                            </div>
+                            <!-- Sección de ID del Partido -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Recidiva:</label>
+                                    <select class="form-control" id="relapse" name="relapse">
+                                        <option value="Si">Yes</option>
+                                        <option value="No" selected>No</option>
+                                        </select>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Estado de la Lesión:</label>
+                                    <select class="form-control" id="injuryStatus" name="injuryStatus">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Gravedad de la Lesión:</label>
+                                    <select class="form-control" id="severityOfInjury" name="severityOfInjury">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Causa de la Lesión:</label>
+                                    <select class="form-control" id="causeOfInjury" name="causeOfInjury">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Tipo de Lesión:</label>
+                                    <select class="form-control" id="typeOfInjury" name="typeOfInjury">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-md-12 mt-4 mb-2 text-center">
+                                <h4>Localización de la Lesión</h4>
+                                <hr>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Zona del cuerpo:</label>
+                                    <select class="form-control" id="bodyZone" >
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Parte del cuerpo:</label>
+                                    <select class="form-control" id="bodyPart" name="bodyPart">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Especificación:</label>
+                                    <select class="form-control" id="specification" name="specification">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12 mt-4">
+                                <div class="form-group">
+                                    <label>Comentarios:</label>
+                                    <textarea id="comments" name="comments" class="form-control" style="height:100px;" bind-placeholder-label="true"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+    </div>
+
+    <div class="container-fluid " style="margin-bottom: 100px; background-color: #f8f9fa;">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg" style="align-items: center;">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Sección de Video -->
+                            <!-- <button type="button" class="btn-default btn " onclick="location = 'https://audax.club/?controller=pfcheckinout&amp;action=insertRespondePlayer'">Cancelar</button>
+                <button type="submit" class="btn-default btn " onclick="llamar_loading();">Guardar</button> -->
+
+                <button id="btnGuardar" class="btn btn-guardar" style="margin: 5px;"><i class="fa fa-check-square" aria-hidden="true" style="margin: 5px;"></i>
+                </button>
+                <button  id="btnCancelar" class="btn btn-cancelar" style="margin: 5px;"><i class="fa fa-window-close" aria-hidden="true" style="margin: 5px;"></i></button>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+    </div>
+
+</body>
+
+
+
+<footer class="footer fixed-bottom">
+    <img src="./img/logo.png" alt="Logo"> <!-- Asegúrate de reemplazar con la ruta correcta al logo -->
+    
+    <div class="version">Wellness Tools by Sports Data Campus Community v1.2.0</div> <!-- Reemplaza con tu número de versión actual -->
+  </footer>
+
+  <script>
+    document.getElementById('menuButton').addEventListener('click', function() {
+        window.location.href = 'menu.html';
+    });
+
+    document.getElementById('btnCancelar').addEventListener('click', function() {
+        window.location.href = 'answers.html';
+    });
+</script>
+
+
+<script language="JavaScript">
+
+    $(document).ready(function () {
+
+        // visibilizaMusculos();
+        
+
+    });
+
+
+    </script>
+
+<script>
+    // PRE CARGAMOS LOS SELECT
+    function getSelectData(datos) {
+        
+        //obtengo con el id de la lesion
+        // var injuryStatus = '-1';
+        // var injurySeverities = '-1';
+        // var causeOfInjury = '-1';
+        // var typeOfInjury = '-1';
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/players.json?nocache=${new Date().getTime()}`, function(data) {
+
+            // console.log(data);
+            var $select = $('#players').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.ShortName));
+            });
+
+            if(datos){
+                $select.val(datos.players).trigger('change');
+            }else{
+                $select.val('-1');
+            }
+        });
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/injuryStatus.json?nocache=${new Date().getTime()}`, function(data) {
+
+            // console.log(data);
+            var $select = $('#injuryStatus').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            if(datos){
+                $select.val(datos.injuryStatus).trigger('change');
+            }else{
+                $select.val('-1');
+            }
+        });
+
+        
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/injurySeverities.json?nocache=${new Date().getTime()}`, function(data) {
+            var $select = $('#severityOfInjury').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            if(datos){
+                $select.val(datos.severityOfInjury).trigger('change');
+            }else{
+                $select.val('-1');
+            }
+        });
+
+        
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/injuryCauses.json?nocache=${new Date().getTime()}`, function(data) {
+            var $select = $('#causeOfInjury').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            if(datos){
+                $select.val(datos.causeOfInjury).trigger('change');
+            }else{
+                $select.val('-1');
+            }
+        });
+
+        
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/injuryTypes.json?nocache=${new Date().getTime()}`, function(data) {
+            var $select = $('#typeOfInjury').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            if(datos){
+                $select.val(datos.typeOfInjury).trigger('change');
+            }else{
+                $select.val('-1');
+            }
+        });
+
+        
+
+        $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+            var uniqueZones = [...new Set(data.map(item => item["BodyZone"]))]; // Extrae zonas únicas
+
+            $('#bodyZone').append($('<option></option>').attr('value', '-1').text('Select One...'));
+            uniqueZones.forEach(function(zonee) {
+                $('#bodyZone').append($('<option>', {
+                    value: zonee,
+                    text: zonee
+                }));
+            });
+
+            if(datos){
+                $select.val(datos.bodyZone).trigger('change');
+            }else{
+                $select.val('Tren Inferior');
+            }
+        });
+
+        // Inicializar el selector de Body Part como deshabilitado
+        $('#bodyPart').prop('disabled', true);
+
+        // Inicializar el selector de Specification como deshabilitado
+        $('#specification').prop('disabled', true);
+
+        $('#bodyZone').change(function() {
+            var selectedZone = $(this).val();
+            $('#bodyPart').empty().prop('disabled', false); // Habilitar y limpiar el selector de Body Part
+            $('#specification').empty().prop('disabled', true); // Reiniciar y deshabilitar el selector de Specification
+
+            $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+                var filteredParts = data.filter(item => item["BodyZone"] === selectedZone);
+                var uniqueParts = [...new Set(filteredParts.map(item => item["BodyPart"]))];
+                $('#bodyPart').append($('<option></option>').attr('value', '-1').text('Select One...'));
+                uniqueParts.forEach(function(part) {
+                    $('#bodyPart').append($('<option>', {
+                        value: part,
+                        text: part
+                    }));
+                });
+            });
+        });
+
+        $('#bodyPart').change(function() {
+           
+            var selectedZone = $('#bodyZone').val();
+
+            var selectedPart = $(this).val();
+            $('#specification').empty().prop('disabled', false); // Habilitar y limpiar el selector de Specification
+            
+            $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+                var filteredSpecifications = data.filter(item => item["BodyZone"] === selectedZone && item["BodyPart"] === selectedPart);
+                $('#specification').append($('<option></option>').attr('value', '-1').text('Select One...'));
+                filteredSpecifications.forEach(function(item) {
+                    $('#specification').append($('<option>', {
+                        value: item.Specification,
+                        text: item.Specification || "No aplica" // Asegurarse de manejar "No aplica" o valores nulos
+                    }));
+                });
+            });
+        });
+
+
+        seleccionarValoresIniciales('Tren Inferior', 'Muslo', 'Anterior');
+
+       
+    }
+
+    function cargarBodyParts(selectedZone) {
+    return new Promise(resolve => {
+        $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+            var filteredParts = data.filter(item => item["BodyZone"] === selectedZone);
+            var uniqueParts = [...new Set(filteredParts.map(item => item["BodyPart"]))];
+            $('#bodyPart').empty().prop('disabled', false).append($('<option></option>').attr('value', '-1').text('Select One...'));
+            uniqueParts.forEach(function(part) {
+                $('#bodyPart').append($('<option>', {
+                    value: part,
+                    text: part
+                }));
+            });
+            resolve();
+        });
+    });
+}
+
+function cargarSpecifications(selectedZone, selectedPart) {
+    return new Promise(resolve => {
+        $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+            var filteredSpecifications = data.filter(item => item["BodyZone"] === selectedZone && item["BodyPart"] === selectedPart);
+            $('#specification').empty().prop('disabled', false).append($('<option></option>').attr('value', '-1').text('Select One...'));
+            filteredSpecifications.forEach(function(item) {
+                $('#specification').append($('<option>', {
+                    value: item.Specification,
+                    text: item.Specification || "No aplica"
+                }));
+            });
+            resolve();
+        });
+    });
+}
+
+
+function seleccionarValoresIniciales(zonee, part, specification) {
+    // Primero, establece el valor de #bodyZone y luego carga las partes del cuerpo
+
+    $('#bodyZone').val(zonee).trigger('change');
+
+    cargarBodyParts(zonee).then(() => {
+        // Una vez que las partes del cuerpo se han cargado y el select se ha actualizado,
+        // establece el valor seleccionado y carga las especificaciones
+        $('#bodyPart').val(part).trigger('change');
+        cargarSpecifications(zonee, part).then(() => {
+            // Finalmente, una vez que las especificaciones se han cargado y el select se ha actualizado,
+            // establece el valor seleccionado para #specification
+            $('#specification').val(specification);
+        });
+    });
+}
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+    // Suponiendo que tienes playerName y fecha en la URL como parámetros
+    const urlParams = new URLSearchParams(window.location.search);
+    const injuryId = urlParams.get('injuryId');
+
+    $('#injutyId').val(injuryId);
+
+    //buscamos la lesion
+    // Leer el archivo JSON y buscar el registro
+    fetch(`./data/json/injuries.json?nocache=${new Date().getTime()}`)
+        .then(response => {
+            if (!response.ok) {
+                // throw new Error(`HTTP error! status: ${response.status}`);
+                getSelectData();
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            // Verifica si el archivo JSON está vacío
+            if (data && data.length > 0) {
+                const registroEncontrado = data.find(registro => registro.injuryId === injuryId);
+            
+                if (registroEncontrado) {
+                    cargarDatosEnFormulario(registroEncontrado);
+                } else {
+                    getSelectData(); // Llamada a tu función para manejar la ausencia de datos específicos
+                }
+            } else {
+                // Maneja el caso de un archivo JSON vacío
+                console.log("El archivo JSON está vacío.");
+                getSelectData(); // O manejo alternativo para un JSON vacío
+            }
+        })
+        .catch(error => { 
+            console.error('Error al cargar los datos:', error);
+            getSelectData(); // Manejo de cualquier error, incluyendo el archivo JSON no encontrado o vacío
+        });
+
+});
+
+function cargarDatosEnFormulario(datos) {
+    // Aquí asignas los valores de 'datos' a los campos del formulario
+
+    getSelectData(datos) ;
+
+    $('#category').val(datos.category);
+    $('#age').val(datos.age);
+    $('#position').val(datos.position);
+    $('#dateOfInjury').val(datos.dateOfInjury);
+    $('#medicalDischargeDate').val(datos.medicalDischargeDate);
+
+    //si tiene fecha inicio y fecha fin poner diferencia de dias
+    // si no tiene fecha de alta medica medicalDischargeDate contar dias hasta hoy
+    //si no tiene no poner nada
+    var days=0;
+    $('#days').val(days);
+
+
+    // VER QUE LOS SELECTS NO SE ACTUALIZAN CON LOS DATOS QUE TENIA GARGADO ESE REGISTRO
+
+    if (datos.playerName) {
+        $('#players').val(datos.playerName).trigger('change');
+    }
+
+    if (datos.Relapse) {
+        $('#Relapse').val(datos.Relapse).trigger('change');
+    }
+
+    // alert(datos.Season);
+    if (datos.injuryStatus) {
+        $('#injuryStatus').val(datos.injuryStatus).trigger('change');
+    }
+
+    if (datos.severityOfInjury) {
+        $('#severityOfInjury').val(datos.severityOfInjury).trigger('change');
+    }
+    
+    if (datos.causeOfInjury) {
+        $('#causeOfInjury').val(datos.causeOfInjury).trigger('change');
+    }
+    
+    if (datos.typeOfInjury) {
+        $('#typeOfInjury').val(datos.typeOfInjury).trigger('change');
+    }
+
+ 
+}
+</script>
+    <script>
+
+        function recogerDatos() {
+            // Obtener todos los valores seleccionados en el select múltiple
+            var selectedMuscles = Array.from(document.getElementById('selectMusculos').options)
+                               .filter(option => option.selected)
+                               .map(option => option.value);
+
+            // // crea un nuevo objeto `Date`
+            // var moment = require('moment');
+ 
+            // // obtener el nombre del mes, día del mes, año, hora
+            // var DateResponse = moment().format("DD/MM/YYYY HH:mm:ss A");
+
+            // obtener el nombre del mes, día del mes, año, hora
+            var DateResponse = moment().format("DD/MM/YYYY HH:mm:ss A");
+
+            // CalcularIndexs(document.getElementById('fecha').value,document.getElementById('playerName_url').value,document.getElementById('pregunta1out').value,document.getElementById('minutesSeason').value);
+
+            return {
+                Id: getId(),
+                date: document.getElementById('fecha').value,
+                playerName: document.getElementById('playerName_url').value,
+                position: document.getElementById('position_url').value,
+                Periodization: document.getElementById('periodizations').value,
+                SessionType: document.getElementById('sessionstype').value,
+                Season: document.getElementById('seasons').value,
+                Event: document.getElementById('events').value,
+                Fase: document.getElementById('fases').value,
+                Fatigue: document.getElementById('pregunta2').value,
+                PainMuscle: document.getElementById('pregunta4').value,
+                SleepQuality: document.getElementById('pregunta1').value,
+                Stress: document.getElementById('pregunta3').value,
+                Humor: document.getElementById('pregunta5').value,
+                RPE: document.getElementById('pregunta1out').value,
+                minutesSeason: document.getElementById('minutesSeason').value,
+                comments: $('#comments').val(),
+                Muscles: selectedMuscles,
+                DateResponse : DateResponse
+                // ... otros campos ...
+            };
+        }
+
+        function pad2(n) { return n < 10 ? '0' + n : n }
+        function getId() { 
+            var date = new Date();
+            return( date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2( date.getDate()) + pad2( date.getHours() ) + pad2( date.getMinutes() ) + pad2( date.getSeconds() ) );
+        }
+
+        function guardarDatos(data) {
+            fetch('./php/guardar_injuries.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = 'injuries.html';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        document.getElementById('btnGuardar').addEventListener('click', function() {
+            let ShortName = document.getElementById('playerName_url').value;
+            // Obtener la configuración de confirmación
+            $.getJSON(`./data/json/config.json?nocache=${new Date().getTime()}`, function(config) {
+                const confirmationConfig = config.find(item => item.Id === 'confirmation');
+                if (confirmationConfig && confirmationConfig.Value === 1) {
+                    // Si la confirmación es necesaria, mostrar el popup
+                    swal.fire({
+                        title: 'Confirmación',
+                        text: 'Por favor, ingresa tu username para confirmar:',
+                        input: 'text',
+                        inputAttributes: {
+                            autocapitalize: 'off'
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: 'Confirmar',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (login) => {
+                            // Aquí puedes agregar una función para validar el username
+                            // Por ejemplo, verificar contra `players.json` o cualquier otra lógica necesaria
+                            return validarUsername(login,ShortName)
+                                .then(response => {
+                                    if (!response.esValido) {
+                                        throw new Error(response.mensajeError);
+                                    }
+                                })
+                                .catch(error => {
+                                    swal.showValidationMessage(
+                                        `${error.mensajeError}`
+                                    );
+                                });
+                        },
+                        allowOutsideClick: () => !swal.isLoading()
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var datos = recogerDatos();
+                            console.log(datos);
+                            guardarDatos(datos);
+                        }
+                    });
+                } else {
+                    // Si no se requiere confirmación, simplemente guardar los datos
+                    var datos = recogerDatos();
+                    console.log(datos);
+                    guardarDatos(datos);
+                }
+            });
+});
+
+function validarUsername(username, ShortName) {
+    debugger;
+    // Usando fetch en lugar de $.getJSON
+    return new Promise((resolve, reject) => {
+        fetch(`./data/json/players.json?nocache=${new Date().getTime()}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(players => {
+                console.log(players);
+                const playerExists = players.some(player => String(player.ShortName) === String(ShortName) && String(player.Username) === String(username));
+
+                if (playerExists) {
+                    resolve({ esValido: true });
+                } else {
+                    reject({ esValido: false, mensajeError: "Confirmation no válido" });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                reject({ esValido: false, mensajeError: "Error al acceder a los datos de los jugadores." });
+            });
+    });
+}
+
+
+function getColor(valor) {
+  var verde = "'rgb(62,166,26)'";
+  var amarillo = "rgb(255,167,1)";
+  var rojo = "rgb(228,62,57)";
+  if (valor >= 0 && valor <= 3) return verde;
+  if (valor >= 4 && valor <= 6) return amarillo;
+  if (valor >= 7) return rojo;
+}
+
+
+    </script>
+
+</html>

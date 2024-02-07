@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Estilos -->
+
+<link rel="stylesheet" href="./plugins/bootstrap-4.5.3/css/bootstrap.css">
+<link rel="stylesheet" href="./plugins/fontawesome-free-6.4.2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="./plugins/DataTables/datatables.css">
+<link rel="stylesheet" type="text/css" href="./plugins/sweetalert2/sweetalert2.css">
+<link rel="stylesheet" type="text/css" href="./css/default.css">
+<link rel="stylesheet" type="text/css" href="./css/config.css">
+
+<!-- JS -->
+<script src="./js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="./plugins/DataTables/datatables.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_popper.js_1.16.0_umd_popper.min.js"></script>
+<script src="./plugins/bootstrap-4.5.3/js/bootstrap.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_xlsx_0.16.9_xlsx.full.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js"></script>
+<!-- <script src="./plugins/sweetalert/sweetalert.min.js"></script> -->
+
+
+<script src="./plugins/sweetalert2/sweetalert2.js"></script>
+<script src="./scripts/header.js"></script>
+<script src="./scripts/config.js"></script>
+<!-- <script src="./plugins/fontawesome-free-6.4.2-web/js/all.min.js" crossorigin="anonymous"></script> -->
+
+<!-- Bootstrap and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness</title>
+
+</head>
+<header class="header">
+    <div class="container-fluid mt-2">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+
+            <div class="col" style="text-align: left;">
+                <span id="teamName">Nombre del Equipo</span><br>
+                <span id="staffName">Nombre del Staff</span> 
+            </div>
+            <a id="menuButton" href="./menu.html"  > 
+                <img id="teamImage" src="./img/team.png" alt="Imagen del Equipo" style="width: 50px; height: 50px;">
+            </a>
+            <div class="col" style="text-align: right;">
+                <span id="soccerTeam">Soccer Team</span> <br>
+                <span id="category">Categoría</span>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+</div>
+</header>
+
+<body>
+    <div class="container-fluid mt-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col">
+                                    <h1>Instalar servidor web</h1>
+
+                                    <h1>Generar archivos de configuración</h1>
+                                    <p style="font-size: 14px;">Recomendación, si se desea ejecutar Wellness Tool en una tablet o celular, primero generar esta configuración en un ordenador y luego copiar o enviar Wellness Tool a la tablet o celular. </p>
+                                    
+                                    <div class="mb-4">
+                                        <h2>Paso 1 - Descargar el archivo modelo para cargar la configuración</h2>
+                                        <hr>
+                                        <p><a href="./data/config.xlsx" class="btn btn-primary">Descargar modelo</a></p>
+                                        <p><a href="./data/bkp/config.xlsx" class="btn btn-primary">Descargar último import</a></p>
+                                    </div>
+                        
+                                    <div class="mb-4">
+                                        <h2>Paso 2 - Editar archivo de Configuración</h2>
+                                        <hr>
+                                        <p>
+                                            * Ajusta el archivo modelo a su gusto solapa a solapa.<br>
+                                            * No modifique los nombres de las solapas.<br>
+                                            * La columna edad en jugadores tiene una formula calculada por si agrega un nuevo jugador podria arrastrarla.
+                                        </p>
+                                    </div>
+                        
+                                    <div class="mb-4">
+                                        <h2>Paso 3 - Importar archivo de configuración </h2>
+                                        <hr>
+                                        <input type="file" id="fileInput" accept=".xlsx, .xls" class="mb-2" />
+                                        <button id="processButton" class="btn btn-success">Procesar Archivo</button>
+                                        <p>
+                                            * Los archivos se generaran y debe guardarse en el directorio de "Descargas". <br>
+                                            * Para no entrar en cambiar configuraciones según navegadores y sistemas operativos, debemos tomar esos archivos y guardarlos en el directorio "/data/json/" donde se encuentra el proyecto.</p>
+                                    </div>
+                        
+                                    <div class="mb-4">
+                                        <h2>Paso 4 - Imagenes de jugadores </h2>
+                                        <hr>
+                                        <p>Si se desea cargar las fotos de los jugadores se deberían guardar en la carpeta "/img/players/" donde los nombres deberían ser el número de id con extencion "png", por ejemplo "1.png". Si tiene las fotos y quisiera quitarle el fondo y dejar solo la cara podria recurrir a <a href="https://remove.bg">remove.bg</a>. <br>
+                                        Sino puede importar una por una desde aquí que se guardaran en la carpeta "/img/players/".</p>
+                                        <form id="uploadForm" enctype="multipart/form-data">
+                                            
+                                            <!-- Sección de Período -->
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Players:</label>
+                                                        <select class="form-control" id="players" name="players">
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <input type="file" id="imageInput" name="imageInput" accept=".png" style="margin-top: 35px;" />
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label></label>
+                                                        <button id="importImgButton" class="btn btn-success" style="margin-top: 30px;">Importar imagen</button>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                        
+                                    <div class="mb-4">
+                                        <h2>Paso 5 - Ajustes de configuración </h2>
+                                        <hr>
+                                        <p>Si en algún momento desea ajustar la configuración, porque tiene la necesidad de agregar un jugador, cambiarle un estado, o lo que considere, y si tiene el archivo XLSX de configuración vaya al punto 3.</p>
+                                    </div>
+                        
+                                    <h1>Configuración actual</h1>
+                                    <!-- Aquí pueden ir las solapas con las tablas de cada configuración -->
+                                    <div class="container mt-3">
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="team-tab" data-toggle="tab" href="#team" role="tab" aria-controls="team" aria-selected="true">Team</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="players-tab" data-toggle="tab" href="#players" role="tab" aria-controls="players" aria-selected="true">Players</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="positions-tab" data-toggle="tab" href="#positions" role="tab" aria-controls="positions" aria-selected="true">Positions</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="references-tab" data-toggle="tab" href="#references" role="tab" aria-controls="references" aria-selected="true">References</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="seasons-tab" data-toggle="tab" href="#seasons" role="tab" aria-controls="seasons" aria-selected="true">Seasons</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="sessionsTypes-tab" data-toggle="tab" href="#sessionsTypes" role="tab" aria-controls="sessionsTypes" aria-selected="true">Sessions Types</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="tacticalperiodizations-tab" data-toggle="tab" href="#tacticalperiodizations" role="tab" aria-controls="tacticalperiodizations" aria-selected="true">Tactical periodizations</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="fases-tab" data-toggle="tab" href="#fases" role="tab" aria-controls="fases" aria-selected="true">Fases</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="config-tab" data-toggle="tab" href="#config" role="tab" aria-controls="config" aria-selected="true">Config</a>
+                                            </li>
+                                            <!-- Repite para cada pestaña: players, positions, etc. -->
+                                            <!-- ... -->
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="team" role="tabpanel" aria-labelledby="team-tab">
+                                                <table id="table-team" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+                                            
+                                            <div class="tab-pane fade show" id="players" role="tabpanel" aria-labelledby="players-tab">
+                                                <table id="table-players" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+                               
+                                            <div class="tab-pane fade show" id="positions" role="tabpanel" aria-labelledby="positions-tab">
+                                                <table id="table-positions" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+
+                                            <div class="tab-pane fade show" id="references" role="tabpanel" aria-labelledby="references-tab">
+                                                <table id="table-references" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+
+                                            <div class="tab-pane fade show" id="seasons" role="tabpanel" aria-labelledby="seasons-tab">
+                                                <table id="table-seasons" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+
+                                            <div class="tab-pane fade show" id="sessionsTypes" role="tabpanel" aria-labelledby="sessionsTypes-tab">
+                                                <table id="table-sessionsTypes" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+
+                                            <div class="tab-pane fade show" id="tacticalperiodizations" role="tabpanel" aria-labelledby="tacticalperiodizations-tab">
+                                                <table id="table-tacticalperiodizations" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+
+                                            <div class="tab-pane fade show" id="fases" role="tabpanel" aria-labelledby="fases-tab">
+                                                <table id="table-fases" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade show" id="config" role="tabpanel" aria-labelledby="config-tab">
+                                                <table id="table-config" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+                                            <!-- Repite para cada pestaña: players, positions, etc. -->
+                                            <!-- ... -->
+                                       
+                                        </div>
+                                </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+
+
+        </div>
+    </div>
+
+</body>
+
+<!-- Eventos de Botones --> 
+<script>
+$(document).ready(function() {
+    // Cargar las opciones al select desde el archivo JSON
+    $.getJSON(`./data/json/players.json?nocache=${new Date().getTime()}`, function(data) {
+
+        // console.log(data);
+        var $select = $('#players').empty();
+
+        // Agregar una opción predeterminada al principio
+        $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+        $.each(data, function(key, entry) {
+            
+            // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+            $select.append($('<option></option>').attr('value', entry.Id).text(entry.ShortName));
+        });
+
+        $select.val('-1');
+        
+    });
+});
+
+   
+    let selectedFile;
+
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+        selectedFile = event.target.files[0];
+    });
+
+    document.getElementById('processButton').addEventListener('click', function () {
+    if (selectedFile) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var data = new Uint8Array(e.target.result);
+            var workbook = XLSX.read(data, { type: 'array' });
+
+            var promesas = workbook.SheetNames.map(sheetName => {
+                var jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+                return enviarJSONAlServidor(jsonData, sheetName);
+            });
+
+            // Agregar la promesa de enviar el archivo completo
+            promesas.push(enviarArchivoAlServidor_bkp(selectedFile));
+
+            // Esperar a que todas las promesas se completen
+            Promise.all(promesas)
+                .then(() => {
+                    Swal.fire({
+                        title: 'Exito',
+                        text: 'Todo salio como lo esperabamos!!!',
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Ok'
+                        }).then((result) => {
+                        if (result.value) {
+                            // Refrescar la página
+                            location.reload();
+                        }
+                    });
+              
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Aquí puedes manejar cualquier error
+                });
+        };
+
+        reader.readAsArrayBuffer(selectedFile);
+    } else {
+        // swal("Haga bien las cosas", "Por favor, selecciona un archivo primero.", "Info");
+        Swal.fire({
+            title: 'Haga bien las cosas',
+            text: 'Por favor, selecciona un archivo primero.',
+            icon: 'info',
+            confirmButtonText: 'Ok'
+        });
+
+    }
+});
+
+document.getElementById('importImgButton').addEventListener('click', function(event) {
+  event.preventDefault(); // Previene el envío del formulario
+  
+  var playerSelect = document.getElementById('players');
+  var selectedPlayer = playerSelect.value;
+  
+  if (selectedPlayer === "-1") {
+    // swal("Haga bien las cosas!!!", "Por favor, selecciona un jugador antes de subir una imagen.", "info");
+    Swal.fire({
+            title: 'Haga bien las cosas',
+            text: 'Por favor, selecciona un jugador antes de subir una imagen.',
+            icon: 'info',
+            confirmButtonText: 'Ok'
+        });
+    return;
+  }
+
+  var fileInput = document.getElementById('imageInput');
+  if (fileInput.files.length === 0) {
+    // swal("Haga bien las cosas!!!", "Por favor, selecciona un archivo para subir.", "info");
+    Swal.fire({
+            title: 'Haga bien las cosas',
+            text: 'Por favor, selecciona un archivo para subir.',
+            icon: 'info',
+            confirmButtonText: 'Ok'
+        });
+    return;
+  }
+
+  var file = fileInput.files[0];
+  if (file.type !== 'image/png') {
+    // swal("Formato no admitido", "Por favor, selecciona una imagen en formato PNG.", "warning");
+    Swal.fire({
+            title: 'Formato no admitido',
+            text: 'Por favor, selecciona una imagen en formato PNG.',
+            icon: 'warning',
+            confirmButtonText: 'Ok'
+        });
+    return;
+  }
+
+  var formData = new FormData(document.getElementById('uploadForm'));
+  formData.append('playerImage', file, selectedPlayer + '.png');
+
+  fetch('./php/guardar_image.php', {
+      method: 'POST',
+      body: formData,
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      return response.text();
+  })
+  .then(result => {
+    //   swal("Imagen subida con éxito", "La imagen ha sido actualizada correctamente.", "success");
+      Swal.fire({
+            title: 'Imagen subida con éxito',
+            text: 'La imagen ha sido actualizada correctamente.',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        });
+    //   var imageUrl = '../img/players/' + selectedPlayer + '.png?' + new Date().getTime();
+    //   document.getElementById('playerImage').src = imageUrl;
+  })
+  .catch(error => {
+    //   swal("Error al subir la imagen", "Hubo un problema al subir la imagen. Por favor, intenta de nuevo.", "error");
+      Swal.fire({
+            title: 'Error al subir la imagen',
+            text: 'Hubo un problema al subir la imagen. Por favor, intenta de nuevo.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+      console.error('Error:', error);
+  });
+});
+
+
+function enviarJSONAlServidor(data, sheetName) {
+    return fetch('./php/guardar_config.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: data, sheetName: sheetName })
+    });
+}
+
+function enviarArchivoAlServidor_bkp(file) {
+    var formData = new FormData();
+    formData.append('file', file);
+
+    return fetch('./php/guardar_config_bkp.php', {
+        method: 'POST',
+        body: formData
+    });
+}
+
+function cargarDatos(tabName) {
+
+    fetch(`./data/json/${tabName}.json?nocache=${new Date().getTime()}`)
+        .then(response => response.json())
+        .then(data => {
+            const table = crearTabla(data);
+            document.getElementById(`table-${tabName}`).innerHTML = table;
+        })
+        .catch(error => 
+            console.error('Error:', error)
+            // swal("Ups algo paso.", error.TypeError, "warning")
+        );
+}
+
+function crearTabla(datos) {
+    let tabla = '<table class="table"><thead><tr>';
+
+    // Crear cabeceras de la tabla
+    if (datos.length > 0) {
+        Object.keys(datos[0]).forEach(key => {
+            tabla += `<th>${key}</th>`;
+        });
+        tabla += '</tr></thead><tbody>';
+        
+        // Crear filas de la tabla
+        datos.forEach(item => {
+            tabla += '<tr>';
+            Object.values(item).forEach(value => {
+                tabla += `<td>${value}</td>`;
+            });
+            tabla += '</tr>';
+        });
+    } else {
+        tabla += '<tr><td>No hay datos disponibles</td></tr>';
+    }
+
+    tabla += '</tbody></table>';
+    return tabla;
+}
+
+
+// Carga los datos para cada pestaña
+['team', 'players', 'positions', 'references', 'seasons', 'sessionsTypes', 'tacticalperiodizations', 'fases', 'config',/* otras pestañas... */].forEach(tab => {
+    cargarDatos(tab);
+});
+
+</script>
+
+<script src="./scripts/config.js"></script>
+
+<footer class="footer fixed-bottom">
+    <img src="./img/logo.png" alt="Logo"> <!-- Asegúrate de reemplazar con la ruta correcta al logo -->
+    <!-- <a href="https://github.com/lucbra21/botonera" target="_blank" > -->
+    <button id="menuButton">Menu</button>
+    <!-- </a> -->
+    <div class="version">Wellness Tools by Sports Data Campus Community v1.2.0</div>
+    <!-- Reemplaza con tu número de versión actual -->
+</footer>
+
+
+
+</html>

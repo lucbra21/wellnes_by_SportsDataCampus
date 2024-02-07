@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Estilos -->
+<link rel="stylesheet" href="./plugins/bootstrap-4.5.3/css/bootstrap.css">
+<link rel="stylesheet" href="./plugins/fontawesome-free-6.4.2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="./plugins/DataTables/datatables.css">
+<link rel="stylesheet" type="text/css" href="./plugins/sweetalert2/sweetalert2.css">
+<link rel="stylesheet" type="text/css" href="./css/default.css">
+
+<!-- JS -->
+<script src="./js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="./plugins/DataTables/datatables.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_popper.js_1.16.0_umd_popper.min.js"></script>
+<script src="./plugins/bootstrap-4.5.3/js/bootstrap.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_xlsx_0.16.9_xlsx.full.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js"></script>
+<script src="./plugins/sweetalert2/sweetalert2.js"></script>
+<script src="./scripts/header.js"></script>
+<!-- <script src="./plugins/fontawesome-free-6.4.2-web/js/all.min.js" crossorigin="anonymous"></script> -->
+
+<!-- Bootstrap and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness</title>
+    <style>
+        
+
+        #editableTable {
+            border-collapse: separate;
+            border-spacing: 0 5px;
+            font-size: 9px;
+        }
+
+        #editableTable thead tr {
+            border: none;
+        }
+
+        #editableTable th, #editableTable td {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+        }
+
+        #editableTable tbody tr:hover {
+            background-color: #f5f5f5; /* Color de fondo cuando pasas el mouse sobre una fila */
+        }
+
+        /* Estilo general para la tabla */
+        .fixed-header {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        /* Fijamos el encabezado */
+        .fixed-header thead {
+            display: block;
+        }
+
+        /* Hacemos que el cuerpo de la tabla sea desplazable */
+        .fixed-header tbody {
+            display: block;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        /* Definimos los anchos específicos para cada columna */
+        /*.fixed-header th:nth-child(1), .fixed-header td:nth-child(1) { width: 5px; }
+        .fixed-header th:nth-child(2), .fixed-header td:nth-child(2) { width: 5px; }
+        .fixed-header th:nth-child(3), .fixed-header td:nth-child(3) { width: 20px; }
+        .fixed-header th:nth-child(4), .fixed-header td:nth-child(4) { width: 140px; }
+        .fixed-header th:nth-child(5), .fixed-header td:nth-child(5) { width: 140px; }
+        .fixed-header th:nth-child(6), .fixed-header td:nth-child(6) { width: 140px; }
+        .fixed-header th:nth-child(7), .fixed-header td:nth-child(7) { width: 40px; }
+        .fixed-header th:nth-child(8), .fixed-header td:nth-child(8) { width: 40px; }
+        .fixed-header th:nth-child(9), .fixed-header td:nth-child(9) { width: 40px; }
+        .fixed-header th:nth-child(10), .fixed-header td:nth-child(10) { width: 40px; }
+        .fixed-header th:nth-child(11), .fixed-header td:nth-child(11) { width: 40px; }
+        .fixed-header th:nth-child(12), .fixed-header td:nth-child(12) { width: 40px; }*/
+      
+        .fixed-header th, .fixed-header td {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        /* Ajusta el ancho y diseño del botón de eliminar */
+        #editableTable button {
+            background: none;
+            border: none;
+            color: red;
+            font-size: 9px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+        #botonera {
+            position: relative;
+        }
+
+        #botonera button {
+            margin-right: 10px;
+        }
+
+        #botonera select {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+        /* Estilo para reducir el espacio entre los elementos de la lista */
+        .list-group-item {
+            padding: 0.1rem 0; /* Ajusta el relleno para que sea más pequeño */
+            background-color: transparent; /* Hace que el fondo de los elementos de la lista sea transparente */
+            border: none; /* Elimina el borde de los elementos de la lista */
+        }
+        
+        /* Estilo para los botones dentro de la lista para que ocupen todo el ancho */
+        .list-group-item .btn {
+            display: block; /* Hace que el botón ocupe todo el ancho */
+            width: 100%; /* Asegura que el botón ocupe todo el ancho */
+            margin: -0.55rem 0; /* Agrega un margen muy pequeño entre los botones */
+        }
+    
+        /* Hace que el fondo del contenedor sea transparente */
+        #acciones {
+            background-color: transparent;
+            border: none; /* Elimina el borde del contenedor */
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .input-right {
+            text-align: right;
+            padding: 10px; /* Espaciado opcional para dar un poco de margen */
+        }
+
+        /* .btn{
+            font-size: 0.5rem
+        } */
+
+    </style>
+
+
+</head>
+<header class="header">
+    <div class="container-fluid mt-2">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+
+            <div class="col" style="text-align: left;">
+                <span id="teamName">Nombre del Equipo</span><br>
+                <span id="staffName">Nombre del Staff</span> 
+            </div>
+            <div class="col" style="text-align: center;">
+                <a id="menuButton" href="./menu.html"  > 
+                    <img id="teamImage" src="./img/team.png" alt="Imagen del Equipo" style="width: 50px; height: 50px;">
+                </a>
+            </div>
+            <div class="col" style="text-align: right;">
+                <span id="soccerTeam">Soccer Team</span> <br>
+                <span id="category">Categoría</span>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+</div>
+</header>
+<body>
+    
+    <div class="container-fluid ">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Sección de Video -->
+                            
+                            <!-- Sección de ID del Partido -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Date:</label>
+                                    <div class="youtube-input-container d-flex align-items-center">
+                                        <input type="date" id="fecha" placeholder="Fecha del partido" class="form-control mr-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Sección de Período -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Seasons:</label>
+                                    <select class="form-control" id="seasons">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Sección de Período -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Events:</label>
+                                    <select class="form-control" id="events">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Sección de Período -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Fases:</label>
+                                    <select class="form-control" id="fases">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Sección de Período -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Periodizations:</label>
+                                    <select class="form-control" id="periodizations">
+                                        <!-- <option value="" selected>Seleccione</option> 
+                                        <option value="1" selected>Periodo 1</option>
+                                        <option value="2">Periodo 2</option>-->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Sección de Período -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Sessions Type:</label>
+                                    <select class="form-control" id="sessionstype">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Minutes:</label>
+                                    <input  type="number" id="minutesSeason" name="minutesSeason" value="0" min=0 step="1" class="form-control" />
+                                </div>
+                            </div>
+                            <!-- Sección de Período -->
+                            <!-- <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Periodizations:</label>
+                                    <select class="form-control" id="periodoSelector">
+                                        <option value="" selected>Seleccione</option>
+                                        <option value="1" selected>Periodo 1</option>
+                                        <option value="2">Periodo 2</option>
+                                    </select>
+                                </div>
+                            </div> -->
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+            
+    </div>
+
+    <div class="container-fluid ">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+                            
+                            <div class="box-body mb-4">
+                                <!--Grid row-->
+
+                                <!--Grid column-->
+                                <div id="playersContainer" class="row">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+
+<footer class="footer fixed-bottom">
+    <img src="./img/logo.png" alt="Logo"> <!-- Asegúrate de reemplazar con la ruta correcta al logo -->
+    
+    <div class="version">Wellness Tools by Sports Data Campus Community v1.2.0</div> <!-- Reemplaza con tu número de versión actual -->
+  </footer>
+
+  
+  <script>
+    document.getElementById('menuButton').addEventListener('click', function() {
+        window.location.href = 'menu.html';
+    });
+</script>
+
+
+<script>
+    // PRE CARGAMOS LOS SELECT
+    $(document).ready(function() {
+      
+
+        // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+        if(localStorage.getItem('minutesseason')) {
+            $('#minutesSeason').val(localStorage.getItem('minutesseason'));
+        } 
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#minutesSeason').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('minutesseason', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('minutesseason');
+            }
+        });
+
+        if(localStorage.getItem('date')) {
+            document.getElementById('fecha').value = localStorage.getItem('date');
+        } else{
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('fecha').value = today;
+        }
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#fecha').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('date', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('date');
+            }
+        });
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON('./data/json/fases.json', function(data) {
+
+            // console.log(data);
+            var $select = $('#fases').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            if(localStorage.getItem('fase')) {
+                $select.val(localStorage.getItem('fase'));
+            } else {
+                // Si no hay nada en localStorage, seleccionar la opción predeterminada
+                $select.val('-1');
+            }
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#fases').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('fase', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('fase');
+            }
+        });
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON('./data/json/tacticalperiodizations.json', function(data) {
+            var $select = $('#periodizations').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            if(localStorage.getItem('periodization')) {
+                $select.val(localStorage.getItem('periodization'));
+            } else {
+                // Si no hay nada en localStorage, seleccionar la opción predeterminada
+                $select.val('-1');
+            }
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#periodizations').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('periodization', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('periodization');
+            }
+        });
+
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON('./data/json/sessionsTypes.json', function(data) {
+            var $select = $('#sessionstype').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            if(localStorage.getItem('sessionType')) {
+                $select.val(localStorage.getItem('sessionType'));
+            } else {
+                // Si no hay nada en localStorage, seleccionar la opción predeterminada
+                $select.val('-1');
+            }
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#sessionstype').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('sessionType', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('sessionType');
+            }
+        });
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON('./data/json/seasons.json', function(data) {
+            var $select = $('#seasons').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            if(localStorage.getItem('season')) {
+                $select.val(localStorage.getItem('season'));
+            } else {
+                // Si no hay nada en localStorage, seleccionar la opción predeterminada
+                $select.val('-1');
+            }
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#seasons').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('season', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('season');
+            }
+        });
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON('./data/json/events.json', function(data) {
+            var $select = $('#events').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            if(localStorage.getItem('event')) {
+                $select.val(localStorage.getItem('event'));
+            } else {
+                // Si no hay nada en localStorage, seleccionar la opción predeterminada
+                $select.val('-1');
+            }
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#events').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('event', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('event');
+            }
+        });
+        
+    });
+    </script>
+
+
+<script>
+    $(document).ready(function() {
+        // Llamar a la función al cargar la página o cuando sea necesario
+        cargarJugadoresYRespuestas();
+
+        
+        });
+    </script>
+
+<script>
+
+
+function cargarJugadoresYRespuestas() {
+    var fechaSeleccionada = document.getElementById('fecha').value;
+
+    $.getJSON(`./data/json/players.json?nocache=${new Date().getTime()}`, function(players) {
+        $.getJSON(`./data/json/answers.json?nocache=${new Date().getTime()}`, function(answers) {
+            var container = document.getElementById('playersContainer');
+            container.innerHTML = '';
+
+            players.forEach(function(player) {
+                if (player.State !== 'Active') {
+                    return;
+                }
+
+                var respuesta = answers.find(answer => answer.playerName === player.ShortName && answer.date === fechaSeleccionada);
+                var borderColor = '#F74019'; // Por defecto rojo
+                if (respuesta) {
+                    borderColor = respuesta.RPE > 0 ? '#46BF42' : '#C4BEBD';
+                }
+                var imageUrl = '../img/players/nombreDeLaImagen.png?' + new Date().getTime();
+                var imagePath = $.get(imagePath) ? `./img/players/${player.Id}.png?` + new Date().getTime() : './img/no_image.png';
+                
+                var playerHTML = `
+                    <div class="col-md-1 m-1 text-center">
+                        <a href="#" class="player-link" data-player="${player.ShortName}" data-position="${player.ShortPosition}">
+                            <div class="box box-default text-center">
+                                <div class="box-body box-profile text-center" style="padding-bottom: 5px;">
+                                    <figure class="effect-ruby text-center">
+                                        <img class="profile-user-img img-responsive" src="${imagePath}" alt="User profile picture" style="width: 90px; height: 90px; border-radius: 50%; border: 3px solid ${borderColor};">
+                                        <h3 class="profile-username text-center" style="font-size:15px">${player.ShortName}</h3>
+                                        <p>${player.ShortPosition}</p>
+                                    </figure>
+                                </div>
+                            </div>
+                        </a>
+                    </div>`;
+                container.innerHTML += playerHTML;
+            });
+
+            document.querySelectorAll('.player-link').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var playerName = this.getAttribute('data-player');
+                    var position = this.getAttribute('data-position');
+                    var date = document.getElementById('fecha').value;
+                    var periodization = document.getElementById('periodizations').value;
+                    var sessionType = document.getElementById('sessionstype').value;
+                    var season = document.getElementById('seasons').value;
+                    var event = document.getElementById('events').value;
+                    var fase = document.getElementById('fases').value;
+                    var minutesSeason = document.getElementById('minutesSeason').value;
+
+                    if (!date || periodization === '-1' || sessionType === '-1' || season === '-1' || event === '-1' || fase === '-1') {
+                        // swal("Debe prestar más atención", "Por favor, completa todos los campos antes de continuar.", "info");
+                        Swal.fire({
+                            title: 'Debe prestar más atención',
+                            text: 'Por favor, completa todos los campos antes de continuar.',
+                            icon: 'info',
+                            confirmButtonText: 'Ok'
+                        });
+                        return;
+                    }
+
+                    var href = 'answer.html?playerName=' + encodeURIComponent(playerName) +
+                               '&position=' + encodeURIComponent(position) +
+                               '&minutesseason=' + encodeURIComponent(minutesSeason) +
+                               '&date=' + encodeURIComponent(date) +
+                               '&periodization=' + encodeURIComponent(periodization) +
+                               '&sessionType=' + encodeURIComponent(sessionType) +
+                               '&season=' + encodeURIComponent(season) +
+                               '&fase=' + encodeURIComponent(fase) +
+                               '&event=' + encodeURIComponent(event);
+
+                    window.location.href = href;
+                });
+            });
+        });
+    });
+}
+
+// Llamar a la función al cargar la página o cuando sea necesario
+cargarJugadoresYRespuestas();
+
+// Asegúrate de llamar a cargarJugadoresYRespuestas() también cuando cambie la fecha
+document.getElementById('fecha').addEventListener('change', cargarJugadoresYRespuestas);
+
+
+
+
+    // Este script va al final del body o después de los elementos a los que hace referencia
+    document.querySelectorAll('.player-link').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var playerName = this.getAttribute('data-player');
+            var position = this.getAttribute('data-position');
+            var date = document.getElementById('fecha').value;
+            var periodization = document.getElementById('periodizations').value;
+            var sessionType = document.getElementById('sessionstype').value;
+            var season = document.getElementById('seasons').value;
+            var event = document.getElementById('events').value;
+            var fase = document.getElementById('fases').value;
+            var minutesSeason = document.getElementById('minutesSeason').value;
+            // ... obtener otros valores ...
+
+            // Validar que todos los campos están completos
+            if (!date || periodization === '-1' || sessionType === '-1' || season === '-1' || event === '-1' || fase === '-1') {
+                // alert('Por favor, completa todos los campos antes de continuar.');
+                // swal("Debe prestar más atención", "Por favor, completa todos los campos antes de continuar.", "info");
+                Swal.fire({
+                            title: 'Debe prestar más atención',
+                            text: 'Por favor, completa todos los campos antes de continuar.',
+                            icon: 'info',
+                            confirmButtonText: 'Ok'
+                        });
+                return;
+            }
+    
+            // Construye la URL con todos los parámetros
+            var href = 'answer.html?playerName=' + encodeURIComponent(playerName) +
+                       '&position=' + encodeURIComponent(position) +
+                       '&minutesseason=' + encodeURIComponent(minutesSeason) +
+                       '&date=' + encodeURIComponent(date) +
+                       '&periodization=' + encodeURIComponent(periodization) +
+                       '&sessionType=' + encodeURIComponent(sessionType) +
+                       '&season=' + encodeURIComponent(season) +
+                       '&fase=' + encodeURIComponent(fase) +
+                       '&event=' + encodeURIComponent(event);
+            // ... añade otros parámetros ...
+    
+            // Redirige a la nueva URL
+            window.location.href = href;
+        });
+    });
+    </script>
+
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Estilos -->
+
+<link rel="stylesheet" href="./plugins/bootstrap-4.5.3/css/bootstrap.css">
+<link rel="stylesheet" href="./plugins/fontawesome-free-6.4.2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="./plugins/DataTables/datatables.css">
+<link rel="stylesheet" type="text/css" href="./plugins/sweetalert2/sweetalert2.css">
+<link rel="stylesheet" type="text/css" href="./css/default.css">
+
+<!-- JS -->
+<script src="./js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="./plugins/DataTables/datatables.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_popper.js_1.16.0_umd_popper.min.js"></script>
+<script src="./plugins/bootstrap-4.5.3/js/bootstrap.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_xlsx_0.16.9_xlsx.full.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js"></script>
+<script src="./plugins/sweetalert2/sweetalert2.js"></script>
+<script src="./scripts/header.js"></script>
+<!-- <script src="./plugins/fontawesome-free-6.4.2-web/js/all.min.js" crossorigin="anonymous"></script> -->
+
+<!-- Bootstrap and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness</title>
+    
+</head>
+<header class="header">
+    <div class="container-fluid mt-2">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+
+            <div class="col" style="text-align: left;">
+                <span id="teamName">Nombre del Equipo</span><br>
+                <span id="staffName">Nombre del Staff</span> 
+            </div>
+            <div class="col" style="text-align: center;">
+                <img id="teamImage" src="./img/team.png" + new Date().getTime() alt="Imagen del Equipo" style="width: 50px; height: 50px;">
+            </div>
+            <div class="col" style="text-align: right;">
+                <span id="soccerTeam">Soccer Team</span> <br>
+                <span id="category">Categoría</span>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+</div>
+</header>
+<body>
+    
+    <div class="container mt-3">
+        <div class="row">
+
+            <!-- Botón Dash Team -->
+            <div class="col">
+                <button class="btn btn-secondary btn-lg btn-block">
+                    <!-- <img src="ruta_a_tu_imagen_dash_team" alt="Dash Team" style="width: 50px; height: 50px;"> -->
+                    <i class="fa-solid fa-chart-column fa-5x" alt="Dash Team" ></i>
+                    <br>
+                    Dash Team
+                </button>
+            </div>
+
+
+            <!-- Botón Dash Player -->
+            <div class="col">
+                <button class="btn btn-secondary btn-lg btn-block">
+                    <!-- <img src="ruta_a_tu_imagen_dash_player" alt="Dash Player" style="width: 50px; height: 50px;"> -->
+                    <i class="fa-solid fa-chart-line fa-5x"  alt="Dash Player" ></i>
+                    <br>
+                    Dash Player
+                </button>
+            </div>
+
+            <!-- Botón Dash Position -->
+            <div class="col">
+                <button class="btn btn-secondary btn-lg btn-block">
+                    <!-- <img src="ruta_a_tu_imagen_dash_position" alt="Dash Position" style="width: 50px; height: 50px;"> -->
+                    <i class="fa-solid fa-chart-area fa-5x" alt="Dash Position" ></i>
+                    <br>
+                    Dash Position
+                </button>
+            </div>
+
+            <!-- Botón Dash Position -->
+            <div class="col">
+                <button class="btn btn-secondary btn-lg btn-block">
+                    <!-- <img src="ruta_a_tu_imagen_dash_position" alt="Dash Position" style="width: 50px; height: 50px;"> -->
+                    <i class="fa-solid fa-pie-chart fa-5x" alt="Dash Injury" ></i>
+                    <br>
+                    Dash Injury
+                </button>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <!-- Botón Load -->
+            <div class="col">
+                <button  id="loadButton" class="btn btn-primary btn-lg btn-block">
+                    <img src="./img/load1.png" alt="Load" style="width: 100px; height: 100px;">
+                    <br>
+                    Load
+                </button>
+            </div>
+            
+            <!-- Botón alertas -->
+            <div class="col">
+                <button  id="kpisButton" class="btn btn-primary btn-lg btn-block">
+                    <img src="./img/icon/alert.gif" alt="kpis" style="width: 100px; height: 100px;">
+                    <br>
+                    <!-- KPI's -->
+                    Alerts
+                </button>
+            </div>
+            
+            <!-- Botón configuracion -->
+            <div class="col">
+                <button  id="injuriesButton" class="btn btn-primary btn-lg btn-block">
+                    <!-- <i class="fa-config fa-chart-area fa-10x" alt="Dash Position" ></i> -->
+                    <i class="fa-solid fa-ambulance fa-5x" alt="Injuries" ></i>
+                    <br>
+                    Injuries
+                </button>
+            </div>
+            <!-- Botón configuracion -->
+            <div class="col">
+                <button  id="configButton" class="btn btn-primary btn-lg btn-block">
+                    <!-- <i class="fa-config fa-chart-area fa-10x" alt="Dash Position" ></i> -->
+                    <i class="fa-solid fa-gears fa-5x" alt="Configuration" ></i>
+                    <br>
+                    Configuration
+                </button>
+            </div>
+            
+        </div>
+        
+    </div>
+
+</body>
+
+<script>
+
+    document.getElementById('injuriesButton').addEventListener('click', function() {
+        window.location.href = 'injuries.html';
+    });
+
+    document.getElementById('loadButton').addEventListener('click', function() {
+        window.location.href = 'load.html';
+    });
+
+    document.getElementById('configButton').addEventListener('click', function() {
+        window.location.href = 'config.html';
+    });
+    document.getElementById('kpisButton').addEventListener('click', function() {
+        window.location.href = 'kpis.html';
+    });
+</script>
+
+<footer class="footer fixed-bottom">
+    <img src="./img/logo.png" alt="Logo"> <!-- Asegúrate de reemplazar con la ruta correcta al logo -->
+    <!-- <a href="https://github.com/lucbra21/botonera" target="_blank" >
+      <button>Descargar Última Versión</button>
+    </a> -->
+    <div class="version">Wellness Tools by Sports Data Campus Community v1.2.0</div> <!-- Reemplaza con tu número de versión actual -->
+  </footer>
+
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Estilos -->
+<link rel="stylesheet" href="./plugins/bootstrap-4.5.3/css/bootstrap.css">
+<link rel="stylesheet" href="./plugins/fontawesome-free-6.4.2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="./plugins/DataTables/datatables.css">
+<link rel="stylesheet" type="text/css" href="./plugins/sweetalert2/sweetalert2.css">
+<link rel="stylesheet" type="text/css" href="./css/default.css">
+
+<!-- JS -->
+<script src="./js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="./plugins/DataTables/datatables.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_popper.js_1.16.0_umd_popper.min.js"></script>
+<script src="./plugins/bootstrap-4.5.3/js/bootstrap.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_xlsx_0.16.9_xlsx.full.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js"></script>
+<script src="./plugins/sweetalert2/sweetalert2.js"></script>
+<script src="./plugins/moment/moment.min.js"></script>
+<script src="./scripts/header.js"></script>
+<!-- <script src="./plugins/fontawesome-free-6.4.2-web/js/all.min.js" crossorigin="anonymous"></script> -->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> -->
+
+<!-- Bootstrap and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness</title>
+    <style>
+        #editableTable {
+            border-collapse: separate;
+            border-spacing: 0 5px;
+            font-size: 9px;
+        }
+
+        #editableTable thead tr {
+            border: none;
+        }
+
+        #editableTable th,
+        #editableTable td {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+        }
+
+        #editableTable tbody tr:hover {
+            background-color: #f5f5f5;
+            /* Color de fondo cuando pasas el mouse sobre una fila */
+        }
+
+        /* Estilo general para la tabla */
+        .fixed-header {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        /* Fijamos el encabezado */
+        .fixed-header thead {
+            display: block;
+        }
+
+        /* Hacemos que el cuerpo de la tabla sea desplazable */
+        .fixed-header tbody {
+            display: block;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        /* Definimos los anchos específicos para cada columna */
+        /*.fixed-header th:nth-child(1), .fixed-header td:nth-child(1) { width: 5px; }
+        .fixed-header th:nth-child(2), .fixed-header td:nth-child(2) { width: 5px; }
+        .fixed-header th:nth-child(3), .fixed-header td:nth-child(3) { width: 20px; }
+        .fixed-header th:nth-child(4), .fixed-header td:nth-child(4) { width: 140px; }
+        .fixed-header th:nth-child(5), .fixed-header td:nth-child(5) { width: 140px; }
+        .fixed-header th:nth-child(6), .fixed-header td:nth-child(6) { width: 140px; }
+        .fixed-header th:nth-child(7), .fixed-header td:nth-child(7) { width: 40px; }
+        .fixed-header th:nth-child(8), .fixed-header td:nth-child(8) { width: 40px; }
+        .fixed-header th:nth-child(9), .fixed-header td:nth-child(9) { width: 40px; }
+        .fixed-header th:nth-child(10), .fixed-header td:nth-child(10) { width: 40px; }
+        .fixed-header th:nth-child(11), .fixed-header td:nth-child(11) { width: 40px; }
+        .fixed-header th:nth-child(12), .fixed-header td:nth-child(12) { width: 40px; }*/
+
+        .fixed-header th,
+        .fixed-header td {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        /* Ajusta el ancho y diseño del botón de eliminar */
+        #editableTable button {
+            background: none;
+            border: none;
+            color: red;
+            font-size: 9px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #botonera {
+            position: relative;
+        }
+
+        #botonera button {
+            margin-right: 10px;
+        }
+
+        #botonera select {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+        /* Estilo para reducir el espacio entre los elementos de la lista */
+        .list-group-item {
+            padding: 0.1rem 0;
+            /* Ajusta el relleno para que sea más pequeño */
+            background-color: transparent;
+            /* Hace que el fondo de los elementos de la lista sea transparente */
+            border: none;
+            /* Elimina el borde de los elementos de la lista */
+        }
+
+        /* Estilo para los botones dentro de la lista para que ocupen todo el ancho */
+        .list-group-item .btn {
+            display: block;
+            /* Hace que el botón ocupe todo el ancho */
+            width: 100%;
+            /* Asegura que el botón ocupe todo el ancho */
+            margin: -0.55rem 0;
+            /* Agrega un margen muy pequeño entre los botones */
+        }
+
+        /* Hace que el fondo del contenedor sea transparente */
+        #acciones {
+            background-color: transparent;
+            border: none;
+            /* Elimina el borde del contenedor */
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .input-right {
+            text-align: right;
+            padding: 10px;
+            /* Espaciado opcional para dar un poco de margen */
+        }
+
+        /* .btn{
+            font-size: 0.5rem
+        } */
+    </style>
+
+
+</head>
+<header class="header">
+    <div class="container-fluid mt-2">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col" style="text-align: left;">
+                                <span id="teamName">Nombre del Equipo</span><br>
+                                <span id="staffName">Nombre del Staff</span>
+                            </div>
+                            <div class="col" style="text-align: center;">
+                                <a id="menuButton" href="./menu.html"  > 
+                                    <img id="teamImage" src="./img/team.png" alt="Imagen del Equipo" style="width: 50px; height: 50px;">
+                                </a>
+                            </div>
+                            <div class="col" style="text-align: right;">
+                                <span id="soccerTeam">Soccer Team</span> <br>
+                                <span id="category">Categoría</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<body>
+
+    <div class="container-fluid ">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Sección de Video -->
+
+                            <!-- Sección de ID del Partido -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Date From:</label>
+                                    <div class="youtube-input-container d-flex align-items-center">
+                                        <input type="date" id="datefrom" name="datefrom" placeholder="Fecha desde"
+                                            class="form-control mr-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Sección de ID del Partido -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Date to:</label>
+                                    <div class="youtube-input-container d-flex align-items-center">
+                                        <input type="date" id="dateto" name="dateto" placeholder="Fecha hasta"
+                                            class="form-control mr-2">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Players:</label>
+                                    <select class="form-control" id="players" name="players">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Display By:</label>
+                                    <select class="form-control" id="displayby">
+                                        <!-- <option value="" selected>Seleccione</option> -->
+                                        <option value="1" selected>Grouped by position</option>
+                                        <option value="2">In order of response</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>New injury</label>
+                                    <button class="form-control" id="injuryButton">Go</button>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" >
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row" style="display: unset !important;">
+                            <!-- Grilla -->
+                           
+                                <div class="col-md-12">
+                                   
+                                        <table id="editableTable" class="display" style="width:100%">
+
+                                            <thead class="bg-secondary text-white">
+                                                <tr >
+                                                    <th style="text-align: center; ">Date</th>
+                                                    <th style="text-align: center; ">Player</th>
+                                                    <th style="text-align: center; ">Position</th>
+                                                    <th style="text-align: center; ">Periodization</th>
+                                                    <th style="text-align: center; ">ICS</th>
+                                                    <th style="text-align: center; ">Fatigue</th>
+                                                    <th style="text-align: center; ">Pain Muscle</th>
+                                                    <th style="text-align: center; ">Sleep Quality</th>
+                                                    <th style="text-align: center; ">Stress</th>
+                                                    <th style="text-align: center; ">Humor</th>
+                                                    <th style="text-align: center; ">Muscles</th>
+                                                    <th style="text-align: center; ">RPE</th>
+                                                    <th style="text-align: center; ">Min.</th>
+                                                    <th style="text-align: center; "><i class="fas fa-trash"></i></th>
+                                                    <!-- Si no tienes FontAwesome, puedes reemplazar con "Delete" -->
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tablaRegistros" class="text-center">
+                                                <!-- Aquí se insertarán las filas automáticamente -->
+                                                <tr class="even">
+                                                    <td colspan="13" class="sin_filas" style="text-align: center; "><b>There are no records yet.</b></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                
+                                </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+
+
+<footer class="footer fixed-bottom">
+    <img src="./img/logo.png" alt="Logo"> <!-- Asegúrate de reemplazar con la ruta correcta al logo -->
+    
+    <div class="version">Wellness Tools by Sports Data Campus Community v1.2.0</div>
+    <!-- Reemplaza con tu número de versión actual -->
+</footer>
+
+<script>
+    
+
+    document.getElementById('injuryButton').addEventListener('click', function () {
+
+        // Establecer periodizations vacio en localStorage
+        localStorage.removeItem('date');
+
+        // Establecer periodizations vacio en localStorage
+        localStorage.removeItem('periodization');
+
+        // Establecer periodizations vacio en localStorage
+        localStorage.removeItem('sessionType');
+
+        // Establecer periodizations vacio en localStorage
+        // localStorage.removeItem('season');
+
+        // Establecer periodizations vacio en localStorage
+        localStorage.removeItem('fases');
+
+        // Establecer periodizations vacio en localStorage
+        localStorage.removeItem('event');
+
+        window.location.href = 'injury.html';
+    });
+</script>
+
+
+<script>
+// function pad2(n) { return n < 10 ? '0' + n : n }
+// function getId() { 
+//             var date = new Date();
+//             return( date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2( date.getDate()) + pad2( date.getHours() ) + pad2( date.getMinutes() ) + pad2( date.getSeconds() ) );
+//         }
+
+$(document).ready(function() {
+// alert(getId());
+        if(localStorage.getItem('datefrom')) {
+            document.getElementById('datefrom').value = localStorage.getItem('datefrom');
+        } else{
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('datefrom').value = today;
+
+            localStorage.setItem('datefrom', today);
+        }
+
+        
+
+        if(localStorage.getItem('dateto')) {
+            document.getElementById('dateto').value = localStorage.getItem('dateto');
+        } else{
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('dateto').value = today;
+
+            localStorage.setItem('dateto', today);
+        }
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/players.json?nocache=${new Date().getTime()}`, function(data) {
+
+            // console.log(data);
+            var $select = $('#players').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Everyone...'));
+          
+            $.each(data, function(key, entry) {
+                
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.ShortName).text(entry.ShortName));
+            });
+
+            // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            if(localStorage.getItem('playerName')) {
+                $select.val(localStorage.getItem('playerName'));
+            } else {
+                // Si no hay nada en localStorage, seleccionar la opción predeterminada
+                $select.val('-1');
+            }
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#players').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('playerName', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('playerName');
+            }
+        });
+
+        // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+        if(localStorage.getItem('displayby')) {
+            $('#displayby').val(localStorage.getItem('displayby'));
+        } else {
+            // Si no hay nada en localStorage, seleccionar la opción predeterminada
+            $('#displayby').val('1');
+        }
+     
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#displayby').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('displayby', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('displayby');
+            }
+        });
+
+
+    // const playerNameFilter = localStorage.getItem('playerName') || '';
+
+    cargarRespuestas();
+});
+
+document.getElementById('datefrom').addEventListener('change', guardarFiltros);
+document.getElementById('dateto').addEventListener('change', guardarFiltros);
+document.getElementById('players').addEventListener('change', guardarFiltros);
+document.getElementById('displayby').addEventListener('change', guardarFiltros);
+
+function guardarFiltros() {
+    const datefromValue = document.getElementById('datefrom').value;
+    const datetoValue = document.getElementById('dateto').value;
+    const playerNameValue = document.getElementById('players').value;
+    const displaybyValue = document.getElementById('displayby').value;
+
+    localStorage.setItem('datefrom', datefromValue);
+    localStorage.setItem('dateto', datetoValue);
+    localStorage.setItem('playerName', playerNameValue);
+    localStorage.setItem('displayby', displaybyValue);
+
+    cargarRespuestas();
+}
+
+function cargarRespuestas() {
+
+    // Asumiendo que ya tienes las variables datefrom, dateto y playerName
+    // Obtener filtros del localStorage
+    // console.log(document.getElementById('datefrom').value);
+    // console.log(localStorage.getItem('datefrom'));
+
+    const datefrom = new Date(localStorage.getItem('datefrom'));
+    const dateto = new Date(localStorage.getItem('dateto'));
+    const playerNameFilter = localStorage.getItem('playerName') || '';
+    const displaybyFilter = localStorage.getItem('displayby') || '1';
+    // debugger;
+    // $.getJSON(`./data/json/players.json?nocache=${new Date().getTime()}`, function(data) {
+    //     console.log(data);
+    // })
+    // $.getJSON(`./data/json/answers.json?nocache=${new Date().getTime()}`, function(answers) {
+    //     console.log(answers);
+    // })
+    fetch(`./data/json/injuries.json?nocache=${new Date().getTime()}`)
+    //fetch('./data/json/answers.json')
+        .then(response => response.json())
+        .then(data => {
+
+        const filteredData = data.filter(item => {
+            const itemDate = new Date(item.date);
+            return itemDate >= datefrom && itemDate <= dateto && (!playerNameFilter || playerNameFilter=='-1' || item.playerName === playerNameFilter);
+            // return itemDate >= datefrom  ;
+        }).sort((a, b) => {
+            // Ordenar por DateResponse si displaybyFilter es '1'
+            if (displaybyFilter === '1') {
+                const dateA = new Date(a.DateResponse || '1970-01-01'); // Usar una fecha por defecto si no existe
+                const dateB = new Date(b.DateResponse || '1970-01-01');
+                return dateA - dateB;
+            } else {
+                // Ordenar por Position en caso contrario
+                if (a.position < b.position) return -1;
+                if (a.position > b.position) return 1;
+                return 0;
+            }
+        });
+        // const filteredData = data;
+        // console.log(data);
+
+        // Renderizar los datos en la tabla
+        const tablaRegistros = document.getElementById('tablaRegistros');
+        tablaRegistros.innerHTML = ''; // Limpiar la tabla existente
+
+        if (filteredData.length === 0) {
+            tablaRegistros.innerHTML = '<tr class="even"><td colspan="13" class="sin_filas" style="text-align: center; "><b>There are no records yet.</b></td></tr>';
+        } else {
+            crearFilasTabla(filteredData);
+
+        }
+    })
+    .catch(error => console.error('Error al cargar los datos:', error));
+}
+
+      function crearFilasTabla(data) {
+        console.log(data);
+        const tablaRegistros = document.getElementById('tablaRegistros');
+        tablaRegistros.innerHTML = ''; // Limpiar contenido existente
+
+        data.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.id = `fila-${item.Id}`;
+            // Crea una celda para cada campo y aplica el color
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCelda('-'));
+            tr.appendChild(crearCeldaEliminar('id'));
+
+            tablaRegistros.appendChild(tr);
+        });
+    }
+
+// Función para crear una celda normal
+function crearCelda(valor) {
+    const td = document.createElement('td');
+    td.textContent = valor;
+    return td;
+}
+
+function eliminarRegistro(uniqueId) {
+    fetch('./php/eliminar_injury.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: uniqueId })
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log('Registro eliminado:', data);
+        // Elimina visualmente el registro de la tabla
+        // document.getElementById(`registro-${uniqueId}`).remove();
+        // Remueve la fila de la tabla
+        const filaParaEliminar = document.getElementById(`fila-${uniqueId}`);
+        if (filaParaEliminar) {
+            filaParaEliminar.remove();
+        }
+
+        // Verifica si la tabla quedó vacía y muestra un mensaje o realiza alguna acción
+        verificarTablaVacia();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function crearCeldaEliminar(uniqueId) {
+    const td = document.createElement('td');
+    const botonEliminar = document.createElement('button');
+    botonEliminar.innerHTML = '<i class="fas fa-trash"></i>'; // O simplemente "Eliminar" si no usas FontAwesome
+    botonEliminar.onclick = function() {
+        // Asegúrate de que cada tr tenga un ID único que combine con este
+        eliminarRegistro(uniqueId);
+    };
+    td.appendChild(botonEliminar);
+    return td;
+}
+
+function verificarTablaVacia() {
+    const tablaRegistros = document.getElementById('tablaRegistros');
+    if (tablaRegistros.children.length === 0 || (tablaRegistros.children.length === 1 && tablaRegistros.querySelector('.sin_filas'))) {
+        // Aquí puedes insertar un nuevo tr con el mensaje de "No hay registros"
+        const tr = document.createElement('tr');
+        tr.className = 'sin_filas';
+        const td = document.createElement('td');
+        td.setAttribute('colspan', '13');
+        td.style.textAlign = 'center';
+        td.innerHTML = '<b>No hay registros.</b>';
+        tr.appendChild(td);
+        tablaRegistros.appendChild(tr);
+    }
+}
+
+
+</script>
+</html>

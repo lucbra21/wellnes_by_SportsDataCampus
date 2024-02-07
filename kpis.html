@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Estilos -->
+<link rel="stylesheet" href="./plugins/bootstrap-4.5.3/css/bootstrap.css">
+<link rel="stylesheet" href="./plugins/fontawesome-free-6.4.2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="./plugins/DataTables/datatables.css">
+<link rel="stylesheet" type="text/css" href="./plugins/sweetalert2/sweetalert2.css">
+<link rel="stylesheet" type="text/css" href="./css/default.css">
+
+<!-- JS -->
+<script src="./js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="./plugins/DataTables/datatables.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_popper.js_1.16.0_umd_popper.min.js"></script>
+<script src="./plugins/bootstrap-4.5.3/js/bootstrap.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_xlsx_0.16.9_xlsx.full.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js"></script>
+<script src="./plugins/sweetalert2/sweetalert2.js"></script>
+
+<script src="./plugins/moment/moment.min.js"></script>
+<script src="./scripts/header.js"></script>
+<!-- <script src="./plugins/fontawesome-free-6.4.2-web/js/all.min.js" crossorigin="anonymous"></script> -->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> -->
+
+<!-- Bootstrap and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness</title>
+    <style>
+        #editableTable {
+            border-collapse: separate;
+            border-spacing: 0 5px;
+            font-size: 9px;
+        }
+
+        #editableTable thead tr {
+            border: none;
+        }
+
+        #editableTable th,
+        #editableTable td {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+        }
+
+        #editableTable tbody tr:hover {
+            background-color: #f5f5f5;
+            /* Color de fondo cuando pasas el mouse sobre una fila */
+        }
+
+        /* Estilo general para la tabla */
+        .fixed-header {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        /* Fijamos el encabezado */
+        .fixed-header thead {
+            display: block;
+        }
+
+        /* Hacemos que el cuerpo de la tabla sea desplazable */
+        .fixed-header tbody {
+            display: block;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        /* Definimos los anchos específicos para cada columna */
+        /*.fixed-header th:nth-child(1), .fixed-header td:nth-child(1) { width: 5px; }
+        .fixed-header th:nth-child(2), .fixed-header td:nth-child(2) { width: 5px; }
+        .fixed-header th:nth-child(3), .fixed-header td:nth-child(3) { width: 20px; }
+        .fixed-header th:nth-child(4), .fixed-header td:nth-child(4) { width: 140px; }
+        .fixed-header th:nth-child(5), .fixed-header td:nth-child(5) { width: 140px; }
+        .fixed-header th:nth-child(6), .fixed-header td:nth-child(6) { width: 140px; }
+        .fixed-header th:nth-child(7), .fixed-header td:nth-child(7) { width: 40px; }
+        .fixed-header th:nth-child(8), .fixed-header td:nth-child(8) { width: 40px; }
+        .fixed-header th:nth-child(9), .fixed-header td:nth-child(9) { width: 40px; }
+        .fixed-header th:nth-child(10), .fixed-header td:nth-child(10) { width: 40px; }
+        .fixed-header th:nth-child(11), .fixed-header td:nth-child(11) { width: 40px; }
+        .fixed-header th:nth-child(12), .fixed-header td:nth-child(12) { width: 40px; }*/
+
+        .fixed-header th,
+        .fixed-header td {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        /* Ajusta el ancho y diseño del botón de eliminar */
+        #editableTable button {
+            background: none;
+            border: none;
+            color: red;
+            font-size: 9px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #botonera {
+            position: relative;
+        }
+
+        #botonera button {
+            margin-right: 10px;
+        }
+
+        #botonera select {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+        /* Estilo para reducir el espacio entre los elementos de la lista */
+        .list-group-item {
+            padding: 0.1rem 0;
+            /* Ajusta el relleno para que sea más pequeño */
+            background-color: transparent;
+            /* Hace que el fondo de los elementos de la lista sea transparente */
+            border: none;
+            /* Elimina el borde de los elementos de la lista */
+        }
+
+        /* Estilo para los botones dentro de la lista para que ocupen todo el ancho */
+        .list-group-item .btn {
+            display: block;
+            /* Hace que el botón ocupe todo el ancho */
+            width: 100%;
+            /* Asegura que el botón ocupe todo el ancho */
+            margin: -0.55rem 0;
+            /* Agrega un margen muy pequeño entre los botones */
+        }
+
+        /* Hace que el fondo del contenedor sea transparente */
+        #acciones {
+            background-color: transparent;
+            border: none;
+            /* Elimina el borde del contenedor */
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .input-right {
+            text-align: right;
+            padding: 10px;
+            /* Espaciado opcional para dar un poco de margen */
+        }
+
+        /* .btn{
+            font-size: 0.5rem
+        } */
+    </style>
+
+</head>
+<header class="header">
+    <div class="container-fluid mt-2">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col" style="text-align: left;">
+                                <span id="teamName">Nombre del Equipo</span><br>
+                                <span id="staffName">Nombre del Staff</span>
+                            </div>
+                            <div class="col" style="text-align: center;">
+                                <a id="menuButton" href="./menu.html"  > 
+                                    <img id="teamImage" src="./img/team.png" alt="Imagen del Equipo" style="width: 50px; height: 50px;">
+                                </a>
+                            </div>
+                            <div class="col" style="text-align: right;">
+                                <span id="soccerTeam">Soccer Team</span> <br>
+                                <span id="category">Categoría</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<body>
+
+    <div class="container-fluid ">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Sección de Video -->
+
+                            <!-- Sección de ID del Partido -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Date:</label>
+                                    <div class="youtube-input-container d-flex align-items-center">
+                                        <input type="date" id="date" name="date" placeholder="Date"
+                                            class="form-control mr-2">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Players:</label>
+                                    <select class="form-control" id="players" name="players">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Display By:</label>
+                                    <select class="form-control" id="displayby">
+                                        <!-- <option value="" selected>Seleccione</option> -->
+                                        <option value="1" selected>Grouped by position</option>
+                                        <option value="2">In order of response</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Microcycles:</label>
+                                    <select class="form-control" id="microciclos">
+                                        <!-- <option value="" selected>Seleccione</option> -->
+                                        <option value="1">1 weeks</option>
+                                        <option value="2">2 weeks</option>
+                                        <option value="3">3 weeks</option>
+                                        <option value="4" selected>4 weeks</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Coupled:</label>
+                                    <select class="form-control" id="acoplado">
+                                        <!-- <option value="" selected>Seleccione</option> -->
+                                        <option value="1" selected>Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Answers</label>
+                                    <button class="form-control" id="answersButton">Go</button>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" >
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row" style="display: unset !important;">
+                            <!-- Grilla -->
+                           
+                                <div class="col-md-12">
+                                   
+                                        <table id="editableTable" class="display" style="width:100%">
+
+                                            <thead class="bg-secondary text-white">
+                                                <tr >
+                                                    <th style="text-align: center; ">Player</th>
+                                                    <th style="text-align: center; ">Position</th>
+                                                    <th style="text-align: center; ">ICS</th>
+                                                    <th style="text-align: center; ">RPE</th>
+                                                    <th style="text-align: center; ">Min.</th>
+                                                    <th style="text-align: center; ">UA</th>
+                                                    <th style="text-align: center; ">IM</th>
+                                                    <th style="text-align: center; ">IFA</th>
+                                                    <th style="text-align: center; ">IFC</th>
+                                                    <th style="text-align: center; ">ICA</th>
+                                                    <th style="text-align: center; ">ICC</th>
+                                                    <th style="text-align: center; ">IC A-C (ACWR RA)</th>
+                                                    <th style="text-align: center; ">IA</th>
+                                                    <th style="text-align: center; ">IVC</th>
+                                                    <th style="text-align: center; ">Z-Score</th>
+                                                    <th style="text-align: center; ">Days Last Injuty</th>
+
+                                                    <!-- Si no tienes FontAwesome, puedes reemplazar con "Delete" -->
+                                                </tr>
+                                            </thead>
+                                            <tbody id="kpisTableBody" class="text-center">
+                                                <!-- Aquí se insertarán las filas automáticamente -->
+                                                <tr class="even">
+                                                    <td colspan="13" class="sin_filas" style="text-align: center; "><b>There are no records yet.</b></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                
+                                </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<footer class="footer fixed-bottom">
+    <img src="./img/logo.png" alt="Logo"> <!-- Asegúrate de reemplazar con la ruta correcta al logo -->
+    
+    <div class="version">Wellness Tools by Sports Data Campus Community v1.2.0</div>
+    <!-- Reemplaza con tu número de versión actual -->
+</footer>
+
+<script>
+
+$(document).ready(function() {
+// alert(getId());
+        if(localStorage.getItem('date')) {
+            document.getElementById('date').value = localStorage.getItem('date');
+        } else{
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('date').value = today;
+
+            localStorage.setItem('date', today);
+        }
+
+        
+
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/players.json?nocache=${new Date().getTime()}`, function(data) {
+
+            // console.log(data);
+            var $select = $('#players').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Everyone...'));
+          
+            $.each(data, function(key, entry) {
+                
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.ShortName).text(entry.ShortName));
+            });
+
+            // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            if(localStorage.getItem('playerName')) {
+                $select.val(localStorage.getItem('playerName'));
+            } else {
+                // Si no hay nada en localStorage, seleccionar la opción predeterminada
+                $select.val('-1');
+            }
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#players').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('playerName', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('playerName');
+            }
+        });
+
+        // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+        if(localStorage.getItem('displayby')) {
+            $('#displayby').val(localStorage.getItem('displayby'));
+        } else {
+            // Si no hay nada en localStorage, seleccionar la opción predeterminada
+            $('#displayby').val('1');
+        }
+     
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#displayby').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('displayby', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('displayby');
+            }
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#acoplado').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('acoplado', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('acoplado');
+            }
+        });
+
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#microciclos').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('microciclos', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('microciclos');
+            }
+        });
+
+    // const playerNameFilter = localStorage.getItem('playerName') || '';
+
+    cargarRespuestas();
+});
+
+document.getElementById('date').addEventListener('change', guardarFiltros);
+document.getElementById('players').addEventListener('change', guardarFiltros);
+document.getElementById('displayby').addEventListener('change', guardarFiltros);
+
+document.getElementById('acoplado').addEventListener('change', guardarFiltros);
+document.getElementById('microciclos').addEventListener('change', guardarFiltros);
+
+function guardarFiltros() {
+    const datefromValue = document.getElementById('date').value;
+    const playerNameValue = document.getElementById('players').value;
+    const displaybyValue = document.getElementById('displayby').value;
+    const acopladoValue = document.getElementById('acoplado').value;
+    const microciclosValue = document.getElementById('microciclos').value;
+
+    localStorage.setItem('date', datefromValue);
+    localStorage.setItem('playerName', playerNameValue);
+    localStorage.setItem('displayby', displaybyValue);
+    localStorage.setItem('acoplado', acopladoValue);
+    localStorage.setItem('microciclos', microciclosValue);
+
+    cargarRespuestas();
+}
+
+
+
+function cargarRespuestas() {
+
+    $.when(
+        $.getJSON(`./data/json/players.json?nocache=${new Date().getTime()}`),
+        $.getJSON(`./data/json/answers.json?nocache=${new Date().getTime()}`)
+    ).done(function(playersData, answersData) {
+
+        const selectedDate = document.getElementById('date').value;
+        const playerNameValue = document.getElementById('players').value;
+        const displaybyValue = document.getElementById('displayby').value;
+
+        const acoplado = document.getElementById('acoplado').value;
+        const semanas = parseInt(document.getElementById('microciclos').value);
+
+        debugger;
+        var activePlayers = null;
+        // Filtra los jugadores activos
+        if (playerNameValue == '-1') {
+            activePlayers = playersData[0].filter(player => player.State === 'Active');
+        }else{
+            activePlayers = playersData[0].filter(player => player.ShortName === playerNameValue);
+        }
+        
+        // Filtra las respuestas por la fecha seleccionada
+        const selectedDateAnswers = answersData[0].filter(answer => answer.date === selectedDate);
+
+        const tableBody = document.getElementById('kpisTableBody');
+        tableBody.innerHTML = '';
+
+        activePlayers.forEach(player => {
+            const tr = document.createElement('tr');
+            tr.appendChild(crearCelda(player.ShortName));
+            tr.appendChild(crearCelda(player.ShortPosition));
+
+            const playerAnswer = selectedDateAnswers.find(answer => answer.playerName === player.ShortName);
+            var ua = 0;
+            var ics = 0;
+            var rpe = 0;
+            var min = 0;
+            if (playerAnswer) {
+                ua = CalculoUA(playerAnswer.RPE, playerAnswer.minutesSeason);
+                ics = playerAnswer.ICS;
+                rpe = playerAnswer.RPE;
+                min = playerAnswer.minutesSeason;
+
+            }
+
+                // debugger;
+                // var im = calcularIM(selectedDate, player.ShortName, answersData);
+                let im = calcularIM(selectedDate, player.ShortName, answersData[0]);
+
+                let ifa = calcularIFA(selectedDate, player.ShortName, answersData[0]);
+
+                // let semanas = 4;
+                // let acoplado = '1'; //1 si 0 no
+
+                let ifc = calcularIFC(selectedDate, player.ShortName, answersData[0], semanas, acoplado);
+
+                let ica = calcularICA(selectedDate, player.ShortName, answersData[0]);
+        
+                let icc = calcularICC(selectedDate, player.ShortName, answersData[0], semanas, acoplado);
+                
+                let ica_icc = (ica / icc).toFixed(2);
+
+                let ia = (ifc - ifa).toFixed(2);
+
+                let ia_porcentaje_diff = (((ifc-ifa)/ifa)*100).toFixed(2);
+
+                let text_ia = String(ia) + " (" + String(ia_porcentaje_diff) + "%)";
+
+                let ivc = calcularIVC(selectedDate, player.ShortName, answersData[0]);
+
+                let text_ivc = String(ivc) + " %";
+
+                let zScore = calcularZScore(selectedDate, player.ShortName, selectedDateAnswers, rpe);
+
+                let DaysLastInjuty = 0;
+
+                debugger;
+                tr.appendChild(crearCeldaColoreadaICS(ics)); // Calcula y colorea ICS
+                tr.appendChild(crearCeldaColoreadaRPE(rpe)); // RPE con color
+                tr.appendChild(crearCelda(min ? min : '-')); // Minutos
+                tr.appendChild(crearCelda(ua ? ua : '-')); // UA
+                tr.appendChild(crearCelda(isNaN(im) ? '-' : im)); // IM
+                tr.appendChild(crearCelda(isNaN(ifa) ? '-' : ifa)); // IM
+                tr.appendChild(crearCelda(isNaN(ifc) ? '-' : ifc)); // IM
+
+                tr.appendChild(crearCelda(isNaN(ica) ? '-' : ica)); // IM
+                tr.appendChild(crearCelda(isNaN(icc) ? '-' : icc)); // IM
+                tr.appendChild(crearCelda(isNaN(ica_icc) ? '-' : ica_icc)); // IM
+                tr.appendChild(crearCelda(text_ia != 'NaN (NaN%)' ? text_ia : '-')); // IM
+                tr.appendChild(crearCelda(text_ivc != 'NaN %' ? text_ivc : '-')); // IM
+                tr.appendChild(crearCelda(zScore ? zScore : '-')); // IM
+                tr.appendChild(crearCelda(DaysLastInjuty ? DaysLastInjuty : '-')); // IM
+        
+            tableBody.appendChild(tr);
+        });
+    });
+}
+
+function crearCelda(text) {
+    const td = document.createElement('td');
+    td.textContent = text;
+    return td;
+}
+
+function crearCeldaColoreada(valor) {
+    // Implementa la lógica para colorear según el valor
+}
+
+function CalculoUA(RPE, minutesSeason){
+    
+    // Convierte RPE y minutos a números enteros
+    const rpe = parseInt(RPE, 10);
+    const minutes = parseInt(minutesSeason, 10);
+
+    // Calcula la UA
+    const ua = rpe * minutes;
+
+    return ua;
+}
+
+function colorIn(valor) {
+        let color='rgb(62,166,26)';
+        if(valor==0 || valor==1 || valor==2 || valor==3){
+            color='rgb(62,166,26)';//verde 0 1 2 3
+        }
+        if(valor==4 || valor==5 || valor==6){
+            color='rgb(255,167,1)';//amarillo 4 5 y 6
+        }
+    
+        if(valor==7 || valor==8 || valor==9 || valor==10){
+            color='rgb(228,62,57)';//rojo 9 y 10
+        }
+        return color;
+      }
+
+function colorRPE(valor) {
+        let color='rgb(62,166,26)';
+        if(valor==0 || valor==1 || valor==2 || valor==3){
+            color='rgb(62,166,26)';//verde 0 1 2 3
+        }
+        if(valor==4 || valor==5 || valor==6){
+            color='rgb(255,167,1)';//amarillo 4 5 y 6
+        }
+        // if(valor==6 || valor==7){
+        //     color='rgb(255,128,0)';//naranja  7 y 8
+        // }
+        if(valor==7 || valor==8 || valor==9 || valor==10){
+            color='rgb(228,62,57)';//rojo 9 y 10
+        }
+        // if(valor==10){
+        //     color='rgb(196,26,0)';//rojo 9 y 10
+        // }
+        return color;
+      }
+
+// Función para crear una celda normal
+function crearCelda(valor) {
+    const td = document.createElement('td');
+    td.textContent = valor;
+    return td;
+}
+
+// Función para crear una celda con color de fondo
+function crearCeldaColoreada(valor) {
+    const td = document.createElement('td');
+    td.textContent = valor;
+    td.style.backgroundColor = colorIn(valor);
+    return td;
+}
+
+// Función para crear una celda con color de fondo
+function crearCeldaColoreadaICS(color) {
+    const td = document.createElement('td');
+    // td.textContent = color;
+    // console.log(color);
+    td.style.backgroundColor = color;
+    return td;
+}
+
+// Función para crear una celda con color de fondo
+function crearCeldaColoreadaRPE(valor) {
+    const td = document.createElement('td');
+    td.textContent = valor;
+    td.style.backgroundColor = colorRPE(valor);
+    return td;
+}
+
+function calcularIM(date, ShortName, answersData) {
+    let fechaFiltro = new Date(date);
+    let fechaInicioSemana = new Date(fechaFiltro);
+    fechaInicioSemana.setDate(fechaFiltro.getDate() - 6); // Resta 6 días para obtener el inicio de la ventana de 7 días
+
+    // Filtrar respuestas por jugador y ventana de tiempo
+    let datosSemanales = answersData.filter(registro => {
+        let fechaRegistro = new Date(registro.date);
+        return registro.playerName === ShortName &&
+               fechaRegistro <= fechaFiltro &&
+               fechaRegistro >= fechaInicioSemana;
+    });
+
+    // Asegurarse de que hay un valor por cada día de la ventana de 7 días
+    let valoresUA = [];
+    for (let i = 0; i < 7; i++) {
+        let fechaDia = new Date(fechaInicioSemana);
+        fechaDia.setDate(fechaInicioSemana.getDate() + i);
+        let respuestaDia = datosSemanales.find(registro => new Date(registro.date).toDateString() === fechaDia.toDateString());
+        valoresUA.push(respuestaDia ? parseFloat(respuestaDia.RPE) * parseFloat(respuestaDia.minutesSeason) : 0);
+    }
+
+    // Cálculo de promedio y desviación estándar
+    let promedioUA = valoresUA.reduce((acc, UA) => acc + UA, 0) / valoresUA.length;
+    let desviacionEstandar = Math.sqrt(valoresUA.reduce((acc, UA) => acc + Math.pow(UA - promedioUA, 2), 0) / (valoresUA.length - 1));
+    let IM = (promedioUA / desviacionEstandar).toFixed(1);
+
+    console.log(IM); // Mostrar IM calculado
+    return IM;
+}
+
+//(rpe-rpe_media)/desviacion_estandar
+function calcularZScore(date, ShortName, answersData, RPEValue) {
+
+    let fechaFiltro = new Date(date);
+    
+    let promedioRPE = answersData.reduce((acc, valorActual) => acc + parseFloat(valorActual.RPE), 0) / answersData.length;
+
+    let desviacionEstandar = Math.sqrt(answersData.reduce((acc, valorActual) => acc + Math.pow(valorActual.RPE - promedioRPE, 2), 0) / (answersData.length - 1));
+
+    let ZScore = ((parseFloat(RPEValue) - promedioRPE) / desviacionEstandar).toFixed(2);
+
+    console.log(ZScore); // Mostrar IM calculado
+    return ZScore;
+}
+
+function calcularIFA(date, ShortName, answersData) {
+    
+    let fechaFiltro = new Date(date);
+    let fechaInicioSemana = new Date(fechaFiltro);
+    fechaInicioSemana.setDate(fechaFiltro.getDate() - 6); // Resta 6 días para obtener el inicio de la ventana de 7 días
+
+    // Filtrar respuestas por jugador y ventana de tiempo
+    let datosSemanales = answersData.filter(registro => {
+        let fechaRegistro = new Date(registro.date);
+        return registro.playerName === ShortName &&
+               fechaRegistro <= fechaFiltro &&
+               fechaRegistro >= fechaInicioSemana;
+    });
+
+    // Asegurarse de que hay un valor por cada día de la ventana de 7 días
+    let valoresUA = [];
+    for (let i = 0; i < 7; i++) {
+        let fechaDia = new Date(fechaInicioSemana);
+        fechaDia.setDate(fechaInicioSemana.getDate() + i);
+        let respuestaDia = datosSemanales.find(registro => new Date(registro.date).toDateString() === fechaDia.toDateString());
+        valoresUA.push(respuestaDia ? parseFloat(respuestaDia.RPE) * parseFloat(respuestaDia.minutesSeason) : 0);
+    }
+   
+    // Cálculo de promedio y desviación estándar
+    let promedioUA = valoresUA.reduce((acc, UA) => acc + UA, 0) / valoresUA.length;
+    let desviacionEstandar = Math.sqrt(valoresUA.reduce((acc, UA) => acc + Math.pow(UA - promedioUA, 2), 0) / (valoresUA.length - 1));
+    let IM = (promedioUA / desviacionEstandar);
+    let sumatoriaUA = valoresUA.reduce((acc, UA) => acc + UA, 0);
+
+    // Cálculo de promedio y desviación estándar
+    
+    let IFA = (sumatoriaUA * IM).toFixed(2);
+
+    console.log(IFA); // Mostrar IM calculado
+    return IFA;
+}
+
+function calcularIFC(date, ShortName, answersData, semanas, acoplado) {
+    let dias = semanas * 7;
+
+    let fechaFiltro = new Date(date);
+    let fechaInicioSemana = new Date(fechaFiltro);
+    //ACOPLADO O DESACOPLADO, -6 DESACOPLADO SI NO RESTAMOS ACOPLADO O SEA TENEMOS EN CUENTA EL DIA ACTUAL O NO
+    if(acoplado=='0'){
+        fechaInicioSemana.setDate(fechaInicioSemana.getDate() - (dias-6)); // Resta 6 días para obtener el inicio de la ventana de 7 días
+    }else{
+        fechaInicioSemana.setDate(fechaInicioSemana.getDate() - (dias-1)); // Resta 6 días para obtener el inicio de la ventana de 7 días
+    }
+
+    // Filtrar respuestas por jugador y ventana de tiempo
+    let datosSemanales = answersData.filter(registro => {
+        let fechaRegistro = new Date(registro.date);
+        return registro.playerName === ShortName &&
+               fechaRegistro <= fechaFiltro &&
+               fechaRegistro >= fechaInicioSemana;
+    });
+
+    // Asegurarse de que hay un valor por cada día de la ventana de 7 días
+
+    let valoresIFA = [];
+    for (let i = 0; i < dias; i++) {
+        let fechaDia = new Date(fechaInicioSemana);
+        fechaDia.setDate(fechaInicioSemana.getDate() + i);
+        let IFA = calcularIFA(fechaDia, ShortName, answersData);
+        
+        valoresIFA.push(IFA ? IFA : 0);
+
+    }
+
+    // Convertir cada elemento del array a número y calcular la suma
+    let suma = valoresIFA.reduce((acumulador, valorActual) => acumulador + parseFloat(valorActual), 0);
+
+    // Calcular la media
+    let media = suma / valoresIFA.length;
+
+    // Redondear a un decimal
+    let IFC = Math.round(media * 10) / 10;
+
+    console.log(IFC); // Mostrar IM calculado
+    return IFC;
+}
+
+function calcularICA(date, ShortName, answersData) {
+    
+    let fechaFiltro = new Date(date);
+    let fechaInicioSemana = new Date(fechaFiltro);
+    fechaInicioSemana.setDate(fechaFiltro.getDate() - 6); // Resta 6 días para obtener el inicio de la ventana de 7 días
+
+    // Filtrar respuestas por jugador y ventana de tiempo
+    let datosSemanales = answersData.filter(registro => {
+        let fechaRegistro = new Date(registro.date);
+        return registro.playerName === ShortName &&
+               fechaRegistro <= fechaFiltro &&
+               fechaRegistro >= fechaInicioSemana;
+    });
+
+    // Asegurarse de que hay un valor por cada día de la ventana de 7 días
+    let valoresUA = [];
+    for (let i = 0; i < 7; i++) {
+        let fechaDia = new Date(fechaInicioSemana);
+        fechaDia.setDate(fechaInicioSemana.getDate() + i);
+        let respuestaDia = datosSemanales.find(registro => new Date(registro.date).toDateString() === fechaDia.toDateString());
+        valoresUA.push(respuestaDia ? parseFloat(respuestaDia.RPE) * parseFloat(respuestaDia.minutesSeason) : 0);
+    }
+
+    let sumatoriaUA = valoresUA.reduce((acc, UA) => acc + UA, 0);
+
+    // Cálculo de promedio y desviación estándar
+    
+    let ICA = (sumatoriaUA);
+
+    console.log(ICA); // Mostrar IM calculado
+    return ICA;
+}
+
+function calcularICC(date, ShortName, answersData, semanas, acoplado) {
+    
+    let dias = semanas * 7;
+    let fechaFiltro = new Date(date);
+    let fechaInicioSemana = new Date(fechaFiltro);
+
+    if(acoplado=='0'){
+        fechaInicioSemana.setDate(fechaInicioSemana.getDate() - (dias-6)); // Resta 6 días para obtener el inicio de la ventana de 7 días
+    }else{
+        fechaInicioSemana.setDate(fechaInicioSemana.getDate() - (dias-1)); // Resta 6 días para obtener el inicio de la ventana de 7 días
+    }
+
+    // Filtrar respuestas por jugador y ventana de tiempo
+    let datosSemanales = answersData.filter(registro => {
+        let fechaRegistro = new Date(registro.date);
+        return registro.playerName === ShortName &&
+               fechaRegistro <= fechaFiltro &&
+               fechaRegistro >= fechaInicioSemana;
+    });
+
+    // Asegurarse de que hay un valor por cada día de la ventana de 7 días
+    let valoresUA = [];
+    for (let i = 0; i < dias; i++) {
+        let fechaDia = new Date(fechaInicioSemana);
+        fechaDia.setDate(fechaInicioSemana.getDate() + i);
+        let respuestaDia = datosSemanales.find(registro => new Date(registro.date).toDateString() === fechaDia.toDateString());
+        valoresUA.push(respuestaDia ? parseFloat(respuestaDia.RPE) * parseFloat(respuestaDia.minutesSeason) : 0);
+    }
+
+    let sumatoriaUA = valoresUA.reduce((acc, UA) => acc + UA, 0);
+
+    // Cálculo de promedio y desviación estándar
+    
+    let ICA = ((sumatoriaUA)/4).toFixed(0);
+
+    console.log(ICA); // Mostrar IM calculado
+    return ICA;
+}
+
+function calcularIVC(date, ShortName, answersData) {
+ 
+    let fechaFiltro = new Date(date);
+    let fechaInicioSemana = new Date(fechaFiltro);
+    let fechaInicioSemanaanterior = new Date(fechaFiltro);
+
+    fechaInicioSemana.setDate(fechaFiltro.getDate() - 6); // Resta 6 días para obtener el inicio de la ventana de 7 días
+    fechaInicioSemanaanterior.setDate(fechaFiltro.getDate() - 13); // Resta 6 días para obtener el inicio de la ventana de 7 días
+    // Filtrar respuestas por jugador y ventana de tiempo
+    let datosSemanales = answersData.filter(registro => {
+        let fechaRegistro = new Date(registro.date);
+        return registro.playerName === ShortName &&
+               fechaRegistro <= fechaFiltro &&
+               fechaRegistro >= fechaInicioSemana;
+    });
+    let datosSemanales2 = answersData.filter(registro => {
+        let fechaRegistro = new Date(registro.date);
+        return registro.playerName === ShortName &&
+               fechaRegistro <= fechaInicioSemana &&
+               fechaRegistro >= fechaInicioSemanaanterior;
+    });
+
+    // Asegurarse de que hay un valor por cada día de la ventana de 7 días
+    let valoresUAMicroActual = [];
+    for (let i = 0; i < 7; i++) {
+        let fechaDia = new Date(fechaInicioSemana);
+        fechaDia.setDate(fechaInicioSemana.getDate() + i);
+        let respuestaDia = datosSemanales.find(registro => new Date(registro.date).toDateString() === fechaDia.toDateString());
+        valoresUAMicroActual.push(respuestaDia ? parseFloat(respuestaDia.RPE) * parseFloat(respuestaDia.minutesSeason) : 0);
+    }
+    
+    // Asegurarse de que hay un valor por cada día de la ventana de 7 días
+    let valoresUAMicroAnterior = [];
+    for (let i = 0; i < 7; i++) {
+        let fechaDia = new Date(fechaInicioSemanaanterior);
+        fechaDia.setDate(fechaInicioSemanaanterior.getDate() + i);
+        let respuestaDia = datosSemanales2.find(registro => new Date(registro.date).toDateString() === fechaDia.toDateString());
+        valoresUAMicroAnterior.push(respuestaDia ? parseFloat(respuestaDia.RPE) * parseFloat(respuestaDia.minutesSeason) : 0);
+    }
+   
+    let sumatoriaUAActual = valoresUAMicroActual.reduce((acc, UA) => acc + UA, 0);
+    let sumatoriaUAAnterior = valoresUAMicroAnterior.reduce((acc, UA) => acc + UA, 0);
+
+    let IVC = (((sumatoriaUAAnterior*100)/sumatoriaUAActual)-100).toFixed(0);
+    // Cálculo de promedio y desviación estándar
+    
+    console.log(IVC); // Mostrar IM calculado
+    return IVC;
+}
+
+
+
+</script>
+</html>

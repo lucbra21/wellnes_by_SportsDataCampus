@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Estilos -->
+<link rel="stylesheet" href="./plugins/bootstrap-4.5.3/css/bootstrap.css">
+<link rel="stylesheet" href="./plugins/fontawesome-free-6.4.2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="./plugins/DataTables/datatables.css">
+<link rel="stylesheet" type="text/css" href="./plugins/sweetalert2/sweetalert2.css">
+<link rel="stylesheet" type="text/css" href="./css/default.css">
+
+<!-- JS -->
+<script src="./js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="./plugins/DataTables/datatables.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_popper.js_1.16.0_umd_popper.min.js"></script>
+<script src="./plugins/bootstrap-4.5.3/js/bootstrap.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_xlsx_0.16.9_xlsx.full.min.js"></script>
+<script src="./js/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js"></script>
+<!-- <script src="./plugins/sweetalert/sweetalert.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+<script src="./plugins/sweetalert2/sweetalert2.js"></script>
+<script src="./plugins/moment/moment.min.js"></script>
+<script src="./scripts/header.js"></script>
+<!-- <script src="./plugins/fontawesome-free-6.4.2-web/js/all.min.js" crossorigin="anonymous"></script> -->
+
+<!-- Incluir CSS de Select2 -->
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" /> -->
+<link rel="stylesheet" type="text/css" href="./plugins/select2/select2.min.css">
+
+<!-- Incluir JS de Select2 -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> -->
+<script src="./plugins/select2/select2.min.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> -->
+<!-- Bootstrap and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness</title>
+
+    <style>
+        #output {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+      
+        }
+        #range-slider {
+            width: 100%;
+        }
+        #range-slider::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output1 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider1 {
+            width: 100%;
+        }
+        #range-slider1::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider1:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output2 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider2 {
+            width: 100%;
+        }
+        #range-slider2::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider2:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output3 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider3 {
+            width: 100%;
+        }
+        #range-slider3::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider3:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output4 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #output7 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider4 {
+            width: 100%;
+        }
+        #range-slider4::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider4:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output5 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider5 {
+            width: 100%;
+        }
+        #range-slider5::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider5:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        #output6 {
+            width: 40px;
+            display: inline-block;
+            margin: 0 15px 0 0;
+            padding: 6px 8px;
+            text-align: center;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            background-color: rgb(62,166,26);
+        }
+        #range-slider6 {
+            width: 100%;
+        }
+        #range-slider6::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider6:active::-moz-range-thumb {
+            background: orange;               
+        }
+        #range-slider7 {
+            width: 100%;
+        }
+        #range-slider7::-moz-range-thumb {
+            padding: 3px;
+        }
+        #range-slider7:active::-moz-range-thumb {
+            background: orange;               
+        }
+      
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            margin: 0px 0px;
+            }
+            input[type=range]:focus {
+            outline: none;
+            }
+            input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 15px;
+            cursor: pointer;
+            background: #fff3;
+            border-radius: 10px;
+            }
+            input[type=range]::-webkit-slider-thumb {
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            background: #8d8e8d;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -12px;
+            }
+            input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #fff3;
+            
+            }
+            p#points {
+            width: 100%;
+            float: left;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 40px;
+            color:  #8d8e8d;
+            }
+      </style>
+      <style>
+                      
+        .inputcheckbox:before {
+            position: absolute;
+            /* top: 0; */
+            left: 0;
+            transform: translate(0%, -13%);
+            width: 22px;
+            height: 22px;
+            /* color:#fff5; */
+           
+        }
+        .checkbox {
+      /* display: flex; */
+      align-items: center;
+      margin-top: 3px;
+      transform: translate(-41%, 0%);
+      }        
+      
+      input[type=checkbox] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      background-color: #fff3;
+      margin-right: 8px;
+      position: relative;
+      
+      }
+      
+      input[type=checkbox]::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      /* background-color: #4b1cb8; */
+      background-color: #ffffff;
+      transform: translate(8px, 13px) rotate(-45deg);
+      transform-origin: left;
+      transition: 150ms all linear;
+      transition-delay: 0ms;
+      }
+      
+      input[type=checkbox]::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      /* background-color: #4b1cb8; */
+      background-color: #ffffff;
+      transform: translate(1px, 8px) rotate(45deg);
+      transform-origin: left;
+      transition: 150ms all linear;
+      transition-delay: 150ms;
+      }
+      
+      input[type=checkbox]:checked::before {
+      width: 14px;
+      transition-delay: 150ms;
+      }
+      
+      input[type=checkbox]:checked::after {
+      width: 10px;
+      transition-delay: 0ms;
+      }
+      
+      </style>
+      <style>
+        .iradio_square-grey {
+            margin: 0px !important;
+        }
+        
+        .btn {
+            padding: 5px !important;
+        }
+      </style>
+      <style>
+       /* Centrar las pestañas */
+.nav-tabs {
+    display: flex;
+    justify-content: right;
+    padding: 10px 0;
+    background-color: #f8f9fa; /* Color de fondo de las pestañas */
+    border-bottom: 2px solid #dee2e6; /* Borde inferior para destacar las pestañas */
+}
+
+/* Estilos para cada pestaña */
+.nav-tabs .nav-item {
+    margin: 0 5px; /* Espaciado entre pestañas */
+}
+
+/* Estilos para los enlaces de las pestañas */
+.nav-tabs .nav-link {
+    border: none; /* Elimina el borde predeterminado */
+    color: #007bff; /* Color del texto de las pestañas */
+    background-color: #ffffff; /* Color de fondo de cada pestaña */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 15px; /* Espaciado interno para el texto */
+}
+
+/* Estilos para la pestaña activa */
+.nav-tabs .nav-link.active {
+    color: #fff; /* Color del texto para la pestaña activa */
+    background-color: #007bff; /* Color de fondo para la pestaña activa */
+}
+
+/* Estilos para el nombre del jugador y las pestañas */
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#playerName {
+    font-size: 1.2rem; /* Ajusta el tamaño del texto según tus necesidades */
+    padding-left: 15px; /* Añade un poco de espacio a la izquierda */
+}
+
+.nav-tabs {
+    margin-right: 15px; /* Añade un poco de espacio a la derecha */
+}
+
+
+      </style>
+
+    <style>
+        
+
+        #editableTable {
+            border-collapse: separate;
+            border-spacing: 0 5px;
+            font-size: 9px;
+        }
+
+        #editableTable thead tr {
+            border: none;
+        }
+
+        #editableTable th, #editableTable td {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+        }
+
+        #editableTable tbody tr:hover {
+            background-color: #f5f5f5; /* Color de fondo cuando pasas el mouse sobre una fila */
+        }
+
+        /* Estilo general para la tabla */
+        .fixed-header {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        /* Fijamos el encabezado */
+        .fixed-header thead {
+            display: block;
+        }
+
+        /* Hacemos que el cuerpo de la tabla sea desplazable */
+        .fixed-header tbody {
+            display: block;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        .fixed-header th, .fixed-header td {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        /* Ajusta el ancho y diseño del botón de eliminar */
+        #editableTable button {
+            background: none;
+            border: none;
+            color: red;
+            font-size: 9px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+        #botonera {
+            position: relative;
+        }
+
+        #botonera button {
+            margin-right: 10px;
+        }
+
+        #botonera select {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+        /* Estilo para reducir el espacio entre los elementos de la lista */
+        .list-group-item {
+            padding: 0.1rem 0; /* Ajusta el relleno para que sea más pequeño */
+            background-color: transparent; /* Hace que el fondo de los elementos de la lista sea transparente */
+            border: none; /* Elimina el borde de los elementos de la lista */
+        }
+        
+        /* Estilo para los botones dentro de la lista para que ocupen todo el ancho */
+        .list-group-item .btn {
+            display: block; /* Hace que el botón ocupe todo el ancho */
+            width: 100%; /* Asegura que el botón ocupe todo el ancho */
+            margin: -0.55rem 0; /* Agrega un margen muy pequeño entre los botones */
+        }
+    
+        /* Hace que el fondo del contenedor sea transparente */
+        #acciones {
+            background-color: transparent;
+            border: none; /* Elimina el borde del contenedor */
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .input-right {
+            text-align: right;
+            padding: 10px; /* Espaciado opcional para dar un poco de margen */
+        }
+
+        /* .btn{
+            font-size: 0.5rem
+        } */
+
+        .card {
+    background: none !important; /* Esto hará que el fondo sea transparente */
+}
+
+.card-header {
+    background-color: #007bff; /* Color de fondo del encabezado de la tarjeta */
+    color: white; /* Color del texto del encabezado de la tarjeta */
+}
+
+.card-title {
+    margin-bottom: 0; /* Elimina el margen inferior del título */
+}
+
+.custom-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+}
+
+.custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #007bff;
+    cursor: pointer;
+}
+
+.custom-range::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #007bff;
+    cursor: pointer;
+}
+
+.custom-range::-ms-thumb {
+    width: 25px;
+    height: 25px;
+    background: #007bff;
+    cursor: pointer;
+}
+
+
+.btn-guardar {
+    background-color: #28a745; /* Color verde para el botón guardar */
+    color: white; /* Texto blanco */
+}
+
+.btn-cancelar {
+    background-color: #dc3545; /* Color rojo para el botón cancelar */
+    color: white; /* Texto blanco */
+}
+
+/* Estilos para los botones al pasar el mouse */
+.btn-guardar:hover {
+    background-color: #218838;
+}
+
+.btn-cancelar:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 767px) {
+    .card {
+        margin-bottom: 10px; /* Añade un margen en la parte inferior de cada tarjeta */
+    }
+    /* .card:last-child {
+        margin-bottom: 60px;  
+    } */
+}
+
+.select2 {
+    width: 100%  !important;
+}
+    </style>
+
+</head>
+<header class="header">
+    <div class="container-fluid mt-2">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+
+            <div class="col" style="text-align: left;">
+                <span id="teamName">Nombre del Equipo</span><br>
+                <span id="staffName">Nombre del Staff</span> 
+            </div>
+            <div class="col" style="text-align: center;">
+                <a id="menuButton" href="./menu.html"  > 
+                    <img id="teamImage" src="./img/team.png" alt="Imagen del Equipo" style="width: 50px; height: 50px;">
+                </a>
+            </div>
+            <div class="col" style="text-align: right;">
+                <span id="soccerTeam">Soccer Team</span> <br>
+                <span id="category">Categoría</span>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+</div>
+</header>
+<body>
+    
+    <div class="container-fluid ">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Sección de Video -->
+                            
+                            <!-- Sección de ID del Partido -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Date:</label>
+                                    <div class="youtube-input-container d-flex align-items-center">
+                                        <input type="date" id="fecha" placeholder="Fecha del partido" class="form-control mr-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Seasons:</label>
+                                    <select class="form-control" id="seasons">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Events:</label>
+                                    <select class="form-control" id="events">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Fases:</label>
+                                    <select class="form-control" id="fases">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Periodizations:</label>
+                                    <select class="form-control" id="periodizations">
+                                     
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Sessions Type:</label>
+                                    <select class="form-control" id="sessionstype">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+    </div>
+
+    <div class="container-fluid">
+        <div class="nav-tabs-custom" style="width: 100%">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <span id="playerName">Nombre del Jugador</span> <!-- Coloca aquí el nombre del jugador -->
+            
+
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pre-tab" data-toggle="tab" href="#tab_1">Pre entrenamiento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="post-tab" data-toggle="tab" href="#tab_2">Post entrenamiento</a>
+                    </li>
+                </ul>
+                
+            </div>
+
+            <div class="tab-content" style="background-color: #f8f9fa;">
+    
+                <!-- TAB_1 CHECK IN -->
+                <div class="tab-pane active" id="tab_1">
+                    <div class="row" style=" margin-right: 0px; margin-left: 0px;">
+                        <!-- TARJETA FATIGA -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="card" style="margin-top: 5px; height: 260px;">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h4 class="card-title mb-0">FATIGA</h4>
+                                    <label id="output2" class="mb-0" style="color: rgb(255, 255, 255); background-color: rgb(62, 166, 26);">0</label>
+                                </div>
+                                
+                                <div class="card-body p-0">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8">
+                                            <h6 class="text-center main_question mt-2">¿Qué tan fatigado estás en este momento?</h6>
+                                            <input type="hidden" id="pregunta2" name="pregunta2" value="0">
+                                            <div class="imgbox text-center">
+                                                <img id="imagenSalida" src="./img/wellness/img_preentrenamiento2.png" class="img-fluid" style="max-height: 200px;">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input id="range-slider2" type="range" class="custom-range" min="0" max="10" step="1" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- TARJETA DOLOR -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="card"  style="margin-top: 5px; min-height: 260px; ">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h4 class="card-title mb-0">DOLOR MUSCULAR</h4>
+                                    <label id="output4" class="mb-0" style="color: rgb(255, 255, 255); background-color: rgb(62, 166, 26);">0</label>
+                                </div>
+                                
+                                <div class="card-body p-0">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8">
+                                            <h6 class="text-center main_question mt-2">¿Qué tan adolorido te sentís en este momento?</h6>
+                                            <div class="imgbox text-center">
+                                                <img id="imagenSalida" src="./img/wellness/img_preentrenamiento4.png" class="img-fluid" style="max-height: 200px;">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input id="range-slider4" type="range" class="custom-range" min="0" max="10" step="1" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="pregunta4" name="pregunta4" value="0">
+                                    <div id="divmusculos" name="divmusculos" style="display: none;">
+                                        
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <h6 >Seleccione las Zona de Dolor</h6>
+                                                <select class="form-control select2-multiple" id="selectMusculos" name="musculos[]" multiple >
+                                                    <!-- <option value="2">ISQUIOTIBIALES</option>
+                                                    <option value="4">ADDUCTORES</option>
+                                                    <option value="3">CUADRICEPS</option>
+                                                    <option value="1">GEMELOS</option>
+                                                    <option value="8">RODILLAS</option>
+                                                    <option value="9">TIBIALES</option>
+                                                    <option value="5">PUBIS</option>
+                                                    <option value="11">CUELLO</option>
+                                                    <option value="6">TOBILLO</option>
+                                                    <option value="12">ESPALDA</option>
+                                                    <option value="7">LUMBARES</option>
+                                                    <option value="13">TREN SUPERIOR</option> -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TARJETA CALIDAD DEL SUEÑO -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="card"  style="margin-top: 5px; height: 260px;">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h4 class="card-title mb-0">CALIDAD DEL SUEÑO</h4>
+                                    <label id="output1" class="mb-0" style="color: rgb(255, 255, 255); background-color: rgb(62, 166, 26);">0</label>
+                                </div>
+                                
+                                <div class="card-body p-0">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8">
+                                            <h6 class="text-center main_question mt-2">¿Pudiste descansar bien?</h6>
+                                            <!-- <p>(Calidad del sueño: profundo o liviano, continuo o entrecortado, las horas fueron las adecuadas, etc.)</p> -->
+                                            <input type="hidden" id="pregunta1" name="pregunta1" value="0">
+                                            <div class="imgbox text-center">
+                                                <img id="imagenSalida" src="./img/wellness/img_preentrenamiento1.png" class="img-fluid" style="max-height: 200px;">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input id="range-slider1" type="range" class="custom-range" min="0" max="10" step="1" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    
+                    <!-- Segunda fila con tres tarjetas -->
+                    <div class="row"  style=" margin-right: 0px; margin-left: 0px;">
+                        <!-- TARJETA ESTRÉS -->
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            <div class="card"  style="margin-top: 5px; height: 260px;">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h4 class="card-title mb-0">ESTRÉS</h4>
+                                    <label id="output3" class="mb-0" style="color: rgb(255, 255, 255); background-color: rgb(62, 166, 26);">0</label>
+                                </div>
+                                
+                                <div class="card-body p-0">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8">
+                                            <h6 class="text-center main_question mt-2">¿Qué tan estresado te sentís en este momento?</h6>
+                                            <input type="hidden" id="pregunta3" name="pregunta3" value="0">
+                                            <div class="imgbox text-center">
+                                                <img id="imagenSalida" src="./img/wellness/img_preentrenamiento3.png" class="img-fluid" style="max-height: 200px;">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input id="range-slider3" type="range" class="custom-range" min="0" max="10" step="1" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TARJETA HUMOR -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="card"  style="margin-top: 5px; height: 260px;">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h4 class="card-title mb-0">HUMOR</h4>
+                                    <label id="output5" class="mb-0" style="color: rgb(255, 255, 255); background-color: rgb(62, 166, 26);">0</label>
+                                </div>
+                                
+                                <div class="card-body p-0">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8">
+                                            <h6 class="text-center main_question mt-2">¿Cómo estás de humor hoy?</h6>
+                                            <input type="hidden" id="pregunta5" name="pregunta5" value="0">
+                                            <div class="imgbox text-center">
+                                                <img id="imagenSalida" src="./img/wellness/img_preentrenamiento5.png" class="img-fluid" style="max-height: 200px;">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input id="range-slider5" type="range" class="custom-range" min="0" max="10" step="1" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TARJETA COMENTARIOS -->
+                        <div class="col-12 col-md-6 col-lg-4"> <!-- mb-4 añade un margen inferior más grande -->
+                        
+                                <div class="card" style="margin-top: 5px; height: 260px;">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h4 class="card-title mb-0">COMENTARIOS</h4>
+                                        
+                                    </div>
+                                    
+                                    <div class="card-body  p-0">
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-8">
+                                                <h6 class="text-center main_question mt-2">Desea ampliar sobre alguna cuestión relevante para antes del entrenamiento.</h6>
+                                                
+                                                <div class="form-group mt-3" style="padding: 10px;">
+                                                    <textarea id="comments" name="comments" class="form-control" style="height:100px;" bind-placeholder-label="true"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                         
+                            </div>
+                        </div>
+
+                        
+                    </div>
+               
+
+                </div>
+                <!-- FIN TAB_1 CHECK IN -->
+           
+                <!-- TAB_2 CHECK OUT -->
+                <div class="tab-pane" id="tab_2" style="background-color: #f8f9fa;">
+                    <div class="row card shadow-lg card-body  p-0" style="flex-direction: row !important; margin-right: 0px; margin-left: 0px;">
+                        <!-- Columna vacía para mantener la relación de aspecto -->
+                        <div class="col-lg-4 d-none d-lg-block"></div>
+    
+                        <!-- Tarjeta central -->
+                        
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group" style="text-align: center;">
+                                        <label >Minutos de la sesión</label>
+                                        <input style="text-align: center;" type="number" id="minutesSeason" name="minutesSeason" value="0" min=0 step="1" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="margin-top: 5px; height: 290px; background-color: #f8f9fa;">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h4 class="card-title mb-0">ESFUERZO</h4>
+                                    <label id="output6" class="mb-0" style="color: rgb(255, 255, 255); background-color: rgb(62, 166, 26);">0</label>
+                                </div>
+                                
+                                
+                                <div class="card-body  p-0">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8">
+                                            <h6 class="text-center main_question mt-2">¿Usted sintió el esfuerzo de hoy como?</h6>
+                                            <input type="hidden" id="pregunta1out" name="pregunta1out" value="0">
+                                            <div class="imgbox text-center">
+                                                <img id="imagenSalida" src="./img/wellness/img_rpe.png" class="img-fluid" style="max-height: 200px;">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input id="range-slider6" type="range" class="custom-range" min="0" max="10" step="1" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Otra columna vacía para mantener la relación de aspecto -->
+                        <div class="col-lg-4 d-none d-lg-block"></div>
+                    </div>
+                </div>
+                <!-- FIN TAB_2 CHECK OUT -->
+    
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid " style="margin-bottom: 100px; background-color: #f8f9fa;">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-lg" style="align-items: center;">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Sección de Video -->
+                            <!-- <button type="button" class="btn-default btn " onclick="location = 'https://audax.club/?controller=pfcheckinout&amp;action=insertRespondePlayer'">Cancelar</button>
+                <button type="submit" class="btn-default btn " onclick="llamar_loading();">Guardar</button> -->
+
+                <button id="btnGuardar" class="btn btn-guardar" style="margin: 5px;"><i class="fa fa-check-square" aria-hidden="true" style="margin: 5px;"></i>
+                </button>
+                <button  id="btnCancelar" class="btn btn-cancelar" style="margin: 5px;"><i class="fa fa-window-close" aria-hidden="true" style="margin: 5px;"></i></button>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+    </div>
+
+    <input type="hidden" id="playerName_url" name="playerName_url" value="">
+    <input type="hidden" id="position_url" name="position_url" value="">
+    <input type="hidden" id="date_url" name="date_url" value="">
+    <input type="hidden" id="periodization_url" name="periodization_url" value="">
+    <input type="hidden" id="sessionType_url" name="sessionType_url" value="">
+    <input type="hidden" id="season_url" name="season_url" value="">
+    <input type="hidden" id="event_url" name="event_url" value="">
+    <input type="hidden" id="fase_url" name="fase_url" value="">
+    <input type="hidden" id="musculos_url" name="musculos_url" value="">
+    <input type="hidden" id="minutesseason_url" name="minutesseason_url" value="">
+</body>
+
+
+
+<footer class="footer fixed-bottom">
+    <img src="./img/logo.png" alt="Logo"> <!-- Asegúrate de reemplazar con la ruta correcta al logo -->
+    
+    <div class="version">Wellness Tools by Sports Data Campus Community v1.2.0</div> <!-- Reemplaza con tu número de versión actual -->
+  </footer>
+
+  <script>
+    document.getElementById('menuButton').addEventListener('click', function() {
+        window.location.href = 'menu.html';
+    });
+
+    document.getElementById('btnCancelar').addEventListener('click', function() {
+        window.location.href = 'answers.html';
+    });
+</script>
+
+
+<script language="JavaScript">
+
+    $(document).ready(function () {
+
+        visibilizaMusculos();
+
+        RangeSlider();
+    //   colorRangeSlider1();
+    //   colorRangeSlider2();
+    //   colorRangeSlider3();
+    //   colorRangeSlider4();
+    //   colorRangeSlider5();
+    //   colorRangeSlider6();
+
+    });
+
+
+    </script>
+
+<script>
+    // PRE CARGAMOS LOS SELECT
+    function getSelectData() {
+        // alert(2);
+        // alert('ini getSelectData()');
+        // alert($("#fase_url").val());
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON('./data/json/fases.json', function(data) {
+
+            // console.log(data);
+            var $select = $('#fases').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            $select.val($("#fase_url").val());
+        });
+
+        
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON('./data/json/tacticalperiodizations.json', function(data) {
+            var $select = $('#periodizations').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            $select.val($("#periodization_url").val());
+        });
+
+        
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON('./data/json/sessionsTypes.json', function(data) {
+            var $select = $('#sessionstype').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            $select.val($("#sessionType_url").val());
+        });
+
+        
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON('./data/json/seasons.json', function(data) {
+            var $select = $('#seasons').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            $select.val($("#season_url").val());
+        });
+
+
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON('./data/json/events.json', function(data) {
+            var $select = $('#events').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
+
+            $.each(data, function(key, entry) {
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            $select.val($("#event_url").val());
+        });
+
+         $('#selectMusculos').select2({
+            // placeholder: "Selecciona las zonas",
+            allowClear: true,
+            width: '300px' // Ajusta el ancho al contenedor
+        });
+
+        
+        // Realizar una solicitud AJAX para obtener los datos del archivo JSON
+        $.getJSON('./data/json/muscles.json', function(data) {
+            // Limpiar las opciones existentes
+            var $selectMusculos = $('#selectMusculos').empty();
+
+            // Iterar a través del array de músculos
+            $.each(data, function(key, entry) {
+                // Añadir cada músculo como una opción en el select
+                $selectMusculos.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            // Inicializar Select2 después de llenar las opciones
+            $selectMusculos.select2();
+
+            // Tienes un string con valores separados por comas
+            var muscleString = $("#musculos_url").val();
+            // alert(muscleString);
+            // Utiliza split() para convertirlo en un array
+            var muscleArray = muscleString.split(',');
+
+            // Ahora puedes usar este array para establecer los valores en Select2
+            $('#selectMusculos').val(muscleArray).trigger('change');
+        });
+       
+    }
+    </script>
+
+    <script>
+    
+      function colorRangeSlider1() {
+        let color='rgb(62,166,26)';
+        if($('#pregunta1').val()==0 || $('#pregunta1').val()==1 || $('#pregunta1').val()==2 || $('#pregunta1').val()==3){
+            color='rgb(62,166,26)';//verde 0 1 2 3
+        }
+        if($('#pregunta1').val()==4 || $('#pregunta1').val()==5 || $('#pregunta1').val()==6){
+            color='rgb(255,167,1)';//amarillo 4 5 y 6
+        }
+    
+        if($('#pregunta1').val()==7 || $('#pregunta1').val()==8 || $('#pregunta1').val()==9 || $('#pregunta1').val()==10){
+            color='rgb(228,62,57)';//rojo 9 y 10
+        }
+        $('#output1').closest("label").css("background-color", color);
+      }
+    
+      function colorRangeSlider2() {
+        let color='rgb(62,166,26)';
+        if($('#pregunta2').val()==0 || $('#pregunta2').val()==1 || $('#pregunta2').val()==2 || $('#pregunta2').val()==3){
+            color='rgb(62,166,26)';//verde 0 1 2 3
+        }
+        if($('#pregunta2').val()==4 || $('#pregunta2').val()==5 || $('#pregunta2').val()==6){
+            color='rgb(255,167,1)';//amarillo 4 5 y 6
+        }
+        // if($('#pregunta2').val()==6 || $('#pregunta2').val()==7){
+        //     color='rgb(255,128,0)';//naranja  7 y 8
+        // }
+        if($('#pregunta2').val()==7 || $('#pregunta2').val()==8 || $('#pregunta2').val()==9 || $('#pregunta2').val()==10){
+            color='rgb(228,62,57)';//rojo 9 y 10
+        }
+        // if($('#pregunta2').val()==10){
+        //     color='rgb(196,26,0)';//rojo 9 y 10
+        // }
+        $('#output2').closest("label").css("background-color", color);
+      }
+    
+      function colorRangeSlider3() {
+        let color='rgb(62,166,26)';
+        if($('#pregunta3').val()==0 || $('#pregunta3').val()==1 || $('#pregunta3').val()==2 || $('#pregunta3').val()==3){
+            color='rgb(62,166,26)';//verde 0 1 2 3
+        }
+        if($('#pregunta3').val()==4 || $('#pregunta3').val()==5 || $('#pregunta3').val()==6){
+            color='rgb(255,167,1)';//amarillo 4 5 y 6
+        }
+        // if($('#pregunta3').val()==6 || $('#pregunta3').val()==7){
+        //     color='rgb(255,128,0)';//naranja  7 y 8
+        // }
+        if($('#pregunta3').val()==7 || $('#pregunta3').val()==8 || $('#pregunta3').val()==9 || $('#pregunta3').val()==10){
+            color='rgb(228,62,57)';//rojo 9 y 10
+        }
+        // if($('#pregunta3').val()==10){
+        //     color='rgb(196,26,0)';//rojo 9 y 10
+        // }
+        $('#output3').closest("label").css("background-color", color);
+      }
+    
+      function colorRangeSlider4() {
+        let color='rgb(62,166,26)';
+        if($('#pregunta4').val()==0 || $('#pregunta4').val()==1 || $('#pregunta4').val()==2 || $('#pregunta4').val()==3){
+            color='rgb(62,166,26)';//verde 0 1 2 3
+        }
+        if($('#pregunta4').val()==4 || $('#pregunta4').val()==5 || $('#pregunta4').val()==6){
+            color='rgb(255,167,1)';//amarillo 4 5 y 6
+        }
+    
+        if($('#pregunta4').val()==7 || $('#pregunta4').val()==8 || $('#pregunta4').val()==9 || $('#pregunta4').val()==10){
+            color='rgb(228,62,57)';//rojo 9 y 10
+        }
+    
+        $('#output4').closest("label").css("background-color", color);
+      }
+    
+      function colorRangeSlider7() {
+        let color='rgb(62,166,26)';
+        if($('#pregunta2out').val()==0 || $('#pregunta2out').val()==1 || $('#pregunta2out').val()==2 || $('#pregunta2out').val()==3){
+            color='rgb(62,166,26)';//verde 0 1 2 3
+        }
+        if($('#pregunta2out').val()==4 || $('#pregunta2out').val()==5 || $('#pregunta2out').val()==6){
+            color='rgb(255,167,1)';//amarillo 4 5 y 6
+        }
+    
+        if($('#pregunta2out').val()==7 || $('#pregunta2out').val()==8 || $('#pregunta2out').val()==9 || $('#pregunta2out').val()==10){
+            color='rgb(228,62,57)';//rojo 9 y 10
+        }
+        $('#output7').closest("label").css("background-color", color);
+      }
+    
+      function colorRangeSlider5() {
+        let color='rgb(62,166,26)';
+        if($('#pregunta5').val()==0 || $('#pregunta5').val()==1 || $('#pregunta5').val()==2 || $('#pregunta5').val()==3){
+            color='rgb(62,166,26)';//verde 0 1 2 3
+        }
+        if($('#pregunta5').val()==4 || $('#pregunta5').val()==5 || $('#pregunta5').val()==6){
+            color='rgb(255,167,1)';//amarillo 4 5 y 6
+        }
+        // if($('#pregunta5').val()==6 || $('#pregunta5').val()==7){
+        //     color='rgb(255,128,0)';//naranja  7 y 8
+        // }
+        if($('#pregunta5').val()==7 || $('#pregunta5').val()==8 || $('#pregunta5').val()==9 || $('#pregunta5').val()==10){
+            color='rgb(228,62,57)';//rojo 9 y 10
+        }
+        // if($('#pregunta5').val()==10){
+        //     color='rgb(196,26,0)';//rojo 9 y 10
+        // }
+        $('#output5').closest("label").css("background-color", color);
+      }
+    
+      function colorRangeSlider6() {
+        let color='rgb(62,166,26)';
+        if($('#pregunta1out').val()==0 || $('#pregunta1out').val()==1 || $('#pregunta1out').val()==2 || $('#pregunta1out').val()==3){
+            color='rgb(62,166,26)';//verde 0 1 2 3
+        }
+        if($('#pregunta1out').val()==4 || $('#pregunta1out').val()==5 || $('#pregunta1out').val()==6){
+            color='rgb(255,167,1)';//amarillo 4 5 y 6
+        }
+        // if($('#pregunta1out').val()==6 || $('#pregunta1out').val()==7){
+        //     color='rgb(255,128,0)';//naranja  7 y 8
+        // }
+        if($('#pregunta1out').val()==7 || $('#pregunta1out').val()==8 || $('#pregunta1out').val()==9 || $('#pregunta1out').val()==10){
+            color='rgb(228,62,57)';//rojo 9 y 10
+        }
+        // if($('#pregunta1out').val()==10){
+        //     color='rgb(196,26,0)';//rojo 9 y 10
+        // }
+        $('#output6').closest("label").css("background-color", color);
+      }
+    
+      function RangeSlider() {
+    
+         
+          $("#range-slider")
+              .on('input change', function() {
+                  let color='rgb(62,166,26)';
+                  if(this.value==0 || this.value==1 || this.value==2 || this.value==3){
+                      color='rgb(62,166,26)';//verde 0 1 2 3
+                  }
+                  if(this.value==4 || this.value==5 || this.value==6){
+                      color='rgb(255,167,1)';//amarillo 4 5 y 6
+                  }
+    
+                  if(this.value==7 || this.value==8 || this.value==9 || this.value==10){
+                      color='rgb(228,62,57)';//rojo 9 y 10
+                  }
+        
+                  $('#output').closest("label").css("background-color", color);
+                  output.text(this.value);
+          });
+    
+    
+         
+          $("#range-slider1")
+              .on('input change', function() {
+                  let color='rgb(62,166,26)';
+                  if(this.value==0 || this.value==1 || this.value==2 || this.value==3){
+                      color='rgb(62,166,26)';//verde 0 1 2 3
+                  }
+                  if(this.value==4 || this.value==5 || this.value==6){
+                      color='rgb(255,167,1)';//amarillo 4 5 y 6
+                  }
+    
+                  if(this.value==7 || this.value==8 || this.value==9 || this.value==10){
+                      color='rgb(228,62,57)';//rojo 9 y 10
+                  }
+    
+                  $('#output1').closest("label").css("background-color", color);
+                  $("#pregunta1").val(this.value);
+                  $('#output1').text(this.value);
+          });
+    
+         
+          $("#range-slider2")
+              .on('input change', function() {
+                  let color='rgb(62,166,26)';
+                  if(this.value==0 || this.value==1 || this.value==2 || this.value==3){
+                      color='rgb(62,166,26)';//verde 0 1 2 3
+                  }
+                  if(this.value==4 || this.value==5 || this.value==6){
+                      color='rgb(255,167,1)';//amarillo 4 5 y 6
+                  }
+    
+                  if(this.value==7 || this.value==8 || this.value==9 || this.value==10){
+                      color='rgb(228,62,57)';//rojo 9 y 10
+                  }
+                  
+                  $('#output2').closest("label").css("background-color", color);
+                  $('#output2').text(this.value);
+                  $("#pregunta2").val(this.value);
+    
+          });
+    
+         
+          $("#range-slider3")
+              .on('input change', function() {
+                  let color='rgb(62,166,26)';
+                  if(this.value==0 || this.value==1 || this.value==2 || this.value==3){
+                      color='rgb(62,166,26)';//verde 0 1 2 3
+                  }
+                  if(this.value==4 || this.value==5 || this.value==6){
+                      color='rgb(255,167,1)';//amarillo 4 5 y 6
+                  }
+    
+                  if(this.value==7 || this.value==8 || this.value==9 || this.value==10){
+                      color='rgb(228,62,57)';//rojo 9 y 10
+                  }
+       
+                  $('#output3').closest("label").css("background-color", color);
+                  $("#pregunta3").val(this.value);
+                  $('#output3').text(this.value);
+          });
+        
+          $("#range-slider4")
+              .on('input change', function() {
+    
+                  let color='rgb(62,166,26)';
+                  if(this.value==0 || this.value==1 || this.value==2 || this.value==3){
+                      color='rgb(62,166,26)';//verde 0 1 2 3
+                  }
+                  if(this.value==4 || this.value==5 || this.value==6){
+                      color='rgb(255,167,1)';//amarillo 4 5 y 6
+                  }
+    
+                  if(this.value==7 || this.value==8 || this.value==9 || this.value==10){
+                      color='rgb(228,62,57)';//rojo 9 y 10
+                  }
+    
+                  $('#output4').closest("label").css("background-color", color);
+                  $("#pregunta4").val(this.value);
+                  
+                  visibilizaMusculos();
+                  
+                  $('#output4').text(this.value);
+          });
+    
+        
+          $("#range-slider5")
+              .on('input change', function() {
+                  let color='rgb(62,166,26)';
+                  if(this.value==0 || this.value==1 || this.value==2 || this.value==3){
+                      color='rgb(62,166,26)';//verde 0 1 2 3
+                  }
+                  if(this.value==4 || this.value==5 || this.value==6){
+                      color='rgb(255,167,1)';//amarillo 4 5 y 6
+                  }
+    
+                  if(this.value==7 || this.value==8 || this.value==9 || this.value==10){
+                      color='rgb(228,62,57)';//rojo 9 y 10
+                  }
+    
+                  $('#output5').closest("label").css("background-color", color);
+                  $("#pregunta5").val(this.value);
+                  $('#output5').text(this.value);
+          });
+    
+       
+          $("#range-slider6")
+              .on('input change', function() {
+                  let color='rgb(62,166,26)';
+                  if(this.value==0 || this.value==1 || this.value==2 || this.value==3){
+                      color='rgb(62,166,26)';//verde 0 1 2 3
+                  }
+                  if(this.value==4 || this.value==5 || this.value==6){
+                      color='rgb(255,167,1)';//amarillo 4 5 y 6
+                  }
+    
+                  if(this.value==7 || this.value==8 || this.value==9 || this.value==10){
+                      color='rgb(228,62,57)';//rojo 9 y 10
+                  }
+    
+                  $('#output6').closest("label").css("background-color", color);
+                  $("#pregunta1out").val(this.value);
+                  $('#output6').text(this.value);
+          });
+    
+    
+      }
+    
+    
+      function visibilizaMusculos() {
+    
+        var pregunta4 = $("#pregunta4").val();
+
+        switch (pregunta4) {
+            case '1':
+                $("#divmusculos").hide();
+                break;
+            case '2':
+                $("#divmusculos").show();
+                break;
+            case '3':
+                $("#divmusculos").show();
+                break;
+            case '4':
+                $("#divmusculos").show();
+                break;
+            case '5':
+                $("#divmusculos").show();
+                break;
+            case '6':
+                $("#divmusculos").show();
+                break;
+            case '7':
+                $("#divmusculos").show();
+                break;
+            case '8':
+                $("#divmusculos").show();
+                break;
+            case '9':
+                $("#divmusculos").show();
+                break;
+            default:
+                $("#divmusculos").hide();
+                break;
+        }
+    
+        
+    
+    }
+
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+    // Suponiendo que tienes playerName y fecha en la URL como parámetros
+    const urlParams = new URLSearchParams(window.location.search);
+    const playerName = urlParams.get('playerName');
+    const fecha = urlParams.get('date');
+
+    const position = urlParams.get('position');
+    const date = urlParams.get('date');
+    const periodization = urlParams.get('periodization');
+    const sessionType = urlParams.get('sessionType');
+    const season = urlParams.get('season');
+    const event = urlParams.get('event');
+    const fase = urlParams.get('fase');
+    const minutesseason = urlParams.get('minutesseason');
+
+    $("#playerName_url").val(playerName);
+    $("#date_url").val(date);
+    $("#periodization_url").val(periodization);
+    $("#sessionType_url").val(sessionType);
+    $("#season_url").val(season);
+    $("#event_url").val(event);
+    $("#fase_url").val(fase);
+    $("#position_url").val(position);
+    $("#minutesseason_url").val(minutesseason);
+
+    $("#minutesSeason").val(minutesseason);
+
+    document.getElementById('fecha').value = date;
+
+    document.getElementById('playerName').textContent = playerName;
+
+    // Leer el archivo JSON y buscar el registro
+    fetch(`./data/json/answers.json?nocache=${new Date().getTime()}`)
+        .then(response => response.json())
+        .then(data => {
+            // debugger;
+            const registroEncontrado = data.find(registro => registro.playerName === playerName && registro.date === fecha);
+            
+            if (registroEncontrado) {
+                cargarDatosEnFormulario(registroEncontrado);
+                // Si el RPE es 0, activa la pestaña de post entrenamiento
+            if (registroEncontrado.RPE === '0') {
+                // Utiliza jQuery para mostrar la pestaña de post entrenamiento
+                $('#post-tab').tab('show');
+            }
+            }
+            else{
+                getSelectData() ;
+            }
+        })
+        .catch(error => console.error('Error al cargar los datos:', error));
+});
+
+function cargarDatosEnFormulario(datos) {
+    // Aquí asignas los valores de 'datos' a los campos del formulario
+
+    getSelectData() ;
+
+    document.getElementById('playerName').value = datos.playerName;
+
+    document.getElementById('pregunta2').value = datos.Fatigue;
+    $("#pregunta2").val(datos.Fatigue);
+    $('#output2').text(datos.Fatigue);
+    $('#range-slider2').val(datos.Fatigue);
+
+    document.getElementById('pregunta4').value = datos.PainMuscle;
+    $("#pregunta4").val(datos.PainMuscle);
+    $('#output4').text(datos.PainMuscle);
+    $('#range-slider4').val(datos.PainMuscle);
+
+    document.getElementById('pregunta1').value = datos.SleepQuality;
+    $("#pregunta1").val(datos.SleepQuality);
+    $('#output1').text(datos.SleepQuality);
+    $('#range-slider1').val(datos.SleepQuality);
+
+    document.getElementById('pregunta3').value = datos.Stress;
+    $("#pregunta3").val(datos.Stress);
+    $('#output3').text(datos.Stress);
+    $('#range-slider3').val(datos.Stress);
+
+    document.getElementById('pregunta5').value = datos.Humor;
+    $("#pregunta5").val(datos.Humor);
+    $('#output5').text(datos.Humor);
+    $('#range-slider5').val(datos.Humor);
+
+    document.getElementById('pregunta1out').value = datos.RPE;
+    $("#pregunta1out").val(datos.RPE);
+    $('#output6').text(datos.RPE);
+    $('#range-slider6').val(datos.RPE);
+
+    $('#minutesSeason').val(datos.minutesSeason);
+    
+    $('#comments').val(datos.comments);
+
+    visibilizaMusculos();
+
+    // VER QUE LOS SELECTS NO SE ACTUALIZAN CON LOS DATOS QUE TENIA GARGADO ESE REGISTRO
+
+    if (datos.Periodization) {
+        $('#periodizations').val(datos.Periodization).trigger('change');
+    }
+
+    if (datos.SessionType) {
+        $('#sessionstype').val(datos.SessionType).trigger('change');
+    }
+
+    // alert(datos.Season);
+    if (datos.Season) {
+        $('#seasons').val(datos.Season).trigger('change');
+    }
+
+    if (datos.Event) {
+        $('#events').val(datos.Event).trigger('change');
+    }
+    
+    if (datos.Fase) {
+        $('#fases').val(datos.Fase).trigger('change');
+    }
+
+     // alert(datos.Muscles);
+    // Cargar datos en un select múltiple
+
+    if (datos.Muscles && Array.isArray(datos.Muscles)) {
+        // alert(datos.Muscles);
+        $('#selectMusculos').val(datos.Muscles).trigger('change');
+    }
+
+    $("#playerName_url").val(datos.playerName);
+    $("#date_url").val(datos.date);
+    $("#periodization_url").val(datos.Periodization);
+    $("#sessionType_url").val(datos.SessionType);
+    $("#season_url").val(datos.Season);
+    $("#event_url").val(datos.Event);
+
+    // alert(datos.Fase)
+    // debugger;
+    $("#fase_url").val(datos.Fase);
+
+    $("#position_url").val(datos.position);
+    $("#minutesseason_url").val(datos.minutesSeason);
+
+    $("#minutesSeason").val(datos.minutesSeason);
+    // alert(datos.Muscles);
+    $("#musculos_url").val(datos.Muscles);
+
+    // if (datos.Periodization) {
+    //     $('#periodizations').val(datos.Periodization).trigger('change');
+    // }
+    // ... y así con los demás campos ...
+    // console.log(datos.Humor);
+    
+      colorRangeSlider1();
+      colorRangeSlider2();
+      colorRangeSlider3();
+      colorRangeSlider4();
+      colorRangeSlider5();
+      colorRangeSlider6();
+}
+</script>
+    <script>
+
+        function recogerDatos() {
+            // Obtener todos los valores seleccionados en el select múltiple
+            var selectedMuscles = Array.from(document.getElementById('selectMusculos').options)
+                               .filter(option => option.selected)
+                               .map(option => option.value);
+
+            // // crea un nuevo objeto `Date`
+            // var moment = require('moment');
+ 
+            // // obtener el nombre del mes, día del mes, año, hora
+            // var DateResponse = moment().format("DD/MM/YYYY HH:mm:ss A");
+
+            // obtener el nombre del mes, día del mes, año, hora
+            var DateResponse = moment().format("DD/MM/YYYY HH:mm:ss A");
+
+            const ics = calcularICS(document.getElementById('pregunta2').value, document.getElementById('pregunta4').value, document.getElementById('pregunta1').value, document.getElementById('pregunta3').value, document.getElementById('pregunta5').value);
+
+            // CalcularIndexs(document.getElementById('fecha').value,document.getElementById('playerName_url').value,document.getElementById('pregunta1out').value,document.getElementById('minutesSeason').value);
+
+            return {
+                Id: getId(),
+                date: document.getElementById('fecha').value,
+                playerName: document.getElementById('playerName_url').value,
+                position: document.getElementById('position_url').value,
+                Periodization: document.getElementById('periodizations').value,
+                SessionType: document.getElementById('sessionstype').value,
+                Season: document.getElementById('seasons').value,
+                Event: document.getElementById('events').value,
+                Fase: document.getElementById('fases').value,
+                Fatigue: document.getElementById('pregunta2').value,
+                PainMuscle: document.getElementById('pregunta4').value,
+                SleepQuality: document.getElementById('pregunta1').value,
+                Stress: document.getElementById('pregunta3').value,
+                Humor: document.getElementById('pregunta5').value,
+                RPE: document.getElementById('pregunta1out').value,
+                minutesSeason: document.getElementById('minutesSeason').value,
+                comments: $('#comments').val(),
+                Muscles: selectedMuscles,
+                DateResponse : DateResponse,
+                ICS : ics
+                // ... otros campos ...
+            };
+        }
+
+        function pad2(n) { return n < 10 ? '0' + n : n }
+        function getId() { 
+            var date = new Date();
+            return( date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2( date.getDate()) + pad2( date.getHours() ) + pad2( date.getMinutes() ) + pad2( date.getSeconds() ) );
+        }
+
+        function guardarDatos(data) {
+            fetch('./php/guardar_answers.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = 'answers.html';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        document.getElementById('btnGuardar').addEventListener('click', function() {
+            let ShortName = document.getElementById('playerName_url').value;
+            // Obtener la configuración de confirmación
+            $.getJSON(`./data/json/config.json?nocache=${new Date().getTime()}`, function(config) {
+                const confirmationConfig = config.find(item => item.Id === 'confirmation');
+                if (confirmationConfig && confirmationConfig.Value === 1) {
+                    // Si la confirmación es necesaria, mostrar el popup
+                    swal.fire({
+                        title: 'Confirmación',
+                        text: 'Por favor, ingresa tu username para confirmar:',
+                        input: 'text',
+                        inputAttributes: {
+                            autocapitalize: 'off'
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: 'Confirmar',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (login) => {
+                            // Aquí puedes agregar una función para validar el username
+                            // Por ejemplo, verificar contra `players.json` o cualquier otra lógica necesaria
+                            return validarUsername(login,ShortName)
+                                .then(response => {
+                                    if (!response.esValido) {
+                                        throw new Error(response.mensajeError);
+                                    }
+                                })
+                                .catch(error => {
+                                    swal.showValidationMessage(
+                                        `${error.mensajeError}`
+                                    );
+                                });
+                        },
+                        allowOutsideClick: () => !swal.isLoading()
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var datos = recogerDatos();
+                            console.log(datos);
+                            guardarDatos(datos);
+                        }
+                    });
+                } else {
+                    // Si no se requiere confirmación, simplemente guardar los datos
+                    var datos = recogerDatos();
+                    console.log(datos);
+                    guardarDatos(datos);
+                }
+            });
+});
+
+function validarUsername(username, ShortName) {
+    debugger;
+    // Usando fetch en lugar de $.getJSON
+    return new Promise((resolve, reject) => {
+        fetch(`./data/json/players.json?nocache=${new Date().getTime()}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(players => {
+                console.log(players);
+                const playerExists = players.some(player => String(player.ShortName) === String(ShortName) && String(player.Username) === String(username));
+
+                if (playerExists) {
+                    resolve({ esValido: true });
+                } else {
+                    reject({ esValido: false, mensajeError: "Confirmation no válido" });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                reject({ esValido: false, mensajeError: "Error al acceder a los datos de los jugadores." });
+            });
+    });
+}
+
+
+
+function calcularICS(fatigue, painMuscle, sleepQuality, stress, humor) {
+
+  const valores = [fatigue, sleepQuality, stress, humor];
+  const colores = valores.map(valor => getColor(valor));
+  const conteoColores = {
+    verde: colores.filter(color => color === 'verde').length,
+    amarillo: colores.filter(color => color === 'amarillo').length,
+    rojo: colores.filter(color => color === 'rojo').length
+  };
+
+  // Condición de rojo
+  if (conteoColores.rojo > 0 || conteoColores.amarillo >= 3 || (conteoColores.amarillo === 2 && getColor(painMuscle) !== 'verde')) {
+    return 'ROJO';
+  }
+  // Condición de amarillo
+  if (conteoColores.amarillo === 1 || (conteoColores.amarillo === 2 && getColor(painMuscle) === 'verde')) {
+    return 'AMARILLO';
+  }
+  // Condición de verde
+  if (conteoColores.verde === 4 && conteoColores.amarillo === 1 && getColor(painMuscle) === 'verde') {
+    return 'VERDE';
+  }
+  if (conteoColores.verde === 5 || (conteoColores.verde === 4 && getColor(painMuscle) !== 'amarillo')) {
+    return 'VERDE';
+  }
+  
+  // Si no se cumple ninguna condición anterior, por defecto es ROJO
+  return 'ROJO';
+}
+
+function getColor(valor) {
+  var verde = "'rgb(62,166,26)'";
+  var amarillo = "rgb(255,167,1)";
+  var rojo = "rgb(228,62,57)";
+  if (valor >= 0 && valor <= 3) return verde;
+  if (valor >= 4 && valor <= 6) return amarillo;
+  if (valor >= 7) return rojo;
+}
+
+
+    </script>
+
+</html>
