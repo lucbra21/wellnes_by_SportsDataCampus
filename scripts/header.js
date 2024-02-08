@@ -23,7 +23,7 @@ function readJSONFile() {
         // document.getElementById('teamImage').src = teamImage;
         document.getElementById('staffName').textContent = staffName;
         document.getElementById('soccerTeam').textContent = soccerTeam;
-        document.getElementById('category').textContent = category;
+        document.getElementById('categoria').textContent = category;
     })
     .catch(error => {
         console.error('Error al leer el archivo:', error);

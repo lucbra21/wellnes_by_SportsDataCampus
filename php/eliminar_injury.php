@@ -5,19 +5,19 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Obtiene el cuerpo de la solicitud
     $data = json_decode(file_get_contents('php://input'), true);
-    $uniqueId = $data['id'];
+    $uniqueId = $data['Id'];
 
     // Lee el archivo JSON
     $jsonString = file_get_contents('../data/json/injuries.json');
-    $answers = json_decode($jsonString, true);
+    $injuries = json_decode($jsonString, true);
 
     // Filtra el array para eliminar el registro deseado
-    $filteredAnswers = array_filter($answers, function ($answer) use ($uniqueId) {
-        return $answer['Id'] !== $uniqueId;
+    $filteredInjuries = array_filter($injuries, function ($injury) use ($uniqueId) {
+        return $injury['injuryId'] !== $uniqueId;
     });
 
     // Guarda el archivo JSON actualizado
-    file_put_contents('../data/json/injuries.json', json_encode(array_values($filteredAnswers)));
+    file_put_contents('../data/json/injuries.json', json_encode(array_values($filteredInjuries)));
 
     echo "Registro eliminado con éxito";
 } else {

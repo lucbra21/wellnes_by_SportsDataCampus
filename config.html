@@ -51,7 +51,7 @@
             </a>
             <div class="col" style="text-align: right;">
                 <span id="soccerTeam">Soccer Team</span> <br>
-                <span id="category">Categoría</span>
+                <span id="categoria">Categoría</span>
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col">
-                                    <h1>Instalar servidor web</h1>
+                                    <!-- <h1>Instalar servidor web</h1> -->
 
                                     <h1>Generar archivos de configuración</h1>
                                     <p style="font-size: 14px;">Recomendación, si se desea ejecutar Wellness Tool en una tablet o celular, primero generar esta configuración en un ordenador y luego copiar o enviar Wellness Tool a la tablet o celular. </p>
@@ -114,7 +114,7 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Players:</label>
-                                                        <select class="form-control" id="players" name="players">
+                                                        <select class="form-control" id="jugadores" name="jugadores">
                                                             
                                                         </select>
                                                     </div>
@@ -139,9 +139,34 @@
                                         </form>
 
                                     </div>
-                        
                                     <div class="mb-4">
-                                        <h2>Paso 5 - Ajustes de configuración </h2>
+                                        <h2>Paso 5 - Cambiar foto Equipo </h2>
+                                        <hr>
+                                        <form id="uploadTeamForm" enctype="multipart/form-data">
+                                            
+                                            <!-- Sección de Período -->
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <input type="file" id="imageTeamInput" name="imageTeamInput" accept=".png" style="margin-top: 35px;" />
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label></label>
+                                                        <button id="importImgTeamButton" class="btn btn-success" style="margin-top: 30px;">Importar imagen</button>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="mb-4">
+                                        <h2>Paso 6 - Ajustes de configuración </h2>
                                         <hr>
                                         <p>Si en algún momento desea ajustar la configuración, porque tiene la necesidad de agregar un jugador, cambiarle un estado, o lo que considere, y si tiene el archivo XLSX de configuración vaya al punto 3.</p>
                                     </div>
@@ -177,8 +202,28 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" id="config-tab" data-toggle="tab" href="#config" role="tab" aria-controls="config" aria-selected="true">Config</a>
                                             </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="muscles-tab" data-toggle="tab" href="#muscles" role="tab" aria-controls="muscles" aria-selected="true">Muscles</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="injuryLocations-tab" data-toggle="tab" href="#injuryLocations" role="tab" aria-controls="injuryLocations" aria-selected="true">injuryLocations</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="injuryCauses-tab" data-toggle="tab" href="#injuryCauses" role="tab" aria-controls="injuryCauses" aria-selected="true">injuryCauses</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="injurySeverities-tab" data-toggle="tab" href="#injurySeverities" role="tab" aria-controls="injurySeverities" aria-selected="true">injurySeverities</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="injuryStatus-tab" data-toggle="tab" href="#injuryStatus" role="tab" aria-controls="injuryStatus" aria-selected="true">injuryStatus</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="injuryTypes-tab" data-toggle="tab" href="#injuryTypes" role="tab" aria-controls="injuryTypes" aria-selected="true">injuryTypes</a>
+                                            </li>
                                             <!-- Repite para cada pestaña: players, positions, etc. -->
                                             <!-- ... -->
+
+                                           
                                         </ul>
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="team" role="tabpanel" aria-labelledby="team-tab">
@@ -233,9 +278,42 @@
                                                     <!-- Los datos del JSON se cargarán aquí -->
                                                 </table>
                                             </div>
+
+                                            <div class="tab-pane fade show" id="muscles" role="tabpanel" aria-labelledby="muscles-tab">
+                                                <table id="table-muscles" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade show" id="injuryLocations" role="tabpanel" aria-labelledby="injuryLocations-tab">
+                                                <table id="table-injuryLocations" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade show" id="injuryCauses" role="tabpanel" aria-labelledby="injuryCauses-tab">
+                                                <table id="table-injuryCauses" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade show" id="injurySeverities" role="tabpanel" aria-labelledby="injurySeverities-tab">
+                                                <table id="table-injurySeverities" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade show" id="injuryStatus" role="tabpanel" aria-labelledby="injuryStatus-tab">
+                                                <table id="table-injuryStatus" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade show" id="injuryTypes" role="tabpanel" aria-labelledby="injuryTypes-tab">
+                                                <table id="table-injuryTypes" class="table">
+                                                    <!-- Los datos del JSON se cargarán aquí -->
+                                                </table>
+                                            </div>
                                             <!-- Repite para cada pestaña: players, positions, etc. -->
                                             <!-- ... -->
                                        
+
+                                            
                                         </div>
                                 </div>
                                     
@@ -265,7 +343,7 @@ $(document).ready(function() {
     $.getJSON(`./data/json/players.json?nocache=${new Date().getTime()}`, function(data) {
 
         // console.log(data);
-        var $select = $('#players').empty();
+        var $select = $('#jugadores').empty();
 
         // Agregar una opción predeterminada al principio
         $select.append($('<option></option>').attr('value', '-1').text('Select One...'));
@@ -288,17 +366,33 @@ $(document).ready(function() {
         selectedFile = event.target.files[0];
     });
 
-    document.getElementById('processButton').addEventListener('click', function () {
+document.getElementById('processButton').addEventListener('click', function () {
     if (selectedFile) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
             var data = new Uint8Array(e.target.result);
-            var workbook = XLSX.read(data, { type: 'array' });
+            var workbook = XLSX.read(data, {type: 'array'});
 
             var promesas = workbook.SheetNames.map(sheetName => {
-                var jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-                return enviarJSONAlServidor(jsonData, sheetName);
+                // var jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+                var jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {
+                    raw: false, // Indica a la librería que procese los números y fechas
+                    dateNF: "dd/mm/yyyy" // Formato deseado para las fechas
+                });
+
+
+                // Convertir todos los valores a texto
+                var jsonDataAsText = jsonData.map(obj => {
+                    var newObj = {};
+                    Object.keys(obj).forEach(key => {
+                        // Asegurarse de que el valor es convertido a string
+                        newObj[key] = String(obj[key]);
+                    });
+                    return newObj;
+                });
+
+                return enviarJSONAlServidor(jsonDataAsText, sheetName);
             });
 
             // Agregar la promesa de enviar el archivo completo
@@ -309,18 +403,17 @@ $(document).ready(function() {
                 .then(() => {
                     Swal.fire({
                         title: 'Exito',
-                        text: 'Todo salio como lo esperabamos!!!',
+                        text: 'Todo salió como lo esperábamos!!!',
                         icon: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#DD6B55',
                         confirmButtonText: 'Ok'
-                        }).then((result) => {
+                    }).then((result) => {
                         if (result.value) {
                             // Refrescar la página
                             location.reload();
                         }
                     });
-              
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -329,22 +422,21 @@ $(document).ready(function() {
         };
 
         reader.readAsArrayBuffer(selectedFile);
+        
     } else {
-        // swal("Haga bien las cosas", "Por favor, selecciona un archivo primero.", "Info");
         Swal.fire({
             title: 'Haga bien las cosas',
             text: 'Por favor, selecciona un archivo primero.',
             icon: 'info',
             confirmButtonText: 'Ok'
         });
-
     }
 });
 
 document.getElementById('importImgButton').addEventListener('click', function(event) {
   event.preventDefault(); // Previene el envío del formulario
   
-  var playerSelect = document.getElementById('players');
+  var playerSelect = document.getElementById('jugadores');
   var selectedPlayer = playerSelect.value;
   
   if (selectedPlayer === "-1") {
@@ -386,6 +478,71 @@ document.getElementById('importImgButton').addEventListener('click', function(ev
   formData.append('playerImage', file, selectedPlayer + '.png');
 
   fetch('./php/guardar_image.php', {
+      method: 'POST',
+      body: formData,
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      return response.text();
+  })
+  .then(result => {
+    //   swal("Imagen subida con éxito", "La imagen ha sido actualizada correctamente.", "success");
+      Swal.fire({
+            title: 'Imagen subida con éxito',
+            text: 'La imagen ha sido actualizada correctamente.',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        });
+    //   var imageUrl = '../img/players/' + selectedPlayer + '.png?' + new Date().getTime();
+    //   document.getElementById('playerImage').src = imageUrl;
+  })
+  .catch(error => {
+    //   swal("Error al subir la imagen", "Hubo un problema al subir la imagen. Por favor, intenta de nuevo.", "error");
+      Swal.fire({
+            title: 'Error al subir la imagen',
+            text: 'Hubo un problema al subir la imagen. Por favor, intenta de nuevo.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+      console.error('Error:', error);
+  });
+});
+
+
+document.getElementById('importImgTeamButton').addEventListener('click', function(event) {
+  event.preventDefault(); // Previene el envío del formulario
+  
+
+  var fileInput = document.getElementById('imageTeamInput');
+  if (fileInput.files.length === 0) {
+    // swal("Haga bien las cosas!!!", "Por favor, selecciona un archivo para subir.", "info");
+    Swal.fire({
+            title: 'Haga bien las cosas',
+            text: 'Por favor, selecciona un archivo para subir.',
+            icon: 'info',
+            confirmButtonText: 'Ok'
+        });
+    return;
+  }
+
+  var file = fileInput.files[0];
+  if (file.type !== 'image/png') {
+    // swal("Formato no admitido", "Por favor, selecciona una imagen en formato PNG.", "warning");
+    Swal.fire({
+            title: 'Formato no admitido',
+            text: 'Por favor, selecciona una imagen en formato PNG.',
+            icon: 'warning',
+            confirmButtonText: 'Ok'
+        });
+    return;
+  }
+
+  var formData = new FormData(document.getElementById('uploadTeamForm'));
+  formData.append('teamImage', file, 'team.png');
+
+  fetch('./php/guardar_imageTeam.php', {
       method: 'POST',
       body: formData,
   })
@@ -481,7 +638,7 @@ function crearTabla(datos) {
 
 
 // Carga los datos para cada pestaña
-['team', 'players', 'positions', 'references', 'seasons', 'sessionsTypes', 'tacticalperiodizations', 'fases', 'config',/* otras pestañas... */].forEach(tab => {
+['team', 'players', 'positions', 'references', 'seasons', 'sessionsTypes', 'tacticalperiodizations', 'fases',  'muscles','injuryLocations', 'injuryCauses', 'injurySeverities','injuryStatus','injuryTypes', 'config'/* otras pestañas... */].forEach(tab => {
     cargarDatos(tab);
 });
 

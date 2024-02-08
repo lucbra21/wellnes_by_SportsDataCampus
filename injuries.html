@@ -203,7 +203,7 @@
                             </div>
                             <div class="col" style="text-align: right;">
                                 <span id="soccerTeam">Soccer Team</span> <br>
-                                <span id="category">Categoría</span>
+                                <span id="categoria">Categoría</span>
                             </div>
                         </div>
                     </div>
@@ -254,18 +254,78 @@
                                 </div>
                             </div>
 
-                            <!-- Sección de Período -->
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label>Display By:</label>
-                                    <select class="form-control" id="displayby">
-                                        <!-- <option value="" selected>Seleccione</option> -->
-                                        <option value="1" selected>Grouped by position</option>
-                                        <option value="2">In order of response</option>
+                                    <label>Recidiva:</label>
+                                    <select class="form-control" id="relapse" name="relapse">
+                                        <option value="-1" selected>Everyone...</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                        </select>
                                     </select>
                                 </div>
                             </div>
 
+                            <!-- Sección de Período -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Estado:</label>
+                                    <select class="form-control" id="injuriesStatus" name="injuriesStatus">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Gravedad:</label>
+                                    <select class="form-control" id="severityOfInjury" name="severityOfInjury">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Causa:</label>
+                                    <select class="form-control" id="causeOfInjury" name="causeOfInjury">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Tipo:</label>
+                                    <select class="form-control" id="typeOfInjury" name="typeOfInjury">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Zona:</label>
+                                    <select class="form-control" id="bodyZone" >
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Parte:</label>
+                                    <select class="form-control" id="bodyPart" name="bodyPart">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Especificación:</label>
+                                    <select class="form-control" id="specification" name="specification">
+                                        
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>New injury</label>
@@ -292,23 +352,27 @@
                                 <div class="col-md-12">
                                    
                                         <table id="editableTable" class="display" style="width:100%">
+                                           
 
                                             <thead class="bg-secondary text-white">
                                                 <tr >
-                                                    <th style="text-align: center; ">Date</th>
-                                                    <th style="text-align: center; ">Player</th>
-                                                    <th style="text-align: center; ">Position</th>
-                                                    <th style="text-align: center; ">Periodization</th>
-                                                    <th style="text-align: center; ">ICS</th>
-                                                    <th style="text-align: center; ">Fatigue</th>
-                                                    <th style="text-align: center; ">Pain Muscle</th>
-                                                    <th style="text-align: center; ">Sleep Quality</th>
-                                                    <th style="text-align: center; ">Stress</th>
-                                                    <th style="text-align: center; ">Humor</th>
-                                                    <th style="text-align: center; ">Muscles</th>
-                                                    <th style="text-align: center; ">RPE</th>
-                                                    <th style="text-align: center; ">Min.</th>
+                                                    <th style="text-align: center; ">Jugador</th>
+                                                    <th style="text-align: center; ">Posicion</th>
+                                                    <th style="text-align: center; ">Edad</th>
+                                                    <th style="text-align: center; ">F. Lesión</th>
+                                                    <th style="text-align: center; ">F. Alta</th>
+                                                    <th style="text-align: center; ">Días</th>
+                                                    <th style="text-align: center; ">Recidiva</th>
+                                                    <th style="text-align: center; ">Estado</th>
+                                                    <th style="text-align: center; ">Gravedad</th>
+                                                    <th style="text-align: center; ">Causa</th>
+                                                    <th style="text-align: center; ">Tipo</th>
+                                                    <th style="text-align: center; ">Zona</th>
+                                                    <th style="text-align: center; ">Parte</th>
+                                                    <th style="text-align: center; ">Especificación</th>
+                                                    <th style="text-align: center; ">Comentarios</th>
                                                     <th style="text-align: center; "><i class="fas fa-trash"></i></th>
+                                                    <th style="text-align: center; "><i class="fas fa-pencil"></i></th>
                                                     <!-- Si no tienes FontAwesome, puedes reemplazar con "Delete" -->
                                                 </tr>
                                             </thead>
@@ -344,25 +408,39 @@
 <script>
     
 
-    document.getElementById('injuryButton').addEventListener('click', function () {
+document.getElementById('injuryButton').addEventListener('click', function () {
 
         // Establecer periodizations vacio en localStorage
-        localStorage.removeItem('date');
+        // localStorage.removeItem('date');
 
-        // Establecer periodizations vacio en localStorage
-        localStorage.removeItem('periodization');
+        // // Establecer periodizations vacio en localStorage
+        // localStorage.removeItem('periodization');
 
-        // Establecer periodizations vacio en localStorage
-        localStorage.removeItem('sessionType');
+        // // Establecer periodizations vacio en localStorage
+        // localStorage.removeItem('sessionType');
 
-        // Establecer periodizations vacio en localStorage
-        // localStorage.removeItem('season');
+        // // Establecer periodizations vacio en localStorage
+        // // localStorage.removeItem('season');
 
-        // Establecer periodizations vacio en localStorage
-        localStorage.removeItem('fases');
+        // // Establecer periodizations vacio en localStorage
+        // localStorage.removeItem('fases');
 
-        // Establecer periodizations vacio en localStorage
-        localStorage.removeItem('event');
+        // // Establecer periodizations vacio en localStorage
+        // localStorage.removeItem('event');
+        localStorage.removeItem('playerName');
+        localStorage.removeItem('relapse');
+
+        localStorage.removeItem('datefrom');
+        localStorage.removeItem('dateto');
+
+        localStorage.removeItem('injuryStatus');
+        localStorage.removeItem('severityOfInjury');
+        localStorage.removeItem('causeOfInjury');
+        localStorage.removeItem('typeOfInjury');
+
+        localStorage.removeItem('bodyZone');
+        localStorage.removeItem('bodyPart');
+        localStorage.removeItem('specification');
 
         window.location.href = 'injury.html';
     });
@@ -377,36 +455,49 @@
 //         }
 
 $(document).ready(function() {
-// alert(getId());
-        if(localStorage.getItem('datefrom')) {
-            document.getElementById('datefrom').value = localStorage.getItem('datefrom');
-        } else{
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
-            var yyyy = today.getFullYear();
+        // alert(getId());
+        localStorage.removeItem('playerName');
+        localStorage.removeItem('relapse');
 
-            today = yyyy + '-' + mm + '-' + dd;
-            document.getElementById('datefrom').value = today;
+        localStorage.removeItem('datefrom');
+        localStorage.removeItem('dateto');
 
-            localStorage.setItem('datefrom', today);
-        }
+        localStorage.removeItem('injuryStatus');
+        localStorage.removeItem('severityOfInjury');
+        localStorage.removeItem('causeOfInjury');
+        localStorage.removeItem('typeOfInjury');
 
-        
+        localStorage.removeItem('bodyZone');
+        localStorage.removeItem('bodyPart');
+        localStorage.removeItem('specification');
 
-        if(localStorage.getItem('dateto')) {
-            document.getElementById('dateto').value = localStorage.getItem('dateto');
-        } else{
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
-            var yyyy = today.getFullYear();
+        // if(localStorage.getItem('datefrom')) {
+        //     document.getElementById('datefrom').value = localStorage.getItem('datefrom');
+        // } else{
+        //     var today = new Date();
+        //     var dd = String(today.getDate()).padStart(2, '0');
+        //     var mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
+        //     var yyyy = today.getFullYear();
 
-            today = yyyy + '-' + mm + '-' + dd;
-            document.getElementById('dateto').value = today;
+        //     today = yyyy + '-' + mm + '-' + dd;
+        //     document.getElementById('datefrom').value = today;
 
-            localStorage.setItem('dateto', today);
-        }
+        //     localStorage.setItem('datefrom', today);
+        // }
+
+        // if(localStorage.getItem('dateto')) {
+        //     document.getElementById('dateto').value = localStorage.getItem('dateto');
+        // } else{
+        //     var today = new Date();
+        //     var dd = String(today.getDate()).padStart(2, '0');
+        //     var mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
+        //     var yyyy = today.getFullYear();
+
+        //     today = yyyy + '-' + mm + '-' + dd;
+        //     document.getElementById('dateto').value = today;
+
+        //     localStorage.setItem('dateto', today);
+        // }
         // Evento para detectar cambio en el select y almacenar la opción seleccionada
         
 
@@ -426,12 +517,13 @@ $(document).ready(function() {
             });
 
             // Comprobar si hay un valor guardado en localStorage y seleccionarlo
-            if(localStorage.getItem('playerName')) {
-                $select.val(localStorage.getItem('playerName'));
-            } else {
-                // Si no hay nada en localStorage, seleccionar la opción predeterminada
-                $select.val('-1');
-            }
+            // if(localStorage.getItem('playerName')) {
+            //     $select.val(localStorage.getItem('playerName'));
+            // } else {
+            //     // Si no hay nada en localStorage, seleccionar la opción predeterminada
+            //     $select.val('-1');
+            // }
+            $select.val('-1');
         });
 
         // Evento para detectar cambio en el select y almacenar la opción seleccionada
@@ -445,90 +537,400 @@ $(document).ready(function() {
             }
         });
 
-        // Comprobar si hay un valor guardado en localStorage y seleccionarlo
-        if(localStorage.getItem('displayby')) {
-            $('#displayby').val(localStorage.getItem('displayby'));
-        } else {
-            // Si no hay nada en localStorage, seleccionar la opción predeterminada
-            $('#displayby').val('1');
-        }
-     
+        // --- Estado
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/injuryStatus.json?nocache=${new Date().getTime()}`, function(data) {
+
+            // console.log(data);
+            var $select = $('#injuriesStatus').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Everyone...'));
+
+            $.each(data, function(key, entry) {
+                
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            // if(localStorage.getItem('injuryStatus')) {
+            //     $select.val(localStorage.getItem('injuryStatus'));
+            // } else {
+            //     // Si no hay nada en localStorage, seleccionar la opción predeterminada
+            //     $select.val('-1');
+            // }
+            $select.val('-1');
+        });
 
         // Evento para detectar cambio en el select y almacenar la opción seleccionada
-        $('#displayby').on('change', function() {
+        $('#injuriesStatus').on('change', function() {
+        // Guardar la selección en localStorage solo si no es la opción predeterminada
+        // debugger;
+            // if(this.value !== '-1') {
+            //     localStorage.setItem('injuryStatus', this.value);
+            // } else {
+            //     // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+            //     localStorage.removeItem('injuryStatus');
+            // }
+            $select.val('-1');
+        });
+
+        
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#injuriesStatus').on('change', function() {
             // Guardar la selección en localStorage solo si no es la opción predeterminada
+            // debugger;
             if(this.value !== '-1') {
-                localStorage.setItem('displayby', this.value);
+                localStorage.setItem('injuryStatus', this.value);
             } else {
                 // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
-                localStorage.removeItem('displayby');
+                localStorage.removeItem('injuryStatus');
             }
         });
 
+        // --- Recidiva
+        // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+        // if(localStorage.getItem('relapse')) {
+        //     $('#relapse').val(localStorage.getItem('relapse'));
+        // } else {
+        //     // Si no hay nada en localStorage, seleccionar la opción predeterminada
+        //     $('#relapse').val('-1');
+        // }
+        $('#relapse').val('-1');
 
-    // const playerNameFilter = localStorage.getItem('playerName') || '';
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#relapse').on('change', function() {
+            // Guardar la selección en localStorage solo si no es la opción predeterminada
+            if(this.value !== '-1') {
+                localStorage.setItem('relapse', this.value);
+            } else {
+                // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+                localStorage.removeItem('relapse');
+            }
+        });
+       // --- gravedad
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/injurySeverities.json?nocache=${new Date().getTime()}`, function(data) {
+
+            // console.log(data);
+            var $select = $('#severityOfInjury').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Everyone...'));
+
+            $.each(data, function(key, entry) {
+                
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            // // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            // if(localStorage.getItem('severityOfInjury')) {
+            //     $select.val(localStorage.getItem('severityOfInjury'));
+            // } else {
+            //     // Si no hay nada en localStorage, seleccionar la opción predeterminada
+            //     $select.val('-1');
+            // }
+            $select.val('-1');
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#severityOfInjury').on('change', function() {
+        // Guardar la selección en localStorage solo si no es la opción predeterminada
+        // debugger;
+        if(this.value !== '-1') {
+            localStorage.setItem('severityOfInjury', this.value);
+        } else {
+            // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+            localStorage.removeItem('severityOfInjury');
+        }
+        });
+
+
+       // --- causa
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/injuryCauses.json?nocache=${new Date().getTime()}`, function(data) {
+
+            // console.log(data);
+            var $select = $('#causeOfInjury').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Everyone...'));
+
+            $.each(data, function(key, entry) {
+                
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            // // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            // if(localStorage.getItem('causeOfInjury')) {
+            //     $select.val(localStorage.getItem('causeOfInjury'));
+            // } else {
+            //     // Si no hay nada en localStorage, seleccionar la opción predeterminada
+            //     $select.val('-1');
+            // }
+            $select.val('-1');
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#causeOfInjury').on('change', function() {
+        // Guardar la selección en localStorage solo si no es la opción predeterminada
+        // debugger;
+        if(this.value !== '-1') {
+            localStorage.setItem('causeOfInjury', this.value);
+        } else {
+            // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+            localStorage.removeItem('causeOfInjury');
+        }
+        });
+
+
+       // --- tipo
+        // Cargar las opciones al select desde el archivo JSON
+        $.getJSON(`./data/json/injuryTypes.json?nocache=${new Date().getTime()}`, function(data) {
+
+            // console.log(data);
+            var $select = $('#typeOfInjury').empty();
+
+            // Agregar una opción predeterminada al principio
+            $select.append($('<option></option>').attr('value', '-1').text('Everyone...'));
+
+            $.each(data, function(key, entry) {
+                
+                // $select.append($('<option></option>').attr('value', entry.Id).text(entry.Value));
+                $select.append($('<option></option>').attr('value', entry.Value).text(entry.Value));
+            });
+
+            // // Comprobar si hay un valor guardado en localStorage y seleccionarlo
+            // if(localStorage.getItem('typeOfInjury')) {
+            //     $select.val(localStorage.getItem('typeOfInjury'));
+            // } else {
+            //     // Si no hay nada en localStorage, seleccionar la opción predeterminada
+            //     $select.val('-1');
+            // }
+            $select.val('-1');
+        });
+
+        // Evento para detectar cambio en el select y almacenar la opción seleccionada
+        $('#typeOfInjury').on('change', function() {
+        // Guardar la selección en localStorage solo si no es la opción predeterminada
+        // debugger;
+        if(this.value !== '-1') {
+            localStorage.setItem('typeOfInjury', this.value);
+        } else {
+            // Si se selecciona la opción predeterminada, eliminar la entrada de localStorage
+            localStorage.removeItem('typeOfInjury');
+        }
+        });
+
+
+       // --- zona
+       $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+            var uniqueZones = [...new Set(data.map(item => item["BodyZone"]))]; // Extrae zonas únicas
+            var $select = $('#bodyZone').empty();
+
+            $('#bodyZone').append($('<option></option>').attr('value', '-1').text('Select One...'));
+            uniqueZones.forEach(function(zonee) {
+                $('#bodyZone').append($('<option>', {
+                    value: zonee,
+                    text: zonee
+                }));
+            });
+            // debugger;
+            // if(localStorage.getItem('bodyZone')){
+            //     $select.val(localStorage.getItem('bodyZone')).trigger('change');
+            // }else{
+            //     $select.val('-1');
+            // }
+            $select.val('-1');
+        });
+
+        // Inicializar el selector de Body Part como deshabilitado
+        $('#bodyPart').prop('disabled', true);
+
+        // Inicializar el selector de Specification como deshabilitado
+        $('#specification').prop('disabled', true);
+
+        $('#bodyZone').change(function() {
+            var selectedZone = $(this).val();
+            $('#bodyPart').empty().prop('disabled', false); // Habilitar y limpiar el selector de Body Part
+            $('#specification').empty().prop('disabled', true); // Reiniciar y deshabilitar el selector de Specification
+
+            $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+                var $select = $('#bodyPart').empty();
+
+                var filteredParts = data.filter(item => item["BodyZone"] === selectedZone);
+                var uniqueParts = [...new Set(filteredParts.map(item => item["BodyPart"]))];
+                $('#bodyPart').append($('<option></option>').attr('value', '-1').text('Select One...'));
+                uniqueParts.forEach(function(part) {
+                    $('#bodyPart').append($('<option>', {
+                        value: part,
+                        text: part
+                    }));
+                });
+                // debugger;
+
+                
+                // if(localStorage.getItem('bodyPart')){
+                //     $('#bodyPart').val(localStorage.getItem('bodyPart')).trigger('change');
+                // }else{
+                //     $('#bodyPart').val('-1');
+                    
+                // }
+                $select.val('-1');
+            });
+            
+        });
+
+        $('#bodyPart').change(function() {
+           
+            var selectedZone = $('#bodyZone').val();
+
+            var selectedPart = $(this).val();
+            $('#specification').empty().prop('disabled', false); // Habilitar y limpiar el selector de Specification
+            
+            $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+                var $select = $('#specification').empty();
+
+                var filteredSpecifications = data.filter(item => item["BodyZone"] === selectedZone && item["BodyPart"] === selectedPart);
+                $('#specification').append($('<option></option>').attr('value', '-1').text('Select One...'));
+                filteredSpecifications.forEach(function(item) {
+                    $('#specification').append($('<option>', {
+                        value: item.Specification,
+                        text: item.Specification || "No aplica" // Asegurarse de manejar "No aplica" o valores nulos
+                    }));
+                });
+                if(localStorage.getItem('specification')){
+                $('#specification').val(localStorage.getItem('specification')).trigger('change');
+            }else{
+                $('#specification').val('-1');
+            }
+            });
+        });
 
     cargarRespuestas();
 });
 
-document.getElementById('datefrom').addEventListener('change', guardarFiltros);
-document.getElementById('dateto').addEventListener('change', guardarFiltros);
-document.getElementById('players').addEventListener('change', guardarFiltros);
-document.getElementById('displayby').addEventListener('change', guardarFiltros);
+
 
 function guardarFiltros() {
     const datefromValue = document.getElementById('datefrom').value;
     const datetoValue = document.getElementById('dateto').value;
     const playerNameValue = document.getElementById('players').value;
-    const displaybyValue = document.getElementById('displayby').value;
+    const relapseValue = document.getElementById('relapse').value;
+    const injuryStatusValue = document.getElementById('injuriesStatus').value;
+    const severityOfInjuryValue = document.getElementById('severityOfInjury').value;
+    const causeOfInjuryValue = document.getElementById('causeOfInjury').value;
+    const typeOfInjuryValue = document.getElementById('typeOfInjury').value;
+    const bodyZoneValue = document.getElementById('bodyZone').value;
+    const bodyPartValue = document.getElementById('bodyPart').value;
+    const specificationValue = document.getElementById('specification').value;
 
     localStorage.setItem('datefrom', datefromValue);
     localStorage.setItem('dateto', datetoValue);
     localStorage.setItem('playerName', playerNameValue);
-    localStorage.setItem('displayby', displaybyValue);
-
+    localStorage.setItem('relapse', relapseValue);
+    localStorage.setItem('injuryStatus', injuryStatusValue);
+    localStorage.setItem('severityOfInjury', severityOfInjuryValue);
+    localStorage.setItem('causeOfInjury', causeOfInjuryValue);
+    localStorage.setItem('typeOfInjury', typeOfInjuryValue);
+    localStorage.setItem('bodyZone', bodyZoneValue);
+    localStorage.setItem('bodyPart', bodyPartValue);
+    localStorage.setItem('specification', specificationValue);
+    // debugger;
     cargarRespuestas();
 }
+
+document.getElementById('datefrom').addEventListener('change', guardarFiltros);
+document.getElementById('dateto').addEventListener('change', guardarFiltros);
+document.getElementById('players').addEventListener('change', guardarFiltros);
+document.getElementById('relapse').addEventListener('change', guardarFiltros);
+document.getElementById('injuriesStatus').addEventListener('change', guardarFiltros);
+document.getElementById('severityOfInjury').addEventListener('change', guardarFiltros);
+document.getElementById('causeOfInjury').addEventListener('change', guardarFiltros);
+document.getElementById('typeOfInjury').addEventListener('change', guardarFiltros);
+
+document.getElementById('bodyZone').addEventListener('change', function() {
+    guardarFiltros();
+    // if (localStorage.getItem('bodyZone') === '-1') {
+        localStorage.removeItem('bodyPart');
+        localStorage.removeItem('specification');
+        $('#bodyPart').prop('disabled', true);
+        $('#specification').prop('disabled', true);
+    // }
+});
+
+document.getElementById('bodyPart').addEventListener('change', function() {
+    guardarFiltros();
+    // if (localStorage.getItem('bodyZone') === '-1') {
+        // localStorage.removeItem('bodyPart');
+        localStorage.removeItem('specification');
+        // $('#bodyPart').prop('disabled', true);
+        // $('#specification').prop('disabled', true);
+    // }
+});
+document.getElementById('specification').addEventListener('change', guardarFiltros);
 
 function cargarRespuestas() {
 
     // Asumiendo que ya tienes las variables datefrom, dateto y playerName
     // Obtener filtros del localStorage
-    // console.log(document.getElementById('datefrom').value);
-    // console.log(localStorage.getItem('datefrom'));
+    if(localStorage.getItem('bodyZone')==='-1'){
+        localStorage.removeItem('bodyZone');
+        localStorage.removeItem('bodyPart');
+        localStorage.removeItem('specification');
+        $('#bodyPart').prop('disabled', true);
+        $('#specification').prop('disabled', true);
+    }
 
-    const datefrom = new Date(localStorage.getItem('datefrom'));
-    const dateto = new Date(localStorage.getItem('dateto'));
+    var datefrom = ''
+    if (localStorage.getItem('datefrom')) {
+        datefrom = new Date(localStorage.getItem('datefrom'));
+    }
+    var dateto = ''
+    if (localStorage.getItem('dateto')) {
+        dateto = new Date(localStorage.getItem('dateto'));
+    }
+    // const dateto = new Date(localStorage.getItem('dateto'));
     const playerNameFilter = localStorage.getItem('playerName') || '';
-    const displaybyFilter = localStorage.getItem('displayby') || '1';
+    const injuryStatusFilter = localStorage.getItem('injuryStatus') || '-1';
+    const relapseFilter = localStorage.getItem('relapse') || '-1';
+    const severityOfInjuryFilter = localStorage.getItem('severityOfInjury') || '-1';
+    const causeOfInjuryFilter = localStorage.getItem('causeOfInjury') || '-1';
+    const typeOfInjuryFilter = localStorage.getItem('typeOfInjury') || '-1';
+    const bodyZoneFilter = localStorage.getItem('bodyZone') || '-1';
+    const bodyPartFilter = localStorage.getItem('bodyPart') || '-1';
+    const specificationFilter = localStorage.getItem('specification') || '-1';
+
+    
+
     // debugger;
-    // $.getJSON(`./data/json/players.json?nocache=${new Date().getTime()}`, function(data) {
-    //     console.log(data);
-    // })
-    // $.getJSON(`./data/json/answers.json?nocache=${new Date().getTime()}`, function(answers) {
-    //     console.log(answers);
-    // })
     fetch(`./data/json/injuries.json?nocache=${new Date().getTime()}`)
     //fetch('./data/json/answers.json')
         .then(response => response.json())
         .then(data => {
 
         const filteredData = data.filter(item => {
-            const itemDate = new Date(item.date);
-            return itemDate >= datefrom && itemDate <= dateto && (!playerNameFilter || playerNameFilter=='-1' || item.playerName === playerNameFilter);
-            // return itemDate >= datefrom  ;
-        }).sort((a, b) => {
+            var itemDate = new Date(item.dateOfInjury);
+            // console.log(datefrom);
+            // console.log(itemDate);
+            // debugger;
+            return (!datefrom || itemDate >= datefrom) && (!dateto || itemDate <= dateto) && (!playerNameFilter || playerNameFilter=='-1' || item.playerName === playerNameFilter) 
+            && (!injuryStatusFilter || injuryStatusFilter=='-1' || item.injuryStatus === injuryStatusFilter)
+            && (!relapseFilter || relapseFilter=='-1' || item.relapse === relapseFilter)
+            && (!severityOfInjuryFilter || severityOfInjuryFilter=='-1' || item.severityOfInjury === severityOfInjuryFilter)
+            && (!causeOfInjuryFilter || causeOfInjuryFilter=='-1' || item.causeOfInjury === causeOfInjuryFilter)
+            && (!typeOfInjuryFilter || typeOfInjuryFilter=='-1' || item.typeOfInjury === typeOfInjuryFilter)
+            && (!bodyZoneFilter || bodyZoneFilter=='-1' || item.bodyZone === bodyZoneFilter)
+            && (!bodyPartFilter || bodyPartFilter=='-1' || item.bodyPart === bodyPartFilter)
+            && (!specificationFilter || specificationFilter=='-1' || item.specification === specificationFilter);
+        //     // return itemDate >= datefrom  ;
+        }).sort((a) => {
             // Ordenar por DateResponse si displaybyFilter es '1'
-            if (displaybyFilter === '1') {
-                const dateA = new Date(a.DateResponse || '1970-01-01'); // Usar una fecha por defecto si no existe
-                const dateB = new Date(b.DateResponse || '1970-01-01');
-                return dateA - dateB;
-            } else {
-                // Ordenar por Position en caso contrario
-                if (a.position < b.position) return -1;
-                if (a.position > b.position) return 1;
-                return 0;
-            }
+                const dateA = new Date(a.dateOfInjury || '1970-01-01'); // Usar una fecha por defecto si no existe
+                return dateA;
         });
         // const filteredData = data;
         // console.log(data);
@@ -538,7 +940,7 @@ function cargarRespuestas() {
         tablaRegistros.innerHTML = ''; // Limpiar la tabla existente
 
         if (filteredData.length === 0) {
-            tablaRegistros.innerHTML = '<tr class="even"><td colspan="13" class="sin_filas" style="text-align: center; "><b>There are no records yet.</b></td></tr>';
+            tablaRegistros.innerHTML = '<tr class="even"><td colspan="17" class="sin_filas" style="text-align: center; "><b>There are no records yet.</b></td></tr>';
         } else {
             crearFilasTabla(filteredData);
 
@@ -547,29 +949,35 @@ function cargarRespuestas() {
     .catch(error => console.error('Error al cargar los datos:', error));
 }
 
-      function crearFilasTabla(data) {
-        console.log(data);
+function crearFilasTabla(data) {
+        // console.log(data);
         const tablaRegistros = document.getElementById('tablaRegistros');
         tablaRegistros.innerHTML = ''; // Limpiar contenido existente
 
         data.forEach(item => {
             const tr = document.createElement('tr');
-            tr.id = `fila-${item.Id}`;
+            tr.id = `fila-${item.injuryId}`;
             // Crea una celda para cada campo y aplica el color
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCelda('-'));
-            tr.appendChild(crearCeldaEliminar('id'));
+            tr.appendChild(crearCelda(item.playerName));
+            tr.appendChild(crearCelda(item.position));
+            tr.appendChild(crearCelda(item.age));
+            tr.appendChild(crearCelda(item.dateOfInjury));
+            tr.appendChild(crearCelda(item.medicalDischargeDate));
+            tr.appendChild(crearCelda(item.days));
+            tr.appendChild(crearCelda(item.relapse));
+            tr.appendChild(crearCelda(item.injuryStatus));
+            tr.appendChild(crearCelda(item.severityOfInjury));
+            tr.appendChild(crearCelda(item.causeOfInjury));
+            tr.appendChild(crearCelda(item.typeOfInjury));
+            tr.appendChild(crearCelda(item.bodyZone));
+            tr.appendChild(crearCelda(item.bodyPart));
+            tr.appendChild(crearCelda(item.specification));
+            tr.appendChild(crearCelda(item.comments));
+            tr.appendChild(crearCeldaEliminar(item.injuryId));
+            tr.appendChild(crearCeldaEditar(item.injuryId));
+            {
+        
+    }
 
             tablaRegistros.appendChild(tr);
         });
@@ -583,12 +991,13 @@ function crearCelda(valor) {
 }
 
 function eliminarRegistro(uniqueId) {
+    debugger;
     fetch('./php/eliminar_injury.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: uniqueId })
+        body: JSON.stringify({ Id: uniqueId })
     })
     .then(response => response.text())
     .then(data => {
@@ -597,6 +1006,7 @@ function eliminarRegistro(uniqueId) {
         // document.getElementById(`registro-${uniqueId}`).remove();
         // Remueve la fila de la tabla
         const filaParaEliminar = document.getElementById(`fila-${uniqueId}`);
+        debugger;
         if (filaParaEliminar) {
             filaParaEliminar.remove();
         }
@@ -621,6 +1031,25 @@ function crearCeldaEliminar(uniqueId) {
     return td;
 }
 
+function crearCeldaEditar(uniqueId) {
+    const td = document.createElement('td');
+    const botonEliminar = document.createElement('button');
+    botonEliminar.innerHTML = '<i class="fas fa-pencil"></i>'; // O simplemente "Eliminar" si no usas FontAwesome
+    botonEliminar.onclick = function() {
+        // Asegúrate de que cada tr tenga un ID único que combine con este
+
+        //abrir pasandole registros
+        var href = 'injury.html?injuryId=' + encodeURIComponent(uniqueId);
+                //    '&position=' + encodeURIComponent(position) +
+                //    '&minutesseason=' + encodeURIComponent(minutesSeason) +
+
+        window.location.href = href;
+
+    };
+    td.appendChild(botonEliminar);
+    return td;
+}
+
 function verificarTablaVacia() {
     const tablaRegistros = document.getElementById('tablaRegistros');
     if (tablaRegistros.children.length === 0 || (tablaRegistros.children.length === 1 && tablaRegistros.querySelector('.sin_filas'))) {
@@ -628,7 +1057,7 @@ function verificarTablaVacia() {
         const tr = document.createElement('tr');
         tr.className = 'sin_filas';
         const td = document.createElement('td');
-        td.setAttribute('colspan', '13');
+        td.setAttribute('colspan', '17');
         td.style.textAlign = 'center';
         td.innerHTML = '<b>No hay registros.</b>';
         tr.appendChild(td);

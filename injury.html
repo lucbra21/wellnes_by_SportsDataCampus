@@ -587,7 +587,7 @@
             </div>
             <div class="col" style="text-align: right;">
                 <span id="soccerTeam">Soccer Team</span> <br>
-                <span id="category">Categoría</span>
+                <span id="categoria">Categoría</span>
             </div>
         </div>
     </div>
@@ -665,7 +665,7 @@
                                 <div class="form-group">
                                     <label>Recidiva:</label>
                                     <select class="form-control" id="relapse" name="relapse">
-                                        <option value="Si">Yes</option>
+                                        <option value="Si">Si</option>
                                         <option value="No" selected>No</option>
                                         </select>
                                     </select>
@@ -695,7 +695,7 @@
                                     </select>
                                 </div>
                             </div>
-
+                            
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tipo de Lesión:</label>
@@ -788,7 +788,7 @@
     });
 
     document.getElementById('btnCancelar').addEventListener('click', function() {
-        window.location.href = 'answers.html';
+        window.location.href = 'injuries.html';
     });
 </script>
 
@@ -796,10 +796,10 @@
 <script language="JavaScript">
 
     $(document).ready(function () {
-
+        // debugger;
         // visibilizaMusculos();
+        // Cargar las opciones al select desde el archivo JSON
         
-
     });
 
 
@@ -808,12 +808,7 @@
 <script>
     // PRE CARGAMOS LOS SELECT
     function getSelectData(datos) {
-        
-        //obtengo con el id de la lesion
-        // var injuryStatus = '-1';
-        // var injurySeverities = '-1';
-        // var causeOfInjury = '-1';
-        // var typeOfInjury = '-1';
+
 
         // Cargar las opciones al select desde el archivo JSON
         $.getJSON(`./data/json/players.json?nocache=${new Date().getTime()}`, function(data) {
@@ -830,7 +825,7 @@
             });
 
             if(datos){
-                $select.val(datos.players).trigger('change');
+                $select.val(datos.playerName).trigger('change');
             }else{
                 $select.val('-1');
             }
@@ -857,7 +852,6 @@
             }
         });
 
-        
         // Cargar las opciones al select desde el archivo JSON
         $.getJSON(`./data/json/injurySeverities.json?nocache=${new Date().getTime()}`, function(data) {
             var $select = $('#severityOfInjury').empty();
@@ -897,9 +891,6 @@
             }
         });
 
-        
-
-        // Cargar las opciones al select desde el archivo JSON
         $.getJSON(`./data/json/injuryTypes.json?nocache=${new Date().getTime()}`, function(data) {
             var $select = $('#typeOfInjury').empty();
 
@@ -918,10 +909,9 @@
             }
         });
 
-        
-
         $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
             var uniqueZones = [...new Set(data.map(item => item["BodyZone"]))]; // Extrae zonas únicas
+            var $select = $('#bodyZone').empty();
 
             $('#bodyZone').append($('<option></option>').attr('value', '-1').text('Select One...'));
             uniqueZones.forEach(function(zonee) {
@@ -930,11 +920,11 @@
                     text: zonee
                 }));
             });
-
+            // debugger;
             if(datos){
                 $select.val(datos.bodyZone).trigger('change');
             }else{
-                $select.val('Tren Inferior');
+                $select.val('-1');
             }
         });
 
@@ -950,6 +940,8 @@
             $('#specification').empty().prop('disabled', true); // Reiniciar y deshabilitar el selector de Specification
 
             $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+                var $select = $('#bodyPart').empty();
+
                 var filteredParts = data.filter(item => item["BodyZone"] === selectedZone);
                 var uniqueParts = [...new Set(filteredParts.map(item => item["BodyPart"]))];
                 $('#bodyPart').append($('<option></option>').attr('value', '-1').text('Select One...'));
@@ -959,7 +951,14 @@
                         text: part
                     }));
                 });
+                // debugger;
+            if(datos){
+                $('#bodyPart').val(datos.bodyPart).trigger('change');
+            }else{
+                $('#bodyPart').val('-1');
+            }
             });
+            
         });
 
         $('#bodyPart').change(function() {
@@ -970,6 +969,8 @@
             $('#specification').empty().prop('disabled', false); // Habilitar y limpiar el selector de Specification
             
             $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+                var $select = $('#specification').empty();
+
                 var filteredSpecifications = data.filter(item => item["BodyZone"] === selectedZone && item["BodyPart"] === selectedPart);
                 $('#specification').append($('<option></option>').attr('value', '-1').text('Select One...'));
                 filteredSpecifications.forEach(function(item) {
@@ -978,31 +979,50 @@
                         text: item.Specification || "No aplica" // Asegurarse de manejar "No aplica" o valores nulos
                     }));
                 });
+                if(datos){
+                $('#specification').val(datos.specification).trigger('change');
+            }else{
+                $('#specification').val('-1');
+            }
             });
         });
-
-
-        seleccionarValoresIniciales('Tren Inferior', 'Muslo', 'Anterior');
-
+        
        
     }
 
-    function cargarBodyParts(selectedZone) {
-    return new Promise(resolve => {
-        $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
-            var filteredParts = data.filter(item => item["BodyZone"] === selectedZone);
-            var uniqueParts = [...new Set(filteredParts.map(item => item["BodyPart"]))];
-            $('#bodyPart').empty().prop('disabled', false).append($('<option></option>').attr('value', '-1').text('Select One...'));
-            uniqueParts.forEach(function(part) {
-                $('#bodyPart').append($('<option>', {
-                    value: part,
-                    text: part
-                }));
+    function cargarBodyZone(selectedZone) {
+        return new Promise(resolve => {
+            $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+                var filteredParts = data.filter(item => item["BodyZone"] === selectedZone);
+                var uniqueParts = [...new Set(filteredParts.map(item => item["BodyZone"]))];
+                $('#BodyZone').empty().prop('disabled', false).append($('<option></option>').attr('value', '-1').text('Select One...'));
+                uniqueParts.forEach(function(part) {
+                    $('#BodyZone').append($('<option>', {
+                        value: part,
+                        text: part
+                    }));
+                });
+                resolve();
             });
-            resolve();
         });
-    });
-}
+    }
+
+function cargarBodyParts(selectedZone) {
+        return new Promise(resolve => {
+            $.getJSON(`./data/json/injuryLocations.json?nocache=${new Date().getTime()}`, function(data) {
+                var filteredParts = data.filter(item => item["BodyZone"] === selectedZone);
+                var uniqueParts = [...new Set(filteredParts.map(item => item["BodyPart"]))];
+                $('#bodyPart').empty().prop('disabled', false).append($('<option></option>').attr('value', '-1').text('Select One...'));
+                uniqueParts.forEach(function(part) {
+                    $('#bodyPart').append($('<option>', {
+                        value: part,
+                        text: part
+                    }));
+                });
+                resolve();
+            });
+        });
+    }
 
 function cargarSpecifications(selectedZone, selectedPart) {
     return new Promise(resolve => {
@@ -1020,17 +1040,19 @@ function cargarSpecifications(selectedZone, selectedPart) {
     });
 }
 
-
-function seleccionarValoresIniciales(zonee, part, specification) {
+function seleccionarValoresIniciales(zonee, parte, specification) {
     // Primero, establece el valor de #bodyZone y luego carga las partes del cuerpo
 
-    $('#bodyZone').val(zonee).trigger('change');
+    // $('#bodyZone').val(zonee).trigger('change');
+    // debugger;
+    cargarBodyZone(zonee);
 
     cargarBodyParts(zonee).then(() => {
         // Una vez que las partes del cuerpo se han cargado y el select se ha actualizado,
         // establece el valor seleccionado y carga las especificaciones
-        $('#bodyPart').val(part).trigger('change');
-        cargarSpecifications(zonee, part).then(() => {
+        // debugger;
+        $('#bodyPart').val(parte).trigger('change');
+        cargarSpecifications(zonee, parte).then(() => {
             // Finalmente, una vez que las especificaciones se han cargado y el select se ha actualizado,
             // establece el valor seleccionado para #specification
             $('#specification').val(specification);
@@ -1052,32 +1074,47 @@ function seleccionarValoresIniciales(zonee, part, specification) {
     // Leer el archivo JSON y buscar el registro
     fetch(`./data/json/injuries.json?nocache=${new Date().getTime()}`)
         .then(response => {
+            // debugger;
             if (!response.ok) {
                 // throw new Error(`HTTP error! status: ${response.status}`);
-                getSelectData();
+                // var datos = {bodyZone: 'Tren Inferior', bodyPart: 'Muslo', specification: 'Anterior'};
+                // getSelectData();
             } else {
-                return response.json();
+                try {
+                    return response.json();
+                } catch (error) {
+                    // var datos = {bodyZone: 'Tren Inferior', bodyPart: 'Muslo', specification: 'Anterior'};
+                    // getSelectData();
+                }
+                
             }
         })
         .then(data => {
             // Verifica si el archivo JSON está vacío
+            // debugger;
             if (data && data.length > 0) {
                 const registroEncontrado = data.find(registro => registro.injuryId === injuryId);
             
                 if (registroEncontrado) {
                     cargarDatosEnFormulario(registroEncontrado);
                 } else {
-                    getSelectData(); // Llamada a tu función para manejar la ausencia de datos específicos
+                    // var datos = {bodyZone: 'Tren Inferior', bodyPart: 'Muslo', specification: 'Anterior'};
+                    getSelectData(null);
+                    // getSelectData(); // Llamada a tu función para manejar la ausencia de datos específicos
                 }
             } else {
                 // Maneja el caso de un archivo JSON vacío
                 console.log("El archivo JSON está vacío.");
-                getSelectData(); // O manejo alternativo para un JSON vacío
+                // var datos = {bodyZone: 'Tren Inferior', bodyPart: 'Muslo', specification: 'Anterior'};
+                getSelectData(null);
+                // getSelectData(); // O manejo alternativo para un JSON vacío
             }
         })
         .catch(error => { 
             console.error('Error al cargar los datos:', error);
-            getSelectData(); // Manejo de cualquier error, incluyendo el archivo JSON no encontrado o vacío
+            // getSelectData(); // Manejo de cualquier error, incluyendo el archivo JSON no encontrado o vacío
+            // var datos = {bodyZone: 'Tren Inferior', bodyPart: 'Muslo', specification: 'Anterior'};
+            // getSelectData();
         });
 
 });
@@ -1086,18 +1123,23 @@ function cargarDatosEnFormulario(datos) {
     // Aquí asignas los valores de 'datos' a los campos del formulario
 
     getSelectData(datos) ;
-
+    // debugger;
     $('#category').val(datos.category);
     $('#age').val(datos.age);
     $('#position').val(datos.position);
     $('#dateOfInjury').val(datos.dateOfInjury);
     $('#medicalDischargeDate').val(datos.medicalDischargeDate);
+    // debugger;
+    $('#comments').val(datos.comments);
+    
+    // $('#injuryStatus').val(datos.injuryStatus).trigger('change');
 
     //si tiene fecha inicio y fecha fin poner diferencia de dias
     // si no tiene fecha de alta medica medicalDischargeDate contar dias hasta hoy
     //si no tiene no poner nada
-    var days=0;
-    $('#days').val(days);
+    // var days=0;
+    // $('#days').val(days);
+    calcularYMostrarDias();
 
 
     // VER QUE LOS SELECTS NO SE ACTUALIZAN CON LOS DATOS QUE TENIA GARGADO ESE REGISTRO
@@ -1106,8 +1148,8 @@ function cargarDatosEnFormulario(datos) {
         $('#players').val(datos.playerName).trigger('change');
     }
 
-    if (datos.Relapse) {
-        $('#Relapse').val(datos.Relapse).trigger('change');
+    if (datos.relapse) {
+        $('#relapse').val(datos.relapse).trigger('change');
     }
 
     // alert(datos.Season);
@@ -1127,6 +1169,7 @@ function cargarDatosEnFormulario(datos) {
         $('#typeOfInjury').val(datos.typeOfInjury).trigger('change');
     }
 
+    seleccionarValoresIniciales(datos.bodyZone, datos.bodyPart, datos.specification);
  
 }
 </script>
@@ -1134,9 +1177,7 @@ function cargarDatosEnFormulario(datos) {
 
         function recogerDatos() {
             // Obtener todos los valores seleccionados en el select múltiple
-            var selectedMuscles = Array.from(document.getElementById('selectMusculos').options)
-                               .filter(option => option.selected)
-                               .map(option => option.value);
+            
 
             // // crea un nuevo objeto `Date`
             // var moment = require('moment');
@@ -1150,24 +1191,23 @@ function cargarDatosEnFormulario(datos) {
             // CalcularIndexs(document.getElementById('fecha').value,document.getElementById('playerName_url').value,document.getElementById('pregunta1out').value,document.getElementById('minutesSeason').value);
 
             return {
-                Id: getId(),
-                date: document.getElementById('fecha').value,
-                playerName: document.getElementById('playerName_url').value,
-                position: document.getElementById('position_url').value,
-                Periodization: document.getElementById('periodizations').value,
-                SessionType: document.getElementById('sessionstype').value,
-                Season: document.getElementById('seasons').value,
-                Event: document.getElementById('events').value,
-                Fase: document.getElementById('fases').value,
-                Fatigue: document.getElementById('pregunta2').value,
-                PainMuscle: document.getElementById('pregunta4').value,
-                SleepQuality: document.getElementById('pregunta1').value,
-                Stress: document.getElementById('pregunta3').value,
-                Humor: document.getElementById('pregunta5').value,
-                RPE: document.getElementById('pregunta1out').value,
-                minutesSeason: document.getElementById('minutesSeason').value,
+                injuryId: getId(),        
+                playerName: document.getElementById('players').value,
+                position: document.getElementById('position').value,
+                age: document.getElementById('age').value,
+                category: document.getElementById('category').value,
+                dateOfInjury: document.getElementById('dateOfInjury').value,
+                medicalDischargeDate: document.getElementById('medicalDischargeDate').value,
+                days: document.getElementById('days').value,
+                relapse: document.getElementById('relapse').value,
+                injuryStatus: document.getElementById('injuryStatus').value,
+                severityOfInjury: document.getElementById('severityOfInjury').value,
+                causeOfInjury: document.getElementById('causeOfInjury').value,
+                typeOfInjury: document.getElementById('typeOfInjury').value,
+                bodyZone: document.getElementById('bodyZone').value,
+                bodyPart: document.getElementById('bodyPart').value,
+                specification: document.getElementById('specification').value,
                 comments: $('#comments').val(),
-                Muscles: selectedMuscles,
                 DateResponse : DateResponse
                 // ... otros campos ...
             };
@@ -1198,26 +1238,27 @@ function cargarDatosEnFormulario(datos) {
         }
 
         document.getElementById('btnGuardar').addEventListener('click', function() {
-            let ShortName = document.getElementById('playerName_url').value;
+            // let ShortName = document.getElementById('players').value;
             // Obtener la configuración de confirmación
             $.getJSON(`./data/json/config.json?nocache=${new Date().getTime()}`, function(config) {
-                const confirmationConfig = config.find(item => item.Id === 'confirmation');
-                if (confirmationConfig && confirmationConfig.Value === 1) {
+                const confirmationConfig = config.find(item => item.Id === 'confirmationInjury');
+                debugger;
+                if (confirmationConfig && confirmationConfig.Value !== '') {
                     // Si la confirmación es necesaria, mostrar el popup
                     swal.fire({
                         title: 'Confirmación',
-                        text: 'Por favor, ingresa tu username para confirmar:',
-                        input: 'text',
+                        text: 'Por favor, ingresa la clave de confirmación de carga de lesión:',
+                        input: 'password',
                         inputAttributes: {
                             autocapitalize: 'off'
                         },
                         showCancelButton: true,
                         confirmButtonText: 'Confirmar',
                         showLoaderOnConfirm: true,
-                        preConfirm: (login) => {
+                        preConfirm: (pass) => {
                             // Aquí puedes agregar una función para validar el username
                             // Por ejemplo, verificar contra `players.json` o cualquier otra lógica necesaria
-                            return validarUsername(login,ShortName)
+                            return validarPassConfirmationInjury(pass)
                                 .then(response => {
                                     if (!response.esValido) {
                                         throw new Error(response.mensajeError);
@@ -1246,22 +1287,23 @@ function cargarDatosEnFormulario(datos) {
             });
 });
 
-function validarUsername(username, ShortName) {
-    debugger;
+function validarPassConfirmationInjury(passConfirmation) {
+    // debugger;
     // Usando fetch en lugar de $.getJSON
     return new Promise((resolve, reject) => {
-        fetch(`./data/json/players.json?nocache=${new Date().getTime()}`)
+        fetch(`./data/json/config.json?nocache=${new Date().getTime()}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
             })
-            .then(players => {
-                console.log(players);
-                const playerExists = players.some(player => String(player.ShortName) === String(ShortName) && String(player.Username) === String(username));
+            .then(configs => {
+                console.log(configs);
+                // debugger;
+                const configExists = configs.some(config => String(config.Value) === String(passConfirmation) && String(config.Id) === 'confirmationInjury');
 
-                if (playerExists) {
+                if (configExists) {
                     resolve({ esValido: true });
                 } else {
                     reject({ esValido: false, mensajeError: "Confirmation no válido" });
@@ -1269,7 +1311,7 @@ function validarUsername(username, ShortName) {
             })
             .catch(error => {
                 console.error('Error:', error);
-                reject({ esValido: false, mensajeError: "Error al acceder a los datos de los jugadores." });
+                reject({ esValido: false, mensajeError: "Error al acceder a los datos de los configuraciones." });
             });
     });
 }
@@ -1283,6 +1325,86 @@ function getColor(valor) {
   if (valor >= 4 && valor <= 6) return amarillo;
   if (valor >= 7) return rojo;
 }
+
+// Función para calcular y mostrar los días
+function calcularYMostrarDias() {
+    var fechaLesion = document.getElementById('dateOfInjury').value;
+    var fechaAltaMedica = document.getElementById('medicalDischargeDate').value;
+
+    if (fechaLesion && fechaAltaMedica) {
+        // Convertir las fechas a objetos Date
+        var fechaInicio = new Date(fechaLesion);
+        var fechaFin = new Date(fechaAltaMedica);
+
+        // Calcular la diferencia en milisegundos
+        var diferencia = fechaFin.getTime() - fechaInicio.getTime();
+
+        // Convertir la diferencia en días
+        var dias = diferencia / (1000 * 3600 * 24);
+
+        // Mostrar el número de días en el campo 'days'
+        document.getElementById('days').value = dias;
+    } else {
+        // Limpiar el campo si alguna de las fechas está vacía
+        document.getElementById('days').value = '';
+    }
+}
+document.getElementById('players').addEventListener('change', function() {
+    var selectedPlayerName = this.value; // Obtiene el ID del jugador seleccionado
+
+    // Verifica si se ha seleccionado un jugador
+    if (selectedPlayerName !== "-1") {
+        // Realiza una solicitud para obtener los datos del archivo JSON
+        fetch('./data/json/players.json')
+            .then(response => response.json())
+            .then(players => {
+                // Encuentra los datos del jugador seleccionado basándose en su ID
+                var playerData = players.find(player => player.ShortName === selectedPlayerName);
+                debugger;
+                if (playerData) {
+
+                    // Actualiza la categoría y la posición en el formulario
+                    document.getElementById('position').value = playerData.Position || '';
+
+                    // Calcula la edad del jugador
+                    var birthDate = new Date(playerData.Birth);
+                    var age = calcularEdad(birthDate);
+                    document.getElementById('age').value = age;
+                    document.getElementById('category').value = calcularCategoria(birthDate);
+                    
+                }
+            })
+            .catch(error => console.error('Error al cargar los datos del jugador:', error));
+    } else {
+        // Limpia los campos si no se ha seleccionado un jugador
+        document.getElementById('category').value = '';
+        document.getElementById('age').value = '';
+        document.getElementById('position').value = '';
+    }
+});
+
+// Función para calcular la edad a partir de la fecha de nacimiento
+function calcularEdad(birthDate) {
+    var today = new Date();
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+function calcularCategoria(birthDate) {
+
+    debugger;
+    var birthYear = birthDate.getFullYear();
+    
+    return birthYear;
+}
+
+// Agregar event listeners a los campos de fecha
+document.getElementById('dateOfInjury').addEventListener('change', calcularYMostrarDias);
+document.getElementById('medicalDischargeDate').addEventListener('change', calcularYMostrarDias);
 
 
     </script>

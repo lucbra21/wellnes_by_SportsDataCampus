@@ -1,0 +1,22 @@
+[
+    {
+        "injuryId": "20240208190059",
+        "playerName": "Mart\u00ednez E.",
+        "position": "Portero",
+        "age": "31",
+        "category": "1992",
+        "dateOfInjury": "2024-02-01",
+        "medicalDischargeDate": "2024-02-10",
+        "days": "9",
+        "relapse": "No",
+        "injuryStatus": "Finalizado",
+        "severityOfInjury": "Leve",
+        "causeOfInjury": "Entrenamiento",
+        "typeOfInjury": "Lesiones musculares",
+        "bodyZone": "Tren Inferior",
+        "bodyPart": "Ingle \/ Cadera",
+        "specification": "Posterior",
+        "comments": "",
+        "DateResponse": "08\/02\/2024 19:00:59 PM"
+    }
+]
